@@ -1,7 +1,7 @@
 franchement g la flemme de tout lire
 tkt c surtout pr Loann ou au cas où tu sais plus à quoi un des trucs sert
 je comprends rien
-a ca c pour parler de loann qui fair rien en nsi sans qu'il le sache c ca ?
+
 
 # Incredibot
 La vraie question c est ce que Loann lira cette ligne un jour.
