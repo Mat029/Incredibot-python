@@ -78,6 +78,8 @@ WindowManager:
 		center_x: self.parent.center_x
 		center_y: self.parent.center_y
 		size: root.width, root.height
+<LevelLock@Image>:
+	size_hint: .07, .07
 
 <BackLevelButton@Button>:
     text: "Back"
@@ -126,6 +128,7 @@ WindowManager:
 
 <LevelScreen>:
     name: "levels"
+	on_pre_enter: root.update()
     FloatLayout:
         Image:
             source:'Images/level_background.jpg'
@@ -168,7 +171,11 @@ WindowManager:
             on_press:
 				root.setLvl(str(1 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(1 + 8 * root.etage) if app.getLvlMax() >= str(1 + 8 * root.etage) else "levels"
+                root.manager.current = str(1 + 8 * root.etage) if int(root.getLvlMax()) >= (1 + 8 * root.etage) else "levels"
+		LevelLock:
+			id: _Indicateur1
+			source: root.getImage((1 + 8 * root.etage))
+			pos_hint: {"center_x": .24 , "center_y" : .5}
         HomeButton:
             id: _bouton2
             text: "Stage 2"
@@ -177,7 +184,11 @@ WindowManager:
             on_press:
 				root.setLvl(str(2 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(2 + 8 * root.etage) if app.getLvlMax() >=str (2 + 8 * root.etage) else "levels"
+                root.manager.current = str(2 + 8 * root.etage) if int(root.getLvlMax()) >= (2 + 8 * root.etage) else "levels"
+		LevelLock:
+			id: _Indicateur2
+			source: root.getImage((2 + 8 * root.etage))
+			pos_hint: {"center_x": .48 , "center_y" : .5}
         HomeButton:
             id: _bouton3
             text: "Stage 3"
@@ -186,7 +197,11 @@ WindowManager:
             on_press:
 				root.setLvl(str(3 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(3 + 8 * root.etage) if app.getLvlMax() >=str (3 + 8 * root.etage) else "levels"
+                root.manager.current = str(3 + 8 * root.etage) if int(root.getLvlMax()) >= (3 + 8 * root.etage) else "levels"
+		LevelLock:
+			id: _Indicateur3
+			source: root.getImage((3 + 8 * root.etage))
+			pos_hint: {"center_x": .72 , "center_y" : .5}
         HomeButton:
             id: _bouton4
             text: "Stage 4"
@@ -195,7 +210,11 @@ WindowManager:
             on_press:
 				root.setLvl(str(4 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(4 + 8 * root.etage) if app.getLvlMax() >=str (4 + 8 * root.etage) else "levels"
+                root.manager.current = str(4 + 8 * root.etage) if int(root.getLvlMax()) >= (4 + 8 * root.etage) else "levels"
+		LevelLock:
+			id: _Indicateur4
+			source: root.getImage((4 + 8 * root.etage))
+			pos_hint: {"center_x": .96 , "center_y" : .5}
         HomeButton:
             id: _bouton5
             text: "Stage 5"
@@ -204,7 +223,11 @@ WindowManager:
             on_press:
 				root.setLvl(str(5 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(5 + 8 * root.etage) if app.getLvlMax() >=str (5 + 8 * root.etage) else "levels"
+                root.manager.current = str(5 + 8 * root.etage) if int(root.getLvlMax()) >= (5 + 8 * root.etage) else "levels"
+		LevelLock:
+			id: _Indicateur5
+			source: root.getImage((5 + 8 * root.etage))
+			pos_hint: {"center_x": .24 , "center_y" : .15}
         HomeButton:
             id: _bouton6
             text: "Stage 6"
@@ -213,7 +236,11 @@ WindowManager:
             on_press:
 				root.setLvl(str(6 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(6 + 8 * root.etage) if app.getLvlMax() >=str (6 + 8 * root.etage) else "levels"
+                root.manager.current = str(6 + 8 * root.etage) if int(root.getLvlMax()) >= (6 + 8 * root.etage) else "levels"
+		LevelLock:
+			id: _Indicateur6
+			source: root.getImage((6 + 8 * root.etage))
+			pos_hint: {"center_x": .48 , "center_y" : .15}
         HomeButton:
             id: _bouton7
             text: "Stage 7"
@@ -222,7 +249,11 @@ WindowManager:
             on_press:
 				root.setLvl(str(7 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(7 + 8* root.etage) if app.getLvlMax() >=str (7 + 8 * root.etage) else "levels"
+                root.manager.current = str(7 + 8* root.etage) if int(root.getLvlMax()) >= (7 + 8 * root.etage) else "levels"
+		LevelLock:
+			id: _Indicateur7
+			source: root.getImage((7 + 8 * root.etage))
+			pos_hint: {"center_x": .72 , "center_y" : .15}
         HomeButton:
             id: _bouton8
             text: "Stage 8"
@@ -231,7 +262,11 @@ WindowManager:
             on_press:
 				root.setLvl(str(8 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(8 + 8* root.etage) if app.getLvlMax() >=str (8 + 8 * root.etage) else "levels"
+                root.manager.current = str(8 + 8* root.etage) if int(root.getLvlMax()) >= (8 + 8 * root.etage) else "levels"
+		LevelLock:
+			id: _Indicateur8
+			source: root.getImage((8 + 8 * root.etage))
+			pos_hint: {"center_x": .96 , "center_y" : .15}
 
 <Level_1>:
 	name: "1"

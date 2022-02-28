@@ -1,4 +1,5 @@
 franchement g la flemme de tout lire
+tkt c surtout pr Loann ou au cas où tu sais plus à quoi un des trucs sert
 
 # Incredibot
 La vraie question c est ce que Loann lira cette ligne un jour.
@@ -6,8 +7,7 @@ La vraie question c est ce que Loann lira cette ligne un jour.
 Faudrait qu'on se fasse une sorte de "doc" interne pour savoir comment le programme marche
 Je vais mettre le début :
 En gros : ....
-Bon on a une classe AppPasMain(App) (faudrais peut etre la rename eft c juste que je savais pas que ça serait le code qu'on utiliserai au final quand je l'ai créer)
-Elle returne le fichier .kv, dans lequel il y a un WindowManager
+Bon on a une classe Incredibot(App) qui returne le fichier .kv, dans lequel il y a un WindowManager. C elle qui est executé quand on lance le programme. Window manager par définition ça gère les différents "écrans" (home, level, le niveau 1 etc ...)
 Ttes les classes sont d'abord défini dans le .py, puis la partie graphique est mis dans le .kv et la partie logique à nouveau dans le .py .
 On pourrait mettre la logique simple dans le .kv, mais pour l'organisation mieux vaux faire des fonctions dans la classe correspondante qu'on appele par root.mafonction() 
 (attention ça passe auto le self, donc quand on déclare une fonction, tjrs mettre self en premier, qu'on est des arguments ou pas).
@@ -26,6 +26,7 @@ Dans chaque lvl, il y a un bouton back pr revenir aux niveau, un label avc le no
 une fonction dans app qui regarde si le niveau actuel (current.txt) est supérieur au niveau max, et si c le cas il le remplace dans le fichier
 Il manque sans doute plein de trucs ms pg je completerai plus tard (peut etre)
 
+# DU COUP LA MOITIE EST FAUX G CHANGE PLEIN DE TRUC + JE VAIS PASSER TT EN ECRAN REUTILISABLE POUR LES NIVEAUX
 Nécessaire:
 _ Python >3.7 <3.10 (je conseille la dernière version de 3.9 (ajd 3.9.10))
 _ les trucs de base (pip, setuptools, docutils ...) à jour
