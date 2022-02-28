@@ -1,3 +1,5 @@
+franchement g la flemme de tout lire
+
 # Incredibot
 La vraie question c est ce que Loann lira cette ligne un jour.
 
