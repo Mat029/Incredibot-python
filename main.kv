@@ -2,70 +2,7 @@
 WindowManager:
     HomeScreen:
     LevelScreen:
-    Level_1:
-    Level_2:
-    Level_3:
-    Level_4:
-    Level_5:
-    Level_6:
-    Level_7:
-    Level_8:
-    Level_9:
-    Level_10:
-    Level_11:
-    Level_12:
-    Level_13:
-    Level_14:
-    Level_15:
-    Level_16:
-    Level_17:
-    Level_18:
-    Level_19:
-    Level_20:
-    Level_21:
-    Level_22:
-    Level_23:
-    Level_24:
-    Level_25:
-    Level_26:
-    Level_27:
-    Level_28:
-    Level_29:
-    Level_30:
-    Level_31:
-    Level_32:
-    Level_33:
-    Level_34:
-    Level_35:
-    Level_36:
-    Level_37:
-    Level_38:
-    Level_39:
-    Level_40:
-    Level_41:
-    Level_42:
-    Level_43:
-    Level_44:
-    Level_45:
-    Level_46:
-    Level_47:
-    Level_48:
-    Level_49:
-    Level_50:
-    Level_51:
-    Level_52:
-    Level_53:
-    Level_54:
-    Level_55:
-    Level_56:
-    Level_57:
-    Level_58:
-    Level_59:
-    Level_60:
-    Level_61:
-    Level_62:
-    Level_63:
-    Level_64:
+	CustomLevelScreen:
 
 <HomeButton@Button>:
     font_size: 0.35 * self.height
@@ -80,22 +17,6 @@ WindowManager:
 		size: root.width, root.height
 <LevelLock@Image>:
 	size_hint: .07, .07
-
-<BackLevelButton@Button>:
-    text: "Back"
-    font_size: 25
-    size_hint: .1, .1  
-    pos_hint: {'center_x': .2,'center_y':.2}
-<ValidationButton@Button>:
-    text: "Valider"
-    font_size: 25
-    size_hint: .1, .1  
-    pos_hint: {'center_x': .8,'center_y':.2}
-	on_press: app.changeLvlMax()
-<LabelDuNiveau@Label>:
-    font_size: 0.35 * self.height
-    size_hint: .4, .4
-    pos_hint: {'center_x': .5,'center_y':.5}
 
 <HomeScreen>:
     name: "home"
@@ -171,7 +92,7 @@ WindowManager:
             on_press:
 				root.setLvl(str(1 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(1 + 8 * root.etage) if int(root.getLvlMax()) >= (1 + 8 * root.etage) else "levels"
+                root.manager.current = "custom" if int(root.getLvlMax()) >= (1 + 8 * root.etage) else "levels"
 		LevelLock:
 			id: _Indicateur1
 			source: root.getImage((1 + 8 * root.etage))
@@ -184,7 +105,7 @@ WindowManager:
             on_press:
 				root.setLvl(str(2 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(2 + 8 * root.etage) if int(root.getLvlMax()) >= (2 + 8 * root.etage) else "levels"
+                root.manager.current = "custom" if int(root.getLvlMax()) >= (2 + 8 * root.etage) else "levels"
 		LevelLock:
 			id: _Indicateur2
 			source: root.getImage((2 + 8 * root.etage))
@@ -197,7 +118,7 @@ WindowManager:
             on_press:
 				root.setLvl(str(3 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(3 + 8 * root.etage) if int(root.getLvlMax()) >= (3 + 8 * root.etage) else "levels"
+                root.manager.current = "custom" if int(root.getLvlMax()) >= (3 + 8 * root.etage) else "levels"
 		LevelLock:
 			id: _Indicateur3
 			source: root.getImage((3 + 8 * root.etage))
@@ -210,7 +131,7 @@ WindowManager:
             on_press:
 				root.setLvl(str(4 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(4 + 8 * root.etage) if int(root.getLvlMax()) >= (4 + 8 * root.etage) else "levels"
+                root.manager.current = "custom" if int(root.getLvlMax()) >= (4 + 8 * root.etage) else "levels"
 		LevelLock:
 			id: _Indicateur4
 			source: root.getImage((4 + 8 * root.etage))
@@ -223,7 +144,7 @@ WindowManager:
             on_press:
 				root.setLvl(str(5 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(5 + 8 * root.etage) if int(root.getLvlMax()) >= (5 + 8 * root.etage) else "levels"
+                root.manager.current = "custom" if int(root.getLvlMax()) >= (5 + 8 * root.etage) else "levels"
 		LevelLock:
 			id: _Indicateur5
 			source: root.getImage((5 + 8 * root.etage))
@@ -236,7 +157,7 @@ WindowManager:
             on_press:
 				root.setLvl(str(6 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(6 + 8 * root.etage) if int(root.getLvlMax()) >= (6 + 8 * root.etage) else "levels"
+                root.manager.current = "custom" if int(root.getLvlMax()) >= (6 + 8 * root.etage) else "levels"
 		LevelLock:
 			id: _Indicateur6
 			source: root.getImage((6 + 8 * root.etage))
@@ -249,7 +170,7 @@ WindowManager:
             on_press:
 				root.setLvl(str(7 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(7 + 8* root.etage) if int(root.getLvlMax()) >= (7 + 8 * root.etage) else "levels"
+                root.manager.current = "custom" if int(root.getLvlMax()) >= (7 + 8 * root.etage) else "levels"
 		LevelLock:
 			id: _Indicateur7
 			source: root.getImage((7 + 8 * root.etage))
@@ -262,649 +183,32 @@ WindowManager:
             on_press:
 				root.setLvl(str(8 + 8 * root.etage))
                 root.manager.transition.direction = 'left'
-                root.manager.current = str(8 + 8* root.etage) if int(root.getLvlMax()) >= (8 + 8 * root.etage) else "levels"
+                root.manager.current = "custom" if int(root.getLvlMax()) >= (8 + 8 * root.etage) else "levels"
 		LevelLock:
 			id: _Indicateur8
 			source: root.getImage((8 + 8 * root.etage))
 			pos_hint: {"center_x": .96 , "center_y" : .15}
-
-<Level_1>:
-	name: "1"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 1"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_2>:
-	name: "2"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 2"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_3>:
-	name: "3"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 3"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_4>:
-	name: "4"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 4"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_5>:
-	name: "5"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 5"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_6>:
-	name: "6"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 6"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_7>:
-	name: "7"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 7"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_8>:
-	name: "8"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 8"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_9>:
-	name: "9"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 9"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_10>:
-	name: "10"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 10"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_11>:
-	name: "11"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 11"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_12>:
-	name: "12"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 12"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_13>:
-	name: "13"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 13"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_14>:
-	name: "14"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 14"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_15>:
-	name: "15"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 15"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_16>:
-	name: "16"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 16"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_17>:
-	name: "17"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 17"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_18>:
-	name: "18"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 18"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_19>:
-	name: "19"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 19"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_20>:
-	name: "20"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 20"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_21>:
-	name: "21"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 21"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_22>:
-	name: "22"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 22"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_23>:
-	name: "23"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 23"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_24>:
-	name: "24"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 24"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_25>:
-	name: "25"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 25"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_26>:
-	name: "26"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 26"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_27>:
-	name: "27"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 27"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_28>:
-	name: "28"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 28"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_29>:
-	name: "29"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 29"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_30>:
-	name: "30"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 30"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_31>:
-	name: "31"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 31"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_32>:
-	name: "32"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 32"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_33>:
-	name: "33"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 33"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_34>:
-	name: "34"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 34"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_35>:
-	name: "35"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 35"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_36>:
-	name: "36"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 36"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_37>:
-	name: "37"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 37"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_38>:
-	name: "38"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 38"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_39>:
-	name: "39"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 39"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_40>:
-	name: "40"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 40"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_41>:
-	name: "41"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 41"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_42>:
-	name: "42"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 42"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_43>:
-	name: "43"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 43"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_44>:
-	name: "44"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 44"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_45>:
-	name: "45"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 45"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_46>:
-	name: "46"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 46"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_47>:
-	name: "47"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 47"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_48>:
-	name: "48"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 48"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_49>:
-	name: "49"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 49"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_50>:
-	name: "50"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 50"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_51>:
-	name: "51"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 51"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_52>:
-	name: "52"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 52"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_53>:
-	name: "53"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 53"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_54>:
-	name: "54"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 54"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_55>:
-	name: "55"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 55"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_56>:
-	name: "56"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 56"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_57>:
-	name: "57"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 57"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_58>:
-	name: "58"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 58"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_59>:
-	name: "59"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 59"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_60>:
-	name: "60"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 60"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_61>:
-	name: "61"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 61"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_62>:
-	name: "62"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 62"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_63>:
-	name: "63"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 63"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
-<Level_64>:
-	name: "64"
-	FloatLayout
-		ValidationButton:
-		LabelDuNiveau:
-			text: "Etage 64"
-		BackLevelButton
-			on_press:
-				root.manager.transition.direction = 'right'
-				root.manager.current = 'levels'
+		
+<CustomLevelScreen>:
+	name: "custom"
+	on_pre_enter : root.chargement()
+	FloatLayout:
+		Button:
+			text: "Back"
+			font_size: 25
+			size_hint: .1, .1  
+			pos_hint: {'center_x': .2,'center_y':.2}
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'levels'
+		Button:
+			text: "Valider"
+			font_size: 25
+			size_hint: .1, .1  
+			pos_hint: {'center_x': .8,'center_y':.2}
+			on_press: app.changeLvlMax()
+		Label:
+			id: _labelNomLvl
+			font_size: 0.35 * self.height
+			size_hint: .4, .4
+			pos_hint: {'center_x': .5,'center_y':.5}
