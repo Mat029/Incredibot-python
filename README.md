@@ -1,5 +1,6 @@
 franchement g la flemme de tout lire
 tkt c surtout pr Loann ou au cas où tu sais plus à quoi un des trucs sert
+je comprends rien
 
 # Incredibot
 La vraie question c est ce que Loann lira cette ligne un jour.
