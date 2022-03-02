@@ -194,21 +194,36 @@ WindowManager:
 	on_pre_enter : root.chargement()
 	FloatLayout:
 		Button:
-			text: "Back"
+			text: "Retour"
 			font_size: 25
 			size_hint: .1, .1  
-			pos_hint: {'center_x': .2,'center_y':.2}
+			pos_hint: {'center_x': .1,'center_y':.9}
             on_press:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'levels'
-		Button:
-			text: "Valider"
-			font_size: 25
-			size_hint: .1, .1  
-			pos_hint: {'center_x': .8,'center_y':.2}
-			on_press: app.changeLvlMax()
 		Label:
 			id: _labelNomLvl
+            markup: True
 			font_size: 0.35 * self.height
-			size_hint: .4, .4
-			pos_hint: {'center_x': .5,'center_y':.5}
+			size_hint: .2, .1
+			pos_hint: {'center_x': .25,'center_y':.9}
+        Image:
+            id: _imageLvl
+            size_hint: .50625, .9
+            pos_hint: {"x" : 0.4374,"center_y" : .5}
+        TextInput:
+            id: _userInput
+            font_size: 20
+            size_hint: 0.3 , 0.45
+            pos_hint: {"center_x": 0.2, "center_y" : 0.575}
+        Button:
+            text: "Play"
+            size_hint: 0.3 , 0.1
+            pos_hint: {"center_x" : 0.2, "center_y" : 0.25}
+            on_press:
+                root.verif(_userInput.text)
+        Label:
+            id: _labelResultat
+            font_size: 20
+            size_hint: 0.3, 0.1
+            pos_hint: {"center_x": 0.2, "center_y": .1}
