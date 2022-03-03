@@ -11,7 +11,8 @@ tkt ça vient (paul aura la ref de cours, pas Loann, merde j'espere on a enlever
 
 ## A faire :
 
-* Ttes les images
-* Une interface pour mettre des inputs
-* Un système qui verifie que les instructions de la personne marche (sinon l'insulter de fdp)
+* Ttes les images ⏱ (les 4 premiers)
+* Une interface pour mettre des inputs ✅
+* Un système qui verifie que les instructions de la personne marche (sinon l'insulter de fdp) ⏱ (verifie les instruction de bases (avancer, reculer, dorite, gauche))
+* Un système qui montre les avancé du robot ⏱ (IL Y A UN PUTAIN DE BUG QUI FAIT QUE CA MARCHE PAS)
 * Des trucs en plus (creation, multijoueur, système de bloc joli, image mieux etc ....)

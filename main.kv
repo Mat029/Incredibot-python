@@ -24,6 +24,9 @@ WindowManager:
         Image:
             source:'Images/home_background.jpg'
             pos_hint:{'x': 0,'y':0}
+            size_hint: 1 , 1
+            keep_ratio: False
+            allow_stretch: True
         Label:
             text: "[i][b]Incredibot[/b][/i]"
             markup: True
@@ -54,6 +57,9 @@ WindowManager:
         Image:
             source:'Images/level_background.jpg'
             pos_hint:{'x': 0,'y':0}
+            size_hint: 1 , 1
+            keep_ratio: False
+            allow_stretch: True
         HomeButton:
             text: "Home"
             size_hint: .12,.12
@@ -193,9 +199,16 @@ WindowManager:
 	name: "custom"
 	on_pre_enter : root.chargement()
 	FloatLayout:
+        Image:
+            id: _imageLvl
+            source:'Images/lvl/lvl1.png'
+            pos_hint:{'x': 0.4374,'y':0.05}
+            size_hint: 0.50625 , 0.9
+            keep_ratio: False
+            allow_stretch: True
 		Button:
 			text: "Retour"
-			font_size: 25
+			font_size: 0.4 * self.height
 			size_hint: .1, .1  
 			pos_hint: {'center_x': .1,'center_y':.9}
             on_press:
@@ -203,14 +216,14 @@ WindowManager:
                 root.manager.current = 'levels'
 		Label:
 			id: _labelNomLvl
-            markup: True
-			font_size: 0.35 * self.height
+            bold: True
+			font_size: 0.4 * self.height
 			size_hint: .2, .1
 			pos_hint: {'center_x': .25,'center_y':.9}
         Image:
-            id: _imageLvl
-            size_hint: .50625, .9
-            pos_hint: {"x" : 0.4374,"center_y" : .5}
+            id: _imageRobot
+            source: "Images/lvl/robot.png"
+            size_hint: .050625 , .09
         TextInput:
             id: _userInput
             font_size: 20
@@ -219,11 +232,13 @@ WindowManager:
         Button:
             text: "Play"
             size_hint: 0.3 , 0.1
+            font_size: 0.4 * self.height
             pos_hint: {"center_x" : 0.2, "center_y" : 0.25}
             on_press:
                 root.verif(_userInput.text)
         Label:
             id: _labelResultat
-            font_size: 20
+            font_size: 0.3 * self.height
+            bold: True
             size_hint: 0.3, 0.1
             pos_hint: {"center_x": 0.2, "center_y": .1}
