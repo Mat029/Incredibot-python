@@ -116,7 +116,7 @@ class CustomLevelScreen(Screen):
             orientation = 1
             nb = 0
             Terminer = False
-            Clock.schedule_interval(self.updateRobot, 1)
+            #Clock.schedule_interval(self.updateRobot, 1)
             while not Terminer and nb != len(texteCoupe) :
                 if texteCoupe[nb] == "avancer" :
                     self.position+= orientation
@@ -168,7 +168,7 @@ class CustomLevelScreen(Screen):
                 self.showResult("ECHEC : ça manque d'instruction ton bail")
             time.sleep(1)
             self.position = self.getOrigin(lvl)
-            Clock.unschedule(self.updateRobot)
+            #Clock.unschedule(self.updateRobot)
     def showResult(self, resultat) :
         self.ids._labelResultat.text = resultat
 
