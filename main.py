@@ -2,13 +2,12 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
-from kivy.clock import Clock
 import json
 import time
 
 class HomeScreen(Screen):
     def cours(self):
-        print("tkt ça vient")
+        print("Bientôt disponible (normalement)")
     pass
 
 class LevelScreen(Screen):
@@ -41,31 +40,31 @@ class LevelScreen(Screen):
         
     def augmente(self):
         self.etage+=1
-        self.ids._boutonAugmente.disabled = (self.etage == 7)
+        self.ids._boutonAugmente.disabled = (self.etage == 3)
         self.ids._boutonBaisse.disabled = (self.etage == 0)
         self.ids._labelEtage.text = str(self.etage +1)
-        self.ids._bouton1.text = "Stage " + str(self.etage * 8 + 1)
-        self.ids._bouton2.text = "Stage " + str(self.etage * 8 + 2)
-        self.ids._bouton3.text = "Stage " + str(self.etage * 8 + 3)
-        self.ids._bouton4.text = "Stage " + str(self.etage * 8 + 4)
-        self.ids._bouton5.text = "Stage " + str(self.etage * 8 + 5)
-        self.ids._bouton6.text = "Stage " + str(self.etage * 8 + 6)
-        self.ids._bouton7.text = "Stage " + str(self.etage * 8 + 7)
-        self.ids._bouton8.text = "Stage " + str(self.etage * 8 + 8)
+        self.ids._bouton1.text = "Niveau " + str(self.etage * 8 + 1)
+        self.ids._bouton2.text = "Niveau " + str(self.etage * 8 + 2)
+        self.ids._bouton3.text = "Niveau " + str(self.etage * 8 + 3)
+        self.ids._bouton4.text = "Niveau " + str(self.etage * 8 + 4)
+        self.ids._bouton5.text = "Niveau " + str(self.etage * 8 + 5)
+        self.ids._bouton6.text = "Niveau " + str(self.etage * 8 + 6)
+        self.ids._bouton7.text = "Niveau " + str(self.etage * 8 + 7)
+        self.ids._bouton8.text = "Niveau " + str(self.etage * 8 + 8)
         self.update()
     def baisse(self):
         self.etage-=1
-        self.ids._boutonAugmente.disabled = (self.etage == 7)
+        self.ids._boutonAugmente.disabled = (self.etage == 3)
         self.ids._boutonBaisse.disabled = (self.etage == 0)
         self.ids._labelEtage.text = str(self.etage +1)
-        self.ids._bouton1.text = "Stage " + str(self.etage * 8 + 1)
-        self.ids._bouton2.text = "Stage " + str(self.etage * 8 + 2)
-        self.ids._bouton3.text = "Stage " + str(self.etage * 8 + 3)
-        self.ids._bouton4.text = "Stage " + str(self.etage * 8 + 4)
-        self.ids._bouton5.text = "Stage " + str(self.etage * 8 + 5)
-        self.ids._bouton6.text = "Stage " + str(self.etage * 8 + 6)
-        self.ids._bouton7.text = "Stage " + str(self.etage * 8 + 7)
-        self.ids._bouton8.text = "Stage " + str(self.etage * 8 + 8) 
+        self.ids._bouton1.text = "Niveau " + str(self.etage * 8 + 1)
+        self.ids._bouton2.text = "Niveau " + str(self.etage * 8 + 2)
+        self.ids._bouton3.text = "Niveau " + str(self.etage * 8 + 3)
+        self.ids._bouton4.text = "Niveau " + str(self.etage * 8 + 4)
+        self.ids._bouton5.text = "Niveau " + str(self.etage * 8 + 5)
+        self.ids._bouton6.text = "Niveau " + str(self.etage * 8 + 6)
+        self.ids._bouton7.text = "Niveau " + str(self.etage * 8 + 7)
+        self.ids._bouton8.text = "Niveau " + str(self.etage * 8 + 8) 
         self.update()
     pass
 
@@ -116,7 +115,6 @@ class CustomLevelScreen(Screen):
             orientation = 1
             nb = 0
             Terminer = False
-            #Clock.schedule_interval(self.updateRobot, 1)
             while not Terminer and nb != len(texteCoupe) :
                 if texteCoupe[nb] == "avancer" :
                     self.position+= orientation
@@ -141,9 +139,8 @@ class CustomLevelScreen(Screen):
                 elif texteCoupe[nb] == "reculer" :
                     self.position-= orientation
                 else: 
-                    self.showResult("ECHEC : apprends à écrire bouffon(e)")
+                    self.showResult("ECHEC : Mot incorrect dans le script")
                     Terminer = True
-                time.sleep(1)
                 if str(self.position) in Data[int(lvl) - 1] :
                     if Data[int(lvl) - 1][str(self.position)] == "c" :
                         pass
@@ -151,24 +148,23 @@ class CustomLevelScreen(Screen):
                         pass
                     elif Data[int(lvl) - 1][str(self.position)] == "f" :
                         if (nb + 1) == len(texteCoupe) :
-                            self.showResult("REUSSI : t'enflamme pas c juste le lvl " + lvl)
+                            self.showResult("REUSSI : Bravo, tu as réussi le niveau " + lvl) 
                             self.changeLvlMax()
                             Terminer = True
                         else: 
-                            self.showResult("ECHEC : Trop d'instruction.\nOù est passé le pouvoir de la flemme ?")
+                            self.showResult("ECHEC : Trop d'instructions.\nPourquoi faire compliquer quand on peut faire simple ???")
                             Terminer = True
                     else: 
-                        self.showResult("ERREUR : Faudrait corriger le json")
+                        self.showResult("ERREUR : Faudrait corriger le json\nNous nous excusons de ne pas savoir coder")
                         Terminer = True
                 else: 
-                    self.showResult("ECHEC : hors champs")
+                    self.showResult("ECHEC : Hors champs")
                     Terminer = True
                 nb +=1
             if not Terminer :
-                self.showResult("ECHEC : ça manque d'instruction ton bail")
-            time.sleep(1)
+                self.showResult("ECHEC : Il manque une/plusieurs instructions")
+            #time.sleep(0.25)
             self.position = self.getOrigin(lvl)
-            #Clock.unschedule(self.updateRobot)
     def showResult(self, resultat) :
         self.ids._labelResultat.text = resultat
 
