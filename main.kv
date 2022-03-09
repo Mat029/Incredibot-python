@@ -209,7 +209,7 @@ WindowManager:
 		Button:
 			text: "Retour"
 			font_size: 0.4 * self.height
-			size_hint: .1, .1  
+			size_hint: .1, .075  
 			pos_hint: {'center_x': .1,'center_y':.9}
             on_press:
                 root.manager.transition.direction = 'right'
@@ -218,7 +218,7 @@ WindowManager:
 			id: _labelNomLvl
             bold: True
 			font_size: 0.4 * self.height
-			size_hint: .2, .1
+			size_hint: .2, .075
 			pos_hint: {'center_x': .25,'center_y':.9}
         Image:
             id: _imageRobot
@@ -227,13 +227,48 @@ WindowManager:
         TextInput:
             id: _userInput
             font_size: .06 * self.height
-            size_hint: 0.3 , 0.45
-            pos_hint: {"center_x": 0.2, "center_y" : 0.575}
+            size_hint: 0.3 , 0.4
+            pos_hint: {"center_x": 0.2, "center_y" : 0.625}
+		Button:
+			text: "Avancer"
+			font_size: 0.4 * self.height
+			size_hint: 0.3/4,  0.3/4  
+			pos_hint: {'x': .05,'y': .425 - 0.3/4}
+            on_press:
+                _userInput.text += "\nAvancer" if _userInput.text != "" else "Avancer"
+		Button:
+			text: "Reculer"
+			font_size: 0.4 * self.height
+			size_hint: 0.3/4, 0.3/4  
+			pos_hint: {'x': .05 + 0.3/4,'y': .425 - 0.3/4}
+            on_press:
+                _userInput.text += "\nReculer" if _userInput.text != "" else "Reculer"
+		Button:
+			text: "Droite"
+			font_size: 0.4 * self.height
+			size_hint: 0.3/4, 0.3/4  
+			pos_hint: {'x': .05 + 0.6/4,'y': .425 - 0.3/4}
+            on_press:
+                _userInput.text += "\nDroite" if _userInput.text != "" else "Droite"
+		Button:
+			text: "Gauche"
+			font_size: 0.4 * self.height
+			size_hint: 0.3/4, 0.3/4  
+			pos_hint: {'x': .05 + 0.9/4,'y': .425 - 0.3/4}
+            on_press:
+                _userInput.text += "\nGauche" if _userInput.text != "" else "Gauche"
+		Button:
+			text: "Reset"
+			font_size: 0.4 * self.height
+			size_hint: 0.3/4, 0.3/4  
+			pos_hint: {'x': .05 + 0.9/4,'y': .425 - 0.6/4}
+            on_press:
+                _userInput.text = ""
         Button:
             text: "Play"
-            size_hint: 0.3 , 0.1
+            size_hint: 0.3 , 0.075
             font_size: 0.4 * self.height
-            pos_hint: {"center_x" : 0.2, "center_y" : 0.25}
+            pos_hint: {"center_x" : 0.2, "center_y" : 0.2}
             on_press:
                 root.verif(_userInput.text)
         Label:

@@ -152,10 +152,10 @@ class CustomLevelScreen(Screen):
                             self.changeLvlMax()
                             Terminer = True
                         else: 
-                            self.showResult("ECHEC : Trop d'instructions.\nPourquoi faire compliquer quand on peut faire simple ???")
+                            self.showResult("ECHEC : Trop d'instructions.")
                             Terminer = True
                     else: 
-                        self.showResult("ERREUR : Faudrait corriger le json\nNous nous excusons de ne pas savoir coder")
+                        self.showResult("ERREUR : Faudrait corriger le json")
                         Terminer = True
                 else: 
                     self.showResult("ECHEC : Hors champs")
