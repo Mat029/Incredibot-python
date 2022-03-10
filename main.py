@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
+from kivy.config import Config
 import json
 import time
 
@@ -81,6 +82,10 @@ class CustomLevelScreen(Screen):
         if int(lvl) <= len(Data) :
             self.position = self.getOrigin(lvl)
             self.updateRobot()
+            if "limite" in Data[int(lvl) - 1] :
+                self.ids._labelInstruction.text = "Nombre max d'instructions : " + str(Data[int(lvl) - 1]["limite"])
+            else:
+                self.ids._labelInstruction.text = "Nombre max d'instructions : NAN"
         else:
             self.ids._imageRobot.pos_hint = {"center_x" : .2 , "center_y" : .5}
     def changeLvlMax(self):
@@ -115,6 +120,11 @@ class CustomLevelScreen(Screen):
             orientation = 1
             nb = 0
             Terminer = False
+            if "limite" in Data[int(lvl) - 1] :
+                if len(texteCoupe) > Data[int(lvl) - 1]["limite"] :
+                    Terminer = True
+                    self.showResult("ECHEC : Trop d'instructions !")
+
             while not Terminer and nb != len(texteCoupe) :
                 if texteCoupe[nb] == "avancer" :
                     self.position+= orientation
@@ -151,9 +161,6 @@ class CustomLevelScreen(Screen):
                             self.showResult("REUSSI : Bravo, tu as réussi le niveau " + lvl) 
                             self.changeLvlMax()
                             Terminer = True
-                        else: 
-                            self.showResult("ECHEC : Trop d'instructions.")
-                            Terminer = True
                     else: 
                         self.showResult("ERREUR : Faudrait corriger le json")
                         Terminer = True
@@ -163,7 +170,6 @@ class CustomLevelScreen(Screen):
                 nb +=1
             if not Terminer :
                 self.showResult("ECHEC : Il manque une/plusieurs instructions")
-            #time.sleep(0.25)
             self.position = self.getOrigin(lvl)
     def showResult(self, resultat) :
         self.ids._labelResultat.text = resultat
@@ -182,5 +188,6 @@ class Incredibot(App):
         App.get_running_app().stop()
         Window.close()
 if __name__ == "__main__":
+    Config.set("input","mouse","mouse,multitouch_on_demand")
     Window.maximize()
     Incredibot().run()

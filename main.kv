@@ -257,6 +257,13 @@ WindowManager:
 			pos_hint: {'x': .05 + 0.9/4,'y': .425 - 0.3/4}
             on_press:
                 _userInput.text += "\nGauche" if _userInput.text != "" else "Gauche"
+        Label:
+            id: _labelInstruction
+			font_size: 0.35 * self.height
+            bold: True
+			size_hint: 0.9/4, 0.3/4  
+			pos_hint: {'x': .05,'y': .425 - 0.6/4}
+            
 		Button:
 			text: "Reset"
 			font_size: 0.4 * self.height
