@@ -1,10 +1,28 @@
+""""
+DOC PROVISOIRE !!!!
+
+Voir ttes les recommandations précises dans readme sinon :
+
+installer Kivy :
+1) pip -m install kivy[base] dans votre terminal
+2) Si votre éditeur le supporte (Pycharme/Thonny, Anaconda aussi je crois etc...) Vous pouvez installer directement kivy. Bien prendre le "grand" Kivy, avec toutes les dépendances.
+
+ATTENTION IMPORTANT :
+
+ 1) Le code a été codé sur Python 3.9.10, et même si il devrait fonctionner sur python 3.7 (version de Thonny bundle), il "devrait". (Cf problème de migration vers 3.10 et patern dans readme)
+ 2) Un bug existait en 2.0.0 (et existe peut etre toujours en 2.1.0) et affectait nottament les pc de l'écoles, où kivy detecte une version d'open Gl qui n'est pas la bonne, ce qui provoque un crash. Dans ce cas, rajouter :
+ import os
+ os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
+"""
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
 from kivy.config import Config
+import kivy
 import json
-import time
+
+kivy.require("2.1.0")
 
 class HomeScreen(Screen):
     def cours(self):
@@ -123,7 +141,7 @@ class CustomLevelScreen(Screen):
             if "limite" in Data[int(lvl) - 1] :
                 if len(texteCoupe) > Data[int(lvl) - 1]["limite"] :
                     Terminer = True
-                    self.showResult("ECHEC : Trop d'instructions !")
+                    self.showResult("ECHEC : Limite dépassée !")
 
             while not Terminer and nb != len(texteCoupe) :
                 if texteCoupe[nb] == "avancer" :
