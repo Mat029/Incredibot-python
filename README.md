@@ -15,8 +15,7 @@ On travaille dessus ça viendra
 * Un système qui verifie que les instructions de la personne marche (sinon donner l'erreur) ✅
 * Etage 1 ✅
 * Un système qui montre les mouvements du robot ⏱ 
-* Etage 2 ⏱
-
+* Etage totalement brouillonner (manque du lvl8), transformation en json en cour
 (Symboles : ✅ : terminer (tester à fond) ❌ : annulé ⏱ : en cours de "coding"/terminé mais buggué 🧠 : en reflexion )
 
 ## Road Map  :
@@ -24,7 +23,7 @@ On travaille dessus ça viendra
 ### ----------Stric Minimum pour le projet final----------
 * Finir les 8 premiers niveaux fonctionnels ✅
 * Faire fonctionner le mouvement du robot
-* Faire l'étage 2
+* Faire l'étage 2 (fait)
 * Refonte graphique de l'interface des niv (avec des images "clean")
 * Faire l'étage 3
 * Faire une interface de cours et en rédiger 4
