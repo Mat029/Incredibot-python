@@ -9,10 +9,11 @@ installer Kivy :
 
 ATTENTION IMPORTANT :
 
- 1) Le code a été codé sur Python 3.9.10, et même si il devrait fonctionner sur python 3.7 (version de Thonny bundle), il "devrait". (Cf problème de migration vers 3.10 et patern dans readme)
- 2) Un bug existait en 2.0.0 (et existe peut etre toujours en 2.1.0) et affectait nottament les pc de l'écoles, où kivy detecte une version d'open Gl qui n'est pas la bonne, ce qui provoque un crash. Dans ce cas, rajouter :
+1) Version de python utilisé : 3.7.9 (compatible avec les versions supérieurs aussi)
+2) Un bug de kivy qui affecte nottament les pc de l'écoles, detecte une version d'open Gl qui n'est pas la bonne, ce qui provoque un crash. Dans ce cas, rajouter :
  import os
  os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
+ AU TOUT DEBUT DU FICHIER (avant les autres import)
 """
 from kivy.app import App
 from kivy.lang import Builder
