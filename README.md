@@ -16,6 +16,7 @@ On travaille dessus ça viendra
 * Etage 1 ✅
 * Un système qui montre les mouvements du robot ⏱ 
 * Etage totalement brouillonner (manque du lvl8), transformation en json en cour
+
 (Symboles : ✅ : terminer (tester à fond) ❌ : annulé ⏱ : en cours de "coding"/terminé mais buggué 🧠 : en reflexion )
 
 ## Road Map  :
