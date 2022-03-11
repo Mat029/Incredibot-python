@@ -16,6 +16,7 @@ On travaille dessus ça viendra
 * Etage 1 ✅
 * Un système qui montre les mouvements du robot ⏱ 
 * Etage totalement brouillonner (manque du lvl8), transformation en json en cour
+* ATTENTION J'ai codé seulement les levels 7 et 8 dans le json pour letage 2, c donc le zbeul sur le fichier data.json donc faire antention
 
 (Symboles : ✅ : terminer (tester à fond) ❌ : annulé ⏱ : en cours de "coding"/terminé mais buggué 🧠 : en reflexion )
 
