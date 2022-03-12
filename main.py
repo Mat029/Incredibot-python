@@ -15,6 +15,7 @@ ATTENTION IMPORTANT :
  os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
  AU TOUT DEBUT DU FICHIER (avant les autres import)
 """
+from turtle import pos
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -167,13 +168,37 @@ class CustomLevelScreen(Screen):
                         orientation = - 1
                 elif texteCoupe[nb] == "reculer" :
                     self.position-= orientation
+                elif texteCoupe[nb] == "attendre" :
+                    pass
+                elif texteCoupe[nb] == "jump" :
+                    if str((self.position) + orientation) in Data :
+                        self.showResult("ECHEC : Tu ne peux sauter que par dessus le vide\n Gros chacal de merde sale pute")
+                        Terminer = True
+                    else: 
+                        self.position += 2 * orientation
+
                 else: 
                     self.showResult("ECHEC : Mot incorrect dans le script")
                     Terminer = True
                 if str(self.position) in Data[int(lvl) - 1] :
-                    if Data[int(lvl) - 1][str(self.position)] == "c" :
+                    if Data[int(lvl) - 1][str(self.position)] == "c" or Data[int(lvl) - 1][str(self.position)] == "d" or Data[int(lvl) - 1][str(self.position)] == "f" :
                         pass
-                    elif Data[int(lvl) - 1][str(self.position)] == "d":
+                    elif Data[int(lvl) - 1][str(self.position)] ==  "t-d" :
+                        self.position += 1
+                    elif Data[int(lvl) - 1][str(self.position)] ==  "t-g" :
+                        self.position -= 1
+                    elif Data[int(lvl) - 1][str(self.position)] ==  "t-h" :
+                        self.position -= 10
+                    elif Data[int(lvl) - 1][str(self.position)] ==  "t-b" :
+                        self.position += 10
+                    else: 
+                        self.showResult("ERREUR : Faudrait corriger le json/le code")
+                        Terminer = True
+                else: 
+                    self.showResult("ECHEC : Hors champs")
+                    Terminer = True
+                if str(self.position) in Data[int(lvl) - 1] :
+                    if Data[int(lvl) - 1][str(self.position)] == "c" or Data[int(lvl) - 1][str(self.position)] == "d" or Data[int(lvl) - 1][str(self.position)] == "t-d" or Data[int(lvl) - 1][str(self.position)] == "t-g" or Data[int(lvl) - 1][str(self.position)] == "t-h" or Data[int(lvl) - 1][str(self.position)] == "t-b":
                         pass
                     elif Data[int(lvl) - 1][str(self.position)] == "f" :
                         if (nb + 1) == len(texteCoupe) :
@@ -181,7 +206,7 @@ class CustomLevelScreen(Screen):
                             self.changeLvlMax()
                             Terminer = True
                     else: 
-                        self.showResult("ERREUR : Faudrait corriger le json")
+                        self.showResult("ERREUR : Faudrait corriger le json/le code")
                         Terminer = True
                 else: 
                     self.showResult("ECHEC : Hors champs")
