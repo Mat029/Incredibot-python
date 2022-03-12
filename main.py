@@ -15,7 +15,6 @@ ATTENTION IMPORTANT :
  os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
  AU TOUT DEBUT DU FICHIER (avant les autres import)
 """
-from turtle import pos
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -170,7 +169,7 @@ class CustomLevelScreen(Screen):
                     self.position-= orientation
                 elif texteCoupe[nb] == "attendre" :
                     pass
-                elif texteCoupe[nb] == "jump" :
+                elif texteCoupe[nb] == "sauter" :
                     if str((self.position) + orientation) in Data :
                         self.showResult("ECHEC : Tu ne peux sauter que par dessus le vide\n Gros chacal de merde sale pute")
                         Terminer = True
