@@ -171,7 +171,6 @@ class CustomLevelScreen(Screen):
                     pass
                 elif texteCoupe[nb] == "sauter" and int(lvl) >= 9 :
                     if str((self.position) + orientation) in Data[int(lvl) - 1] :
-                        print("bleu")
                         self.showResult("ECHEC : Tu ne peux sauter que le vide")
                         Terminer = True
                     else: 
