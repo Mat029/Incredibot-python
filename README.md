@@ -29,6 +29,9 @@ On travaille dessus ça viendra
 * Refonte graphique de l'interface des niv (avec des images "clean")
 * Faire l'étage 3
 * Faire une interface de cours et en rédiger 4
+* (selon mon père) :
+* -un bouton qui si tu as fini le niveau peu permettre d'arriver sur le niv d'après sans faire retour
+* -un truc qui donne le nombre d'instruction en cour(écrite))
 ### ----------Objectif----------
 * Passer à 8 cours
 * Ajouter de la musique/des sons
