@@ -167,11 +167,12 @@ class CustomLevelScreen(Screen):
                         orientation = - 1
                 elif texteCoupe[nb] == "reculer" :
                     self.position-= orientation
-                elif texteCoupe[nb] == "attendre" :
+                elif texteCoupe[nb] == "attendre" and int(lvl) >= 9 :
                     pass
-                elif texteCoupe[nb] == "sauter" :
-                    if str((self.position) + orientation) in Data :
-                        self.showResult("ECHEC : Tu ne peux sauter que par dessus le vide\n Gros chacal de merde sale pute")
+                elif texteCoupe[nb] == "sauter" and int(lvl) >= 9 :
+                    if str((self.position) + orientation) in Data[int(lvl) - 1] :
+                        print("bleu")
+                        self.showResult("ECHEC : Tu ne peux sauter que le vide")
                         Terminer = True
                     else: 
                         self.position += 2 * orientation
