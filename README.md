@@ -16,6 +16,7 @@ On travaille dessus ça viendra
 * Etage 1 ✅
 * Un système qui montre les mouvements du robot ⏱ 
 * Etage 2 ✅
+* Refonte graphique de l'interface des niv (avec des images "clean") 🧠
 
 
 (Symboles : ✅ : terminer (tester à fond) ❌ : annulé ⏱ : en cours de "coding"/terminé mais buggué 🧠 : en reflexion )
@@ -29,9 +30,6 @@ On travaille dessus ça viendra
 * Refonte graphique de l'interface des niv (avec des images "clean")
 * Faire l'étage 3
 * Faire une interface de cours et en rédiger 4
-* (selon mon père) :
-* -un bouton qui si tu as fini le niveau peu permettre d'arriver sur le niv d'après sans faire retour
-* -un truc qui donne le nombre d'instruction en cour(écrite))
 ### ----------Objectif----------
 * Passer à 8 cours
 * Ajouter de la musique/des sons
@@ -46,3 +44,8 @@ On travaille dessus ça viendra
 * Le 2ème mode
 * Passage à 6/8 niveaux 
 * Vidéo explicative pour chaque cours
+
+## Nouvelle interface lvl :
+
+* Bouton pour passer au nivau précédent/suivant (si il peut)
+* Indicateur du nombre d'instruction écrites
