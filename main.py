@@ -99,8 +99,7 @@ class CustomLevelScreen(Screen):
         MyJson = open('assets/data.json',)
         Data = json.load(MyJson)
         if int(lvl) <= len(Data) :
-            self.position = self.getOrigin(lvl)
-            self.updateRobot()
+            self.ids._imageRobot.pos_hint = self.posToCoord(self.getOrigin(lvl)) 
             if "limite" in Data[int(lvl) - 1] :
                 self.ids._labelInstruction.text = "Nombre max d'instructions : " + str(Data[int(lvl) - 1]["limite"])
             else:
@@ -121,12 +120,15 @@ class CustomLevelScreen(Screen):
         for i in Data[int(lvl) - 1] :
             if Data[int(lvl) - 1][i] == "d" :
                 return int(i)
-    def updateRobot(self) :
-        self.ids._imageRobot.pos_hint = self.posToCoord() #La valeur change bien (g fait des test, ms le visuel s'update pas avant la fin de verif)
-    def posToCoord(self) :
-        return {"center_x" : (0.469040625 + ((self.position%10 - 1) * 0.06328125)), "center_y" : (0.10625 + ((8 - (self.position//10)) * 0.1125))} # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
+    def updateRobot(self, listePos, message) :
+        #self.ids._imageRobot.pos_hint = self.posToCoord(self.position) #La valeur change bien (g fait des test, ms le visuel s'update pas avant la fin de verif)
+        self.showResult(message)
+    def posToCoord(self, pos) :
+        return {"center_x" : (0.469040625 + ((pos%10 - 1) * 0.06328125)), "center_y" : (0.10625 + ((8 - (pos//10)) * 0.1125))} # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
     def verif(self, texte):
         fichierLvl = open("assets/current_lvl.txt", "r")
+        listePosition = []
+        message = ""
         lvl = fichierLvl.read()
         texte = texte.lower()
         texteCoupe = texte.splitlines()
@@ -135,18 +137,18 @@ class CustomLevelScreen(Screen):
         if int(lvl) > len(Data) :
             self.showResult("ERREUR : On a pas encore mis ce niveau")
         else :
-            self.position = self.getOrigin(lvl)
+            position = self.getOrigin(lvl)
             orientation = 1
             nb = 0
             Terminer = False
             if "limite" in Data[int(lvl) - 1] :
                 if len(texteCoupe) > Data[int(lvl) - 1]["limite"] :
                     Terminer = True
-                    self.showResult("ECHEC : Limite dépassée !")
+                    message = "ECHEC : Limite dépassée !"
 
             while not Terminer and nb != len(texteCoupe) :
                 if texteCoupe[nb] == "avancer" :
-                    self.position+= orientation
+                    position+= orientation
                 elif texteCoupe[nb] == "droite" :
                     if orientation == 1 :
                         orientation = 10
@@ -166,54 +168,55 @@ class CustomLevelScreen(Screen):
                     elif orientation == -10 :
                         orientation = - 1
                 elif texteCoupe[nb] == "reculer" :
-                    self.position-= orientation
+                    position-= orientation
                 elif texteCoupe[nb] == "attendre" and int(lvl) >= 9 :
                     pass
                 elif texteCoupe[nb] == "sauter" and int(lvl) >= 9 :
-                    if str((self.position) + orientation) in Data[int(lvl) - 1] :
-                        self.showResult("ECHEC : Tu ne peux sauter que le vide")
+                    if str((position) + orientation) in Data[int(lvl) - 1] :
+                        message = "ECHEC : Tu ne peux sauter que le vide"
                         Terminer = True
                     else: 
-                        self.position += 2 * orientation
+                        position += 2 * orientation
 
                 else: 
-                    self.showResult("ECHEC : Mot incorrect dans le script")
+                    message = "ECHEC : Mot incorrect dans le script"
                     Terminer = True
-                if str(self.position) in Data[int(lvl) - 1] :
-                    if Data[int(lvl) - 1][str(self.position)] == "c" or Data[int(lvl) - 1][str(self.position)] == "d" or Data[int(lvl) - 1][str(self.position)] == "f" :
+                if str(position) in Data[int(lvl) - 1] :
+                    if Data[int(lvl) - 1][str(position)] == "c" or Data[int(lvl) - 1][str(position)] == "d" or Data[int(lvl) - 1][str(position)] == "f" :
                         pass
-                    elif Data[int(lvl) - 1][str(self.position)] ==  "t-d" :
-                        self.position += 1
-                    elif Data[int(lvl) - 1][str(self.position)] ==  "t-g" :
-                        self.position -= 1
-                    elif Data[int(lvl) - 1][str(self.position)] ==  "t-h" :
-                        self.position -= 10
-                    elif Data[int(lvl) - 1][str(self.position)] ==  "t-b" :
-                        self.position += 10
+                    elif Data[int(lvl) - 1][str(position)] ==  "t-d" :
+                        position += 1
+                    elif Data[int(lvl) - 1][str(position)] ==  "t-g" :
+                        position -= 1
+                    elif Data[int(lvl) - 1][str(position)] ==  "t-h" :
+                        position -= 10
+                    elif Data[int(lvl) - 1][str(position)] ==  "t-b" :
+                        position += 10
                     else: 
-                        self.showResult("ERREUR : Faudrait corriger le json/le code")
+                        message = "ERREUR : Faudrait corriger le json/le code"
                         Terminer = True
                 else: 
-                    self.showResult("ECHEC : Hors champs")
+                    message = "ECHEC : Hors champs"
                     Terminer = True
-                if str(self.position) in Data[int(lvl) - 1] :
-                    if Data[int(lvl) - 1][str(self.position)] == "c" or Data[int(lvl) - 1][str(self.position)] == "d" or Data[int(lvl) - 1][str(self.position)] == "t-d" or Data[int(lvl) - 1][str(self.position)] == "t-g" or Data[int(lvl) - 1][str(self.position)] == "t-h" or Data[int(lvl) - 1][str(self.position)] == "t-b":
+                if str(position) in Data[int(lvl) - 1] :
+                    if Data[int(lvl) - 1][str(position)] == "c" or Data[int(lvl) - 1][str(position)] == "d" or Data[int(lvl) - 1][str(position)] == "t-d" or Data[int(lvl) - 1][str(position)] == "t-g" or Data[int(lvl) - 1][str(position)] == "t-h" or Data[int(lvl) - 1][str(position)] == "t-b":
                         pass
-                    elif Data[int(lvl) - 1][str(self.position)] == "f" :
+                    elif Data[int(lvl) - 1][str(position)] == "f" :
                         if (nb + 1) == len(texteCoupe) :
-                            self.showResult("REUSSI : Bravo, tu as réussi le niveau " + lvl) 
+                            message = "REUSSI : Bravo, tu as réussi le niveau " + lvl
                             self.changeLvlMax()
                             Terminer = True
                     else: 
-                        self.showResult("ERREUR : Faudrait corriger le json/le code")
+                        message = "ERREUR : Faudrait corriger le json/le code"
                         Terminer = True
                 else: 
-                    self.showResult("ECHEC : Hors champs")
+                    message = "ECHEC : Hors champs"
                     Terminer = True
                 nb +=1
             if not Terminer :
-                self.showResult("ECHEC : Il manque une/plusieurs instructions")
-            self.position = self.getOrigin(lvl)
+                message = "ECHEC : Il manque une/plusieurs instructions"
+            position = self.getOrigin(lvl)
+            self.updateRobot( listePosition, message)
     def showResult(self, resultat) :
         self.ids._labelResultat.text = resultat
 
