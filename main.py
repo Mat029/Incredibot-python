@@ -22,6 +22,7 @@ from kivy.core.window import Window
 from kivy.config import Config
 import kivy
 import json
+import time
 
 kivy.require("2.1.0")
 
@@ -121,7 +122,13 @@ class CustomLevelScreen(Screen):
             if Data[int(lvl) - 1][i] == "d" :
                 return int(i)
     def updateRobot(self, listePos, message) :
-        #self.ids._imageRobot.pos_hint = self.posToCoord(self.position) #La valeur change bien (g fait des test, ms le visuel s'update pas avant la fin de verif)
+        self.ids._imageRobot.pos_hint = self.posToCoord(listePos[0])
+        time.sleep(1)
+        for i in range(1, len(listePos)) :
+            self.ids._imageRobot.pos_hint = self.posToCoord(listePos[i])
+            print(self.ids._imageRobot.pos_hint)
+            time.sleep(1)
+        self.ids._imageRobot.pos_hint = self.posToCoord(listePos[0])
         self.showResult(message)
     def posToCoord(self, pos) :
         return {"center_x" : (0.469040625 + ((pos%10 - 1) * 0.06328125)), "center_y" : (0.10625 + ((8 - (pos//10)) * 0.1125))} # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
@@ -138,6 +145,7 @@ class CustomLevelScreen(Screen):
             self.showResult("ERREUR : On a pas encore mis ce niveau")
         else :
             position = self.getOrigin(lvl)
+            listePosition.append(position)
             orientation = 1
             nb = 0
             Terminer = False
@@ -181,17 +189,22 @@ class CustomLevelScreen(Screen):
                 else: 
                     message = "ECHEC : Mot incorrect dans le script"
                     Terminer = True
+                listePosition.append(position)
                 if str(position) in Data[int(lvl) - 1] :
                     if Data[int(lvl) - 1][str(position)] == "c" or Data[int(lvl) - 1][str(position)] == "d" or Data[int(lvl) - 1][str(position)] == "f" :
                         pass
                     elif Data[int(lvl) - 1][str(position)] ==  "t-d" :
                         position += 1
+                        listePosition.append(position)
                     elif Data[int(lvl) - 1][str(position)] ==  "t-g" :
                         position -= 1
+                        listePosition.append(position)
                     elif Data[int(lvl) - 1][str(position)] ==  "t-h" :
                         position -= 10
+                        listePosition.append(position)
                     elif Data[int(lvl) - 1][str(position)] ==  "t-b" :
                         position += 10
+                        listePosition.append(position)
                     else: 
                         message = "ERREUR : Faudrait corriger le json/le code"
                         Terminer = True
@@ -215,7 +228,6 @@ class CustomLevelScreen(Screen):
                 nb +=1
             if not Terminer :
                 message = "ECHEC : Il manque une/plusieurs instructions"
-            position = self.getOrigin(lvl)
             self.updateRobot( listePosition, message)
     def showResult(self, resultat) :
         self.ids._labelResultat.text = resultat
