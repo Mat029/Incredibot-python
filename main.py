@@ -91,8 +91,8 @@ class LevelScreen(Screen):
     pass
 
 class CustomLevelScreen(Screen):
-    pos_x = NumericProperty(.1)
-    pos_y = NumericProperty(.1)
+    pos_x = NumericProperty(.2)
+    pos_y = NumericProperty(.5)
     def chargement(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
@@ -108,9 +108,6 @@ class CustomLevelScreen(Screen):
                     self.ids._labelInstruction.text = "Nombre max d'instructions : " + str(Data[int(lvl) - 1]["limite"])
                 else:
                     self.ids._labelInstruction.text = "Nombre max d'instructions : NAN"
-        else:
-            self.pos_x = .2
-            self.pos_y = .5
     def changeLvlMax(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
@@ -134,8 +131,6 @@ class CustomLevelScreen(Screen):
                 print(self.ids._imageRobot.pos_hint)
                 time.sleep(0.5)
             self.pos_x, self.pos_y = self.posToCoord(listePos[0])
-        else:
-            pass
         self.ids._labelResultat.text = message
     def posToCoord(self, pos) :
         return (0.469040625 + ((pos%10 - 1) * 0.06328125)), (0.10625 + ((8 - (pos//10)) * 0.1125)) # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
