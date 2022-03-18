@@ -49,7 +49,3 @@ On travaille dessus ça viendra
 
 * Bouton pour passer au nivau précédent/suivant (si il peut)
 * Indicateur du nombre d'instruction écrites
-
-## Faire bouger ce fdp
-
-* https://stackoverflow.com/questions/58637260/why-kivy-is-not-updating-the-position-of-widgets-when-pos-hint-is-changed-progra

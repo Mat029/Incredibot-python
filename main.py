@@ -91,6 +91,8 @@ class LevelScreen(Screen):
     pass
 
 class CustomLevelScreen(Screen):
+    pos_x = NumericProperty(.1)
+    pos_y = NumericProperty(.1)
     def chargement(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
@@ -101,13 +103,14 @@ class CustomLevelScreen(Screen):
         MyJson = open('assets/data.json',)
         Data = json.load(MyJson)
         if int(lvl) <= len(Data) :
-            self.ids._imageRobot.pos_hint = self.posToCoord(self.getOrigin(lvl)) 
-            if "limite" in Data[int(lvl) - 1] :
-                self.ids._labelInstruction.text = "Nombre max d'instructions : " + str(Data[int(lvl) - 1]["limite"])
-            else:
-                self.ids._labelInstruction.text = "Nombre max d'instructions : NAN"
+                self.pos_x, self.pos_y = self.posToCoord(self.getOrigin(lvl))
+                if "limite" in Data[int(lvl) - 1] :
+                    self.ids._labelInstruction.text = "Nombre max d'instructions : " + str(Data[int(lvl) - 1]["limite"])
+                else:
+                    self.ids._labelInstruction.text = "Nombre max d'instructions : NAN"
         else:
-            self.ids._imageRobot.pos_hint = {"center_x" : .2 , "center_y" : .5}
+            self.pos_x = .2
+            self.pos_y = .5
     def changeLvlMax(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
@@ -122,17 +125,18 @@ class CustomLevelScreen(Screen):
         for i in Data[int(lvl) - 1] :
             if Data[int(lvl) - 1][i] == "d" :
                 return int(i)
-    def updateRobot(self, listePos, message) :
-        self.ids._imageRobot.pos_hint = self.posToCoord(listePos[0])
+    def play(self, texte) :
+        listePos, message = self.verif(texte)
+        self.pos_x, self.pos_y = self.posToCoord(listePos[0])
         time.sleep(1)
         for i in range(1, len(listePos)) :
-            self.ids._imageRobot.pos_hint = self.posToCoord(listePos[i])
+            self.pos_x, self.pos_y = self.posToCoord(listePos[i])
             print(self.ids._imageRobot.pos_hint)
-            time.sleep(1)
-        self.ids._imageRobot.pos_hint = self.posToCoord(listePos[0])
+            time.sleep(0.5)
+        self.pos_x, self.pos_y = self.posToCoord(listePos[0])
         self.ids._labelResultat.text = message
     def posToCoord(self, pos) :
-        return {"center_x" : (0.469040625 + ((pos%10 - 1) * 0.06328125)), "center_y" : (0.10625 + ((8 - (pos//10)) * 0.1125))} # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
+        return (0.469040625 + ((pos%10 - 1) * 0.06328125)), (0.10625 + ((8 - (pos//10)) * 0.1125)) # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
     def verif(self, texte):
         fichierLvl = open("assets/current_lvl.txt", "r")
         listePosition = []
@@ -143,7 +147,7 @@ class CustomLevelScreen(Screen):
         MyJson = open('assets/data.json',)
         Data = json.load(MyJson)
         if int(lvl) > len(Data) :
-            self.ids._labelResultat.text = "ERREUR : On a pas encore mis ce niveau"
+            message = "ERREUR : On a pas encore mis ce niveau"
         else :
             position = self.getOrigin(lvl)
             listePosition.append(position)
@@ -229,8 +233,7 @@ class CustomLevelScreen(Screen):
                 nb +=1
             if not Terminer :
                 message = "ECHEC : Il manque une/plusieurs instructions"
-            self.updateRobot( listePosition, message)
-
+        return listePosition, message
 class WindowManager(ScreenManager):
     pass
 
