@@ -15,10 +15,12 @@ ATTENTION IMPORTANT :
  os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
  AU TOUT DEBUT DU FICHIER (avant les autres import)
 """
+from turtle import pos
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
+from kivy.properties import NumericProperty
 from kivy.config import Config
 import kivy
 import json
@@ -129,7 +131,7 @@ class CustomLevelScreen(Screen):
             print(self.ids._imageRobot.pos_hint)
             time.sleep(1)
         self.ids._imageRobot.pos_hint = self.posToCoord(listePos[0])
-        self.showResult(message)
+        self.ids._labelResultat.text = message
     def posToCoord(self, pos) :
         return {"center_x" : (0.469040625 + ((pos%10 - 1) * 0.06328125)), "center_y" : (0.10625 + ((8 - (pos//10)) * 0.1125))} # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
     def verif(self, texte):
@@ -142,7 +144,7 @@ class CustomLevelScreen(Screen):
         MyJson = open('assets/data.json',)
         Data = json.load(MyJson)
         if int(lvl) > len(Data) :
-            self.showResult("ERREUR : On a pas encore mis ce niveau")
+            self.ids._labelResultat.text = "ERREUR : On a pas encore mis ce niveau"
         else :
             position = self.getOrigin(lvl)
             listePosition.append(position)
@@ -229,18 +231,15 @@ class CustomLevelScreen(Screen):
             if not Terminer :
                 message = "ECHEC : Il manque une/plusieurs instructions"
             self.updateRobot( listePosition, message)
-    def showResult(self, resultat) :
-        self.ids._labelResultat.text = resultat
 
 class WindowManager(ScreenManager):
     pass
-
-kv = Builder.load_file("main.kv")
 
 class Incredibot(App):
     def build(self):
         self.title = 'Incredibot'
         self.icon = 'Images/icon.png'
+        kv = Builder.load_file("main.kv")
         return kv
     def close_application(self):
         App.get_running_app().stop()
