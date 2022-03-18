@@ -127,13 +127,15 @@ class CustomLevelScreen(Screen):
                 return int(i)
     def play(self, texte) :
         listePos, message = self.verif(texte)
-        self.pos_x, self.pos_y = self.posToCoord(listePos[0])
-        time.sleep(1)
-        for i in range(1, len(listePos)) :
-            self.pos_x, self.pos_y = self.posToCoord(listePos[i])
-            print(self.ids._imageRobot.pos_hint)
-            time.sleep(0.5)
-        self.pos_x, self.pos_y = self.posToCoord(listePos[0])
+        if len(listePos) >= 1 :
+            self.pos_x, self.pos_y = self.posToCoord(listePos[0])
+            for i in range(1, len(listePos)) :
+                self.pos_x, self.pos_y = self.posToCoord(listePos[i])
+                print(self.ids._imageRobot.pos_hint)
+                time.sleep(0.5)
+            self.pos_x, self.pos_y = self.posToCoord(listePos[0])
+        else:
+            pass
         self.ids._labelResultat.text = message
     def posToCoord(self, pos) :
         return (0.469040625 + ((pos%10 - 1) * 0.06328125)), (0.10625 + ((8 - (pos//10)) * 0.1125)) # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
