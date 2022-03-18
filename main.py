@@ -15,7 +15,6 @@ ATTENTION IMPORTANT :
  os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
  AU TOUT DEBUT DU FICHIER (avant les autres import)
 """
-from turtle import pos
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
