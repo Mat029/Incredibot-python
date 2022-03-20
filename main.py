@@ -18,12 +18,13 @@ ATTENTION IMPORTANT :
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.image import Image
+from kivy.animation import Animation
+from functools import partial
 from kivy.core.window import Window
-from kivy.properties import NumericProperty
 from kivy.config import Config
 import kivy
 import json
-import time
 
 kivy.require("2.1.0")
 
@@ -91,8 +92,6 @@ class LevelScreen(Screen):
     pass
 
 class CustomLevelScreen(Screen):
-    pos_x = NumericProperty(.2)
-    pos_y = NumericProperty(.5)
     def chargement(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
@@ -103,11 +102,20 @@ class CustomLevelScreen(Screen):
         MyJson = open('assets/data.json',)
         Data = json.load(MyJson)
         if int(lvl) <= len(Data) :
-                self.pos_x, self.pos_y = self.posToCoord(self.getOrigin(lvl))
+                posRobot = self.posToCoord(self.getOrigin(lvl))
+                self.robot = Image(source = "Images/lvl/robot.png", size_hint =  {.050625 , .09},pos_hint = posRobot)
+                self.ids._layoutLvl.add_widget(self.robot)
                 if "limite" in Data[int(lvl) - 1] :
                     self.ids._labelInstruction.text = "Nombre max d'instructions : " + str(Data[int(lvl) - 1]["limite"])
                 else:
                     self.ids._labelInstruction.text = "Nombre max d'instructions : NAN"
+    def clean(self):
+        fichierLvl = open("assets/current_lvl.txt", "r")
+        lvl = fichierLvl.read()
+        MyJson = open('assets/data.json',)
+        Data = json.load(MyJson)
+        if int(lvl) <= len(Data) :
+            self.ids._layoutLvl.remove_widget(self.robot)
     def changeLvlMax(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
@@ -125,15 +133,22 @@ class CustomLevelScreen(Screen):
     def play(self, texte) :
         listePos, message = self.verif(texte)
         if len(listePos) >= 1 :
-            self.pos_x, self.pos_y = self.posToCoord(listePos[0])
+            Animation.stop_all(self.robot)
+            anim = Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)
             for i in range(1, len(listePos)) :
-                self.pos_x, self.pos_y = self.posToCoord(listePos[i])
-                print(self.ids._imageRobot.pos_hint)
-                time.sleep(0.5)
-            self.pos_x, self.pos_y = self.posToCoord(listePos[0])
+                anim += Animation(pos_hint =self.posToCoord(listePos[i]), duration = .5)
+            anim.start(self.robot)
+            anim.bind(on_complete = partial(self.showMessage , message, listePos))
+        else:
+            self.showMessage(message, listePos)
+    def showMessage(self, message, listePos, *args) :
         self.ids._labelResultat.text = message
+        if len(listePos) >= 1:
+            anim3= Animation(pos_hint = self.posToCoord(listePos[len(listePos) - 1]), duration =  2.5)
+            anim3 += Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)
+            anim3.start(self.robot)
     def posToCoord(self, pos) :
-        return (0.469040625 + ((pos%10 - 1) * 0.06328125)), (0.10625 + ((8 - (pos//10)) * 0.1125)) # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
+        return {"center_x" : (0.469040625 + ((pos%10 - 1) * 0.06328125)), "center_y": (0.10625 + ((8 - (pos//10)) * 0.1125))} # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
     def verif(self, texte):
         fichierLvl = open("assets/current_lvl.txt", "r")
         listePosition = []

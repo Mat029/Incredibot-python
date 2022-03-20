@@ -199,6 +199,7 @@ WindowManager:
 	name: "custom"
 	on_pre_enter : root.chargement()
 	FloatLayout:
+        id: _layoutLvl
         Image:
             id: _imageLvl
             source:'Images/lvl/lvl1.png'
@@ -212,6 +213,7 @@ WindowManager:
 			size_hint: .1, .075  
 			pos_hint: {'center_x': .1,'center_y':.9}
             on_press:
+                root.clean()
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'levels'
 		Label:
@@ -220,11 +222,6 @@ WindowManager:
 			font_size: 0.4 * self.height
 			size_hint: .2, .075
 			pos_hint: {'center_x': .25,'center_y':.9}
-        Image:
-            id: _imageRobot
-            source: "Images/lvl/robot.png"
-            size_hint: .050625 , .09
-            pos_hint: {"center_x" : root.pos_x , "center_y" : root.pos_y}
         TextInput:
             id: _userInput
             font_size: .06 * self.height
