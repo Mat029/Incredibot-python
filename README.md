@@ -31,6 +31,7 @@ On travaille dessus ça viendra
 * Refonte graphique de l'interface des niv (avec des images "clean")
 * Faire l'étage 3
 * Faire une interface de cours et en rédiger 4
+* un bouton qui pop up qd tu as fini un niveau pour aller à celui d'après
 ### ----------Objectif----------
 * Ajouter de la musique/des sons
 * Faire l'étage 4
