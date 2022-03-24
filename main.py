@@ -25,8 +25,6 @@ import json
 kivy.require("2.1.0")
 
 class HomeScreen(Screen):
-    def cours(self):
-        print("Bientôt disponible (normalement)")
     pass
 
 class LevelScreen(Screen):
