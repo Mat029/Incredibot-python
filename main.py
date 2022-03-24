@@ -242,6 +242,13 @@ class CustomLevelScreen(Screen):
             if not Terminer :
                 message = "ECHEC : Il manque une/plusieurs instructions"
         return listePosition, message
+
+class CoursScreen(Screen):
+    pass
+
+class CustomCoursScreen(Screen):
+    pass
+
 class WindowManager(ScreenManager):
     pass
 

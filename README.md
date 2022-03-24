@@ -30,7 +30,7 @@ On travaille dessus ça viendra
 * Faire l'étage 2 ✅
 * Refonte graphique de l'interface des niv (avec des images "clean")
 * Faire l'étage 3
-* Faire une interface de cours et en rédiger 4
+* Faire une interface de cours et en rajouter
 * un bouton qui pop up qd tu as fini un niveau pour aller à celui d'après
 ### ----------Objectif----------
 * Ajouter de la musique/des sons

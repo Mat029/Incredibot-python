@@ -3,6 +3,8 @@ WindowManager:
     HomeScreen:
     LevelScreen:
 	CustomLevelScreen:
+    CoursScreen:
+    CustomCoursScreen:
 
 <HomeButton@Button>:
     font_size: 0.35 * self.height
@@ -44,7 +46,9 @@ WindowManager:
         HomeButton:
             text:'[b]Cours[/b]'
             pos_hint: {'center_x': .5,'center_y':.40}
-            on_release: root.cours()
+            on_release: 
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'cours'
         HomeButton:
             text:'[b]Quit[/b]'
             pos_hint: {'center_x': .5,'center_y':.15}
@@ -282,3 +286,101 @@ WindowManager:
             bold: True
             size_hint: 0.3, 0.1
             pos_hint: {"center_x": 0.2, "center_y": .1}
+<CoursScreen>:
+    name: "cours"
+    FloatLayout:
+        Image:
+            source:'Images/level_background.jpg'
+            pos_hint:{'x': 0,'y':0}
+            size_hint: 1 , 1
+            keep_ratio: False
+            allow_stretch: True
+        HomeButton:
+            text: "Home"
+            size_hint: .12,.12
+            pos_hint: {'center_x': .14,'center_y':.86}            
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'home' 
+        HomeButton:
+            text: "Levels"
+            size_hint: .12,.12
+            pos_hint: {'center_x': .86,'center_y':.86}            
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'levels'
+        HomeButton:
+            id: _bouton1
+            text: "Intro"
+            font_size: 0.25 * self.height
+            pos_hint: {'center_x': .14,'center_y':.6}
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = "custom_cours"
+        HomeButton:
+            id: _bouton2
+            text: "Base"
+            font_size: 0.25 * self.height
+            pos_hint: {'center_x': .38,'center_y':.6}
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = "custom_cours"
+        HomeButton:
+            id: _bouton3
+            text: " Nouveaux \n    Défis"
+            font_size: 0.25 * self.height
+            pos_hint: {'center_x': .62,'center_y':.6}
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = "custom_cours"
+        HomeButton:
+            id: _bouton4
+            text: " Prendre \n Deposer"
+            font_size: 0.25 * self.height
+            pos_hint: {'center_x': .86,'center_y':.6}
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = "custom_cours"
+        HomeButton:
+            id: _bouton5
+            text: ""
+            font_size: 0.25 * self.height
+            pos_hint: {'center_x': .14,'center_y':.25}
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = "custom_cours"
+        HomeButton:
+            id: _bouton6
+            text: ""
+            font_size: 0.25 * self.height
+            pos_hint: {'center_x': .38,'center_y':.25}
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = "custom_cours"
+        HomeButton:
+            id: _bouton7
+            text: "Boucles"
+            font_size: 0.25 * self.height
+            pos_hint: {'center_x': .62,'center_y':.25}
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = "custom_cours"
+        HomeButton:
+            id: _bouton8
+            text: "La suite"
+            font_size: 0.25 * self.height
+            pos_hint: {'center_x': .86,'center_y':.25}
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = "custom_cours"
+
+<CustomCoursScreen>:
+    name: "custom_cours"
+    FloatLayout:
+        HomeButton:
+            text: "Cours"
+            size_hint: .12,.12
+            pos_hint: {'center_x': .14,'center_y':.86}            
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'cours' 
