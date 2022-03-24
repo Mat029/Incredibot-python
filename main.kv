@@ -40,13 +40,13 @@ WindowManager:
         HomeButton:
             text:'[b]Levels[/b]'
             pos_hint: {'center_x': .5,'center_y':.65}
-            on_release:              
+            on_release:
                 root.manager.transition.direction = 'left'
-                root.manager.current = 'levels'  
+                root.manager.current = 'levels'
         HomeButton:
             text:'[b]Cours[/b]'
             pos_hint: {'center_x': .5,'center_y':.40}
-            on_release: 
+            on_release:
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'cours'
         HomeButton:
@@ -67,7 +67,7 @@ WindowManager:
         HomeButton:
             text: "Home"
             size_hint: .12,.12
-            pos_hint: {'center_x': .14,'center_y':.86}            
+            pos_hint: {'center_x': .14,'center_y':.86}
             on_press:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'home'
@@ -91,9 +91,9 @@ WindowManager:
             text: " - "
             font_size: 0.35 * self.height
             size_hint: .06,.06
-            pos_hint: {'center_x': .70,'center_y':.86} 
+            pos_hint: {'center_x': .70,'center_y':.86}
             disabled: True
-            on_press: root.baisse()   
+            on_press: root.baisse()
         HomeButton:
             id: _bouton1
             text: "Niveau 1"
@@ -198,7 +198,7 @@ WindowManager:
 			id: _Indicateur8
 			source: root.getImage((8 + 8 * root.etage))
 			pos_hint: {"x": .88 , "y" : .13}
-		
+
 <CustomLevelScreen>:
 	name: "custom"
 	on_pre_enter : root.chargement()
@@ -214,7 +214,7 @@ WindowManager:
 		Button:
 			text: "Retour"
 			font_size: 0.4 * self.height
-			size_hint: .1, .075  
+			size_hint: .1, .075
 			pos_hint: {'center_x': .1,'center_y':.9}
             on_press:
                 root.clean()
@@ -234,28 +234,28 @@ WindowManager:
 		Button:
 			text: "Avancer"
 			font_size: 0.4 * self.height
-			size_hint: 0.3/4,  0.3/4  
+			size_hint: 0.3/4,  0.3/4
 			pos_hint: {'x': .05,'y': .425 - 0.3/4}
             on_press:
                 _userInput.text += "\nAvancer" if _userInput.text != "" else "Avancer"
 		Button:
 			text: "Reculer"
 			font_size: 0.4 * self.height
-			size_hint: 0.3/4, 0.3/4  
+			size_hint: 0.3/4, 0.3/4
 			pos_hint: {'x': .05 + 0.3/4,'y': .425 - 0.3/4}
             on_press:
                 _userInput.text += "\nReculer" if _userInput.text != "" else "Reculer"
 		Button:
 			text: "Droite"
 			font_size: 0.4 * self.height
-			size_hint: 0.3/4, 0.3/4  
+			size_hint: 0.3/4, 0.3/4
 			pos_hint: {'x': .05 + 0.6/4,'y': .425 - 0.3/4}
             on_press:
                 _userInput.text += "\nDroite" if _userInput.text != "" else "Droite"
 		Button:
 			text: "Gauche"
 			font_size: 0.4 * self.height
-			size_hint: 0.3/4, 0.3/4  
+			size_hint: 0.3/4, 0.3/4
 			pos_hint: {'x': .05 + 0.9/4,'y': .425 - 0.3/4}
             on_press:
                 _userInput.text += "\nGauche" if _userInput.text != "" else "Gauche"
@@ -263,13 +263,13 @@ WindowManager:
             id: _labelInstruction
 			font_size: 0.35 * self.height
             bold: True
-			size_hint: 0.9/4, 0.3/4  
+			size_hint: 0.9/4, 0.3/4
 			pos_hint: {'x': .05,'y': .425 - 0.6/4}
-            
+
 		Button:
 			text: "Reset"
 			font_size: 0.4 * self.height
-			size_hint: 0.3/4, 0.3/4  
+			size_hint: 0.3/4, 0.3/4
 			pos_hint: {'x': .05 + 0.9/4,'y': .425 - 0.6/4}
             on_press:
                 _userInput.text = ""
@@ -298,14 +298,14 @@ WindowManager:
         HomeButton:
             text: "Home"
             size_hint: .12,.12
-            pos_hint: {'center_x': .14,'center_y':.86}            
+            pos_hint: {'center_x': .14,'center_y':.86}
             on_press:
                 root.manager.transition.direction = 'right'
-                root.manager.current = 'home' 
+                root.manager.current = 'home'
         HomeButton:
             text: "Levels"
             size_hint: .12,.12
-            pos_hint: {'center_x': .86,'center_y':.86}            
+            pos_hint: {'center_x': .86,'center_y':.86}
             on_press:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'levels'
@@ -327,7 +327,7 @@ WindowManager:
                 root.manager.current = "custom_cours"
         HomeButton:
             id: _bouton3
-            text: " Nouveaux \n    Défis"
+            text: "    Tapis \n Roulants"
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .62,'center_y':.6}
             on_press:
@@ -335,7 +335,7 @@ WindowManager:
                 root.manager.current = "custom_cours"
         HomeButton:
             id: _bouton4
-            text: " Prendre \n Deposer"
+            text: " Sauts "
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .86,'center_y':.6}
             on_press:
@@ -343,7 +343,7 @@ WindowManager:
                 root.manager.current = "custom_cours"
         HomeButton:
             id: _bouton5
-            text: ""
+            text: "   Prendre  \n  Deposer"
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .14,'center_y':.25}
             on_press:
@@ -351,7 +351,7 @@ WindowManager:
                 root.manager.current = "custom_cours"
         HomeButton:
             id: _bouton6
-            text: ""
+            text: " les defis "
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .38,'center_y':.25}
             on_press:
@@ -380,7 +380,7 @@ WindowManager:
         HomeButton:
             text: "Cours"
             size_hint: .12,.12
-            pos_hint: {'center_x': .14,'center_y':.86}            
+            pos_hint: {'center_x': .14,'center_y':.86}
             on_press:
                 root.manager.transition.direction = 'right'
-                root.manager.current = 'cours' 
+                root.manager.current = 'cours'
