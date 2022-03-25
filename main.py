@@ -97,7 +97,7 @@ class CustomLevelScreen(Screen):
         Data = json.load(MyJson)
         if int(lvl) <= len(Data) :
                 posRobot = self.posToCoord(self.getOrigin(lvl))
-                self.robot = Image(source = "Images/lvl/robot.png", size_hint =  {.050625 , .09},pos_hint = posRobot)
+                self.robot = Image(source = "Images/lvl/robot.png", size_hint =  [.050625 , .09],pos_hint = posRobot)
                 self.ids._layoutLvl.add_widget(self.robot)
                 if "limite" in Data[int(lvl) - 1] :
                     self.ids._labelInstruction.text = "Nombre max d'instructions : " + str(Data[int(lvl) - 1]["limite"])
