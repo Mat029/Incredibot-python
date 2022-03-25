@@ -100,9 +100,9 @@ class CustomLevelScreen(Screen):
                 self.robot = Image(source = "Images/lvl/robot.png", size_hint =  [.050625 , .09],pos_hint = posRobot)
                 self.ids._layoutLvl.add_widget(self.robot)
                 if "limite" in Data[int(lvl) - 1] :
-                    self.ids._labelInstruction.text = "Nombre max d'instructions : " + str(Data[int(lvl) - 1]["limite"])
+                    self.ids._labelInstruction.text = "X instructions / " + str(Data[int(lvl) - 1]["limite"])
                 else:
-                    self.ids._labelInstruction.text = "Nombre max d'instructions : NAN"
+                    self.ids._labelInstruction.text = "X instructions / ∞"
     def clean(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()

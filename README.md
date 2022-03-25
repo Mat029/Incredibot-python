@@ -41,10 +41,6 @@ On travaille dessus ça viendra
 * Animation des plateaux/du robot
 ### ----------Bonus cool----------
 * Mode multijoueur ou Create (Create est plus "logique" mais multi plus "fun" (et long à coder aussi))
-### ----------Si on avait 10ans----------
-* Le 2ème mode
-* Passage à 6/8 niveaux 
-* Vidéo explicative pour chaque cours
 
 ## Nouvelle interface lvl :
 

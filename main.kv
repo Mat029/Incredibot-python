@@ -213,9 +213,9 @@ WindowManager:
             allow_stretch: True
 		Button:
 			text: "Retour"
-			font_size: 0.4 * self.height
-			size_hint: .1, .075
-			pos_hint: {'center_x': .1,'center_y':.9}
+			font_size: 0.5 * self.height
+			size_hint: .1, .07
+			pos_hint: {'center_x': .1,'center_y':.95}
             on_press:
                 root.clean()
                 root.manager.transition.direction = 'right'
@@ -223,61 +223,61 @@ WindowManager:
 		Label:
 			id: _labelNomLvl
             bold: True
-			font_size: 0.4 * self.height
-			size_hint: .2, .075
-			pos_hint: {'center_x': .25,'center_y':.9}
+			font_size: 0.5 * self.height
+			size_hint: .2, .07
+			pos_hint: {'center_x': .25,'center_y':.95}
         TextInput:
             id: _userInput
-            font_size: .06 * self.height
-            size_hint: 0.3 , 0.4
-            pos_hint: {"center_x": 0.2, "center_y" : 0.625}
-		Button:
-			text: "Avancer"
-			font_size: 0.4 * self.height
-			size_hint: 0.3/4,  0.3/4
-			pos_hint: {'x': .05,'y': .425 - 0.3/4}
-            on_press:
-                _userInput.text += "\nAvancer" if _userInput.text != "" else "Avancer"
-		Button:
-			text: "Reculer"
-			font_size: 0.4 * self.height
-			size_hint: 0.3/4, 0.3/4
-			pos_hint: {'x': .05 + 0.3/4,'y': .425 - 0.3/4}
-            on_press:
-                _userInput.text += "\nReculer" if _userInput.text != "" else "Reculer"
-		Button:
-			text: "Droite"
-			font_size: 0.4 * self.height
-			size_hint: 0.3/4, 0.3/4
-			pos_hint: {'x': .05 + 0.6/4,'y': .425 - 0.3/4}
-            on_press:
-                _userInput.text += "\nDroite" if _userInput.text != "" else "Droite"
-		Button:
-			text: "Gauche"
-			font_size: 0.4 * self.height
-			size_hint: 0.3/4, 0.3/4
-			pos_hint: {'x': .05 + 0.9/4,'y': .425 - 0.3/4}
-            on_press:
-                _userInput.text += "\nGauche" if _userInput.text != "" else "Gauche"
+            font_size: .045 * self.height
+            size_hint: 0.2 , 0.6
+            pos_hint: {"center_x": 0.15, "center_y" : 0.6}
+        GridLayout:
+            id: _instructionGrid
+            cols: 1
+            rows: 10
+            row_force_default: True
+            row_default_height: self.height/10
+            size_hint: 0.1 , 0.6
+            pos_hint: {"center_x": 0.3, "center_y" : 0.6}
+            Button:
+                text: "Avancer"
+                font_size: 0.5 * self.height
+                on_press:
+                    _userInput.text += "\nAvancer" if _userInput.text != "" else "Avancer"
+            Button:
+                text: "Reculer"
+                font_size: 0.5 * self.height
+                on_press:
+                    _userInput.text += "\nReculer" if _userInput.text != "" else "Reculer"
+            Button:
+                text: "Droite"
+                font_size: 0.5 * self.height
+                on_press:
+                    _userInput.text += "\nDroite" if _userInput.text != "" else "Droite"
+            Button:
+                text: "Gauche"
+                font_size: 0.5 * self.height
+                on_press:
+                    _userInput.text += "\nGauche" if _userInput.text != "" else "Gauche"
         Label:
             id: _labelInstruction
-			font_size: 0.35 * self.height
+			font_size: 0.5 * self.height
             bold: True
-			size_hint: 0.9/4, 0.3/4
-			pos_hint: {'x': .05,'y': .425 - 0.6/4}
+			size_hint: 0.2, 0.06
+			pos_hint: {'center_x': 0.15,'center_y': 0.27}
 
 		Button:
 			text: "Reset"
-			font_size: 0.4 * self.height
-			size_hint: 0.3/4, 0.3/4
-			pos_hint: {'x': .05 + 0.9/4,'y': .425 - 0.6/4}
+			font_size: 0.5 * self.height
+			size_hint: 0.1, 0.06
+			pos_hint: {"center_x": 0.3, "center_y" : 0.27}
             on_press:
                 _userInput.text = ""
         Button:
             text: "Play"
-            size_hint: 0.3 , 0.075
+            size_hint: 0.2 , 0.07
             font_size: 0.4 * self.height
-            pos_hint: {"center_x" : 0.2, "center_y" : 0.2}
+            pos_hint: {"center_x" : 0.2, "center_y" : 0.17}
             on_press:
                 root.play(_userInput.text)
         Label:
@@ -285,7 +285,7 @@ WindowManager:
             font_size: 0.3 * self.height
             bold: True
             size_hint: 0.3, 0.1
-            pos_hint: {"center_x": 0.2, "center_y": .1}
+            pos_hint: {"center_x": 0.2, "center_y": .08}
 <CoursScreen>:
     name: "cours"
     FloatLayout:
