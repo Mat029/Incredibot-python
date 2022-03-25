@@ -95,6 +95,20 @@ class CustomLevelScreen(Screen):
         self.ids._userInput.text = ""
         MyJson = open('assets/data.json',)
         Data = json.load(MyJson)
+        if int(lvl) >= 9:
+            self.ids._buttonSauter.disabled = False
+            self.ids._buttonSauter.background_color = [1,1,1,1]
+            self.ids._buttonSauter.text = "Sauter"
+            self.ids._buttonAttendre.disabled = False
+            self.ids._buttonAttendre.background_color = [1,1,1,1]
+            self.ids._buttonAttendre.text = "Attendre"
+        else:
+            self.ids._buttonSauter.disabled = True
+            self.ids._buttonSauter.background_color = [0,0,0,0]
+            self.ids._buttonSauter.text = ""
+            self.ids._buttonAttendre.disabled = True
+            self.ids._buttonAttendre.background_color = [0,0,0,0]
+            self.ids._buttonAttendre.text = ""
         if int(lvl) <= len(Data) :
                 posRobot = self.posToCoord(self.getOrigin(lvl))
                 self.robot = Image(source = "Images/lvl/robot.png", size_hint =  [.050625 , .09],pos_hint = posRobot)
