@@ -95,6 +95,21 @@ class CustomLevelScreen(Screen):
         self.ids._userInput.text = ""
         MyJson = open('assets/data.json',)
         Data = json.load(MyJson)
+        self.ids._buttonSauter.disabled = True
+        self.ids._buttonSauter.background_color = [0,0,0,0]
+        self.ids._buttonSauter.text = ""
+        self.ids._buttonAttendre.disabled = True
+        self.ids._buttonAttendre.background_color = [0,0,0,0]
+        self.ids._buttonAttendre.text = ""
+        self.ids._buttonPrendre.disabled = True
+        self.ids._buttonPrendre.background_color = [0,0,0,0]
+        self.ids._buttonPrendre.text = ""
+        self.ids._buttonCollecter.disabled = True
+        self.ids._buttonCollecter.background_color = [0,0,0,0]
+        self.ids._buttonCollecter.text = ""
+        self.ids._buttonBoucle.disabled = True
+        self.ids._buttonBoucle.background_color = [0,0,0,0]
+        self.ids._buttonBoucle.text = ""
         if int(lvl) >= 9:
             self.ids._buttonSauter.disabled = False
             self.ids._buttonSauter.background_color = [1,1,1,1]
@@ -102,21 +117,25 @@ class CustomLevelScreen(Screen):
             self.ids._buttonAttendre.disabled = False
             self.ids._buttonAttendre.background_color = [1,1,1,1]
             self.ids._buttonAttendre.text = "Attendre"
-        else:
-            self.ids._buttonSauter.disabled = True
-            self.ids._buttonSauter.background_color = [0,0,0,0]
-            self.ids._buttonSauter.text = ""
-            self.ids._buttonAttendre.disabled = True
-            self.ids._buttonAttendre.background_color = [0,0,0,0]
-            self.ids._buttonAttendre.text = ""
+        if int(lvl) >= 17:
+            self.ids._buttonPrendre.disabled = False
+            self.ids._buttonPrendre.background_color = [1,1,1,1]
+            self.ids._buttonPrendre.text = "Prendre/Deposer"
+        if int(lvl) >= 25:
+            self.ids._buttonCollecter.disabled = False
+            self.ids._buttonCollecter.background_color = [1,1,1,1]
+            self.ids._buttonCollecter.text = "Collecter"
+            self.ids._buttonBoucle.disabled = False
+            self.ids._buttonBoucle.background_color = [1,1,1,1]
+            self.ids._buttonBoucle.text = "Repeter X fois"
         if int(lvl) <= len(Data) :
                 posRobot = self.posToCoord(self.getOrigin(lvl))
                 self.robot = Image(source = "Images/lvl/robot.png", size_hint =  [.050625 , .09],pos_hint = posRobot)
                 self.ids._layoutLvl.add_widget(self.robot)
                 if "limite" in Data[int(lvl) - 1] :
-                    self.ids._labelInstruction.text = "X instructions / " + str(Data[int(lvl) - 1]["limite"])
+                    self.ids._labelInstruction.text = "0 Instructions / " + str(Data[int(lvl) - 1]["limite"])
                 else:
-                    self.ids._labelInstruction.text = "X instructions / ∞"
+                    self.ids._labelInstruction.text = "0 Instructions / ∞"
     def clean(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
@@ -124,6 +143,40 @@ class CustomLevelScreen(Screen):
         Data = json.load(MyJson)
         if int(lvl) <= len(Data) :
             self.ids._layoutLvl.remove_widget(self.robot)
+    def delLine(self, texte) :
+        if texte!= "" :
+            texteCoupe = texte.splitlines()
+            del texteCoupe[-1]
+            texte_final = "\n".join(texteCoupe)
+            return (texte_final)
+        else:
+            return ""
+    def prendreDeposer(self, texte):
+        texte = texte.lower()
+        texteCoupe = texte.splitlines()
+        nbPrendre = 0
+        nbDeposer = 0
+        for i in texteCoupe :
+            if i == "prendre" :
+                nbPrendre +=1
+        for j in texteCoupe:
+            if j == "déposer" :
+                nbDeposer += 1
+        if nbPrendre > nbDeposer :
+            return "\nDéposer"
+        else:
+            return "\nPrendre"
+    def nbInstruction(self, texte):
+        fichierLvl = open("assets/current_lvl.txt", "r")
+        lvl = fichierLvl.read()
+        MyJson = open('assets/data.json',)
+        Data = json.load(MyJson)
+        limite = "∞"
+        if int(lvl) <= len(Data) :
+            if "limite" in Data[int(lvl) - 1] :
+                limite =  str(Data[int(lvl) - 1]["limite"])
+        texteCoupe = texte.splitlines()
+        self.ids._labelInstruction.text = str(len(texteCoupe)) + " Instrucutions / " + limite
     def changeLvlMax(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
