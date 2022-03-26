@@ -17,7 +17,7 @@ On travaille dessus ça viendra
 * Un système qui montre les mouvements du robot ✅
 * Etage 2 ✅
 * Faire une interface de cours et en rédiger 4 ⏱ (une partie avec du code et une autre avec le blabla car jsp faire des fichiers)
-* Refonte graphique de l'interface des niv (avec des images "clean") 🧠
+* Refonte graphique de l'interface des niv (avec des images "clean") ⏱
 
 
 (Symboles : ✅ : terminer (tester à fond) ❌ : annulé ⏱ : en cours de "coding"/terminé mais buggué 🧠 : en reflexion )
@@ -31,7 +31,6 @@ On travaille dessus ça viendra
 * Refonte graphique de l'interface des niv (avec des images "clean")
 * Faire l'étage 3
 * Faire une interface de cours et en rajouter
-* un bouton qui pop up qd tu as fini un niveau pour aller à celui d'après
 ### ----------Objectif----------
 * Ajouter de la musique/des sons
 * Faire l'étage 4
@@ -39,7 +38,7 @@ On travaille dessus ça viendra
 * Ajouter des "paramètres"
 * Mode "étape par étape"
 * Animation des plateaux/du robot
-### ----------Bonus cool----------
+### ----------Bonus----------
 * Mode multijoueur ou Create (Create est plus "logique" mais multi plus "fun" (et long à coder aussi))
 
 ## Nouvelle interface lvl :
