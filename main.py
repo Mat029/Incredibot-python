@@ -89,7 +89,11 @@ class CustomLevelScreen(Screen):
     def chargement(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
-        self.ids._labelNomLvl.text = "Niveau " + lvl
+        fichierMax = open("assets/max_level.txt", "r")
+        lvlMax = fichierMax.read()
+        self.ids._labelNomLvl.text = " Niveau " + lvl
+        self.ids._buttonPrevious.disabled = int(lvl) == 1
+        self.ids._buttonNext.disabled = int(lvlMax) <= int(lvl) or int(lvl) == 32
         self.ids._imageLvl.source = "Images/lvl/lvl" + lvl + ".png"
         self.ids._labelResultat.text = ""
         self.ids._userInput.text = ""
@@ -136,12 +140,20 @@ class CustomLevelScreen(Screen):
                     self.ids._labelInstruction.text = "Instructions : 0 / " + str(Data[int(lvl) - 1]["limite"]) 
                 else:
                     self.ids._labelInstruction.text = "Instructions : 0 / ∞"
+    def getLvl(self):
+        fichierLvl = open("assets/current_lvl.txt", "r")
+        lvl = fichierLvl.read()
+        return int(lvl)
+    def setLvl(self, lvl):
+        fichier = open("assets/current_lvl.txt", "w")
+        fichier.write(str(lvl))
     def clean(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
         MyJson = open('assets/data.json',)
         Data = json.load(MyJson)
         if int(lvl) <= len(Data) :
+            Animation.stop_all(self.robot)
             self.ids._layoutLvl.remove_widget(self.robot)
     def delLine(self, texte) :
         if texte!= "" :
@@ -203,7 +215,12 @@ class CustomLevelScreen(Screen):
         else:
             self.showMessage(message, listePos)
     def showMessage(self, message, listePos, *args) :
+        fichierLvl = open("assets/current_lvl.txt", "r")
+        lvl = fichierLvl.read()
+        fichierMax = open("assets/max_level.txt", "r")
+        lvlMax = fichierMax.read()
         self.ids._labelResultat.text = message
+        self.ids._buttonNext.disabled = int(lvlMax) <= int(lvl) or int(lvl) == 32
         if len(listePos) >= 1:
             anim3= Animation(pos_hint = self.posToCoord(listePos[len(listePos) - 1]), duration =  2.5)
             anim3 += Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)

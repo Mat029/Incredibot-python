@@ -212,20 +212,51 @@ WindowManager:
             keep_ratio: False
             allow_stretch: True
 		Button:
-			text: "Retour"
+			text: "Back"
 			font_size: 0.5 * self.height
-			size_hint: .1, .07
-			pos_hint: {'center_x': .1,'center_y':.95}
+			size_hint: .05, .06
+			pos_hint: {'center_x': .075,'center_y':.95}
             on_press:
                 root.clean()
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'levels'
+		Button:
+            id: _buttonPrevious
+			text: "<" 
+			font_size: 0.5 * self.height
+			size_hint: .04, .06
+            on_press:
+                root.clean()
+                root.setLvl(root.getLvl() - 1)
+                root.chargement()
+			pos_hint: {'center_x': .14,'center_y':.95}
 		Label:
 			id: _labelNomLvl
             bold: True
+			font_size: 0.7 * self.height
+			size_hint: .14, .06
+            bold: True
+			pos_hint: {'center_x': .22,'center_y':.95}
+		Button:
+            id: _buttonNext
+			text: ">"
 			font_size: 0.5 * self.height
-			size_hint: .2, .07
-			pos_hint: {'center_x': .25,'center_y':.95}
+			size_hint: .04, .06
+			pos_hint: {'center_x': .3,'center_y':.95}
+            on_press:
+                root.clean()
+                root.setLvl(root.getLvl() + 1)
+                root.chargement()
+
+        Button:
+			text: "Cours"
+			font_size: 0.5 * self.height
+			size_hint: .05, .06
+			pos_hint: {'center_x': .365,'center_y':.95}
+            on_press:
+                root.clean()
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'cours'
         TextInput:
             id: _userInput
             font_size: .045 * self.height
