@@ -2,11 +2,12 @@
 
 ## Nécessaire:
 * Python 3.7.9 (OBLIGATOIRE)
-* les trucs de base (pip, setuptools, docutils ...) à jour
+* Les trucs de base (pip, setuptools, docutils ...) à jour
 * Kivy et toutes ses dépendances (python -m pip install kivy[base]) en version 2.1.0 (OBLIGATOIRE)
+
 ## Doc :
 
-On travaille dessus ça viendra
+Soon...
 
 ## En cours/terminé :
 
@@ -18,7 +19,6 @@ On travaille dessus ça viendra
 * Etage 2 ✅
 * Faire une interface de cours et en rédiger 4 ⏱ (une partie avec du code et une autre avec le blabla car jsp faire des fichiers)
 * Refonte graphique de l'interface des niv (avec des images "clean") ⏱
-
 
 (Symboles : ✅ : terminer (tester à fond) ❌ : annulé ⏱ : en cours de "coding"/terminé mais buggué 🧠 : en reflexion )
 
@@ -40,8 +40,3 @@ On travaille dessus ça viendra
 * Animation des plateaux/du robot
 ### ----------Bonus----------
 * Mode multijoueur ou Create (Create est plus "logique" mais multi plus "fun" (et long à coder aussi))
-
-## Nouvelle interface lvl :
-
-* Bouton pour passer au nivau précédent/suivant (si il peut)
-* Indicateur du nombre d'instruction écrites

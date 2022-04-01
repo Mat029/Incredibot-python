@@ -248,7 +248,9 @@ class CustomLevelScreen(Screen):
                 if len(texteCoupe) > Data[int(lvl) - 1]["limite"] :
                     Terminer = True
                     message = "ECHEC : Limite dépassée !"
-
+            elif len(texteCoupe) > 100 :
+                Terminer = True
+                message = "ECHEC : Limite dépassée !"
             while not Terminer and nb != len(texteCoupe) :
                 if texteCoupe[nb] == "avancer" :
                     position+= orientation
