@@ -28,16 +28,6 @@ class HomeScreen(Screen):
     pass
 
 class LevelScreen(Screen):
-    etage = 0
-    def update(self):
-        self.ids._Indicateur1.source = self.getImage((self.etage * 8 + 1))
-        self.ids._Indicateur2.source = self.getImage((self.etage * 8 + 2))
-        self.ids._Indicateur3.source = self.getImage((self.etage * 8 + 3))
-        self.ids._Indicateur4.source = self.getImage((self.etage * 8 + 4))
-        self.ids._Indicateur5.source = self.getImage((self.etage * 8 + 5))
-        self.ids._Indicateur6.source = self.getImage((self.etage * 8 + 6))
-        self.ids._Indicateur7.source = self.getImage((self.etage * 8 + 7))
-        self.ids._Indicateur8.source = self.getImage((self.etage * 8 + 8))
     def setLvl(self, lvl):
         fichier = open("assets/current_lvl.txt", "w")
         fichier.write(str(lvl))
@@ -45,16 +35,16 @@ class LevelScreen(Screen):
     def getLvlMax(self):
         fichierMax = open("assets/max_level.txt", "r")
         lvlMax = fichierMax.read()
-        return lvlMax
+        return int(lvlMax)
     def getImage(self, lvl):
-        lvlMax = int(self.getLvlMax())
+        lvlMax = self.getLvlMax()
         if lvlMax > lvl :
             return "Images/valide.png"
         elif lvlMax == lvl :
             return "Images/play.png"
         else:
             return "Images/cadenas.png"
-
+    etage = 0
     def augmente(self):
         self.etage+=1
         self.ids._boutonAugmente.disabled = (self.etage == 3)
@@ -83,13 +73,23 @@ class LevelScreen(Screen):
         self.ids._bouton7.text = "Niveau " + str(self.etage * 8 + 7)
         self.ids._bouton8.text = "Niveau " + str(self.etage * 8 + 8)
         self.update()
-    pass
+    def update(self):
+        self.ids._Indicateur1.source = self.getImage((self.etage * 8 + 1))
+        self.ids._Indicateur2.source = self.getImage((self.etage * 8 + 2))
+        self.ids._Indicateur3.source = self.getImage((self.etage * 8 + 3))
+        self.ids._Indicateur4.source = self.getImage((self.etage * 8 + 4))
+        self.ids._Indicateur5.source = self.getImage((self.etage * 8 + 5))
+        self.ids._Indicateur6.source = self.getImage((self.etage * 8 + 6))
+        self.ids._Indicateur7.source = self.getImage((self.etage * 8 + 7))
+        self.ids._Indicateur8.source = self.getImage((self.etage * 8 + 8))
 
 class CustomLevelScreen(Screen):
     def chargement(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
         fichierMax = open("assets/max_level.txt", "r")
+        MyJson = open('assets/data.json',)
+        Data = json.load(MyJson)
         lvlMax = fichierMax.read()
         self.ids._labelNomLvl.text = " Niveau " + lvl
         self.ids._buttonPrevious.disabled = int(lvl) == 1
@@ -97,8 +97,6 @@ class CustomLevelScreen(Screen):
         self.ids._imageLvl.source = "Images/lvl/lvl" + lvl + ".png"
         self.ids._labelResultat.text = ""
         self.ids._userInput.text = ""
-        MyJson = open('assets/data.json',)
-        Data = json.load(MyJson)
         self.ids._buttonSauter.disabled = True
         self.ids._buttonSauter.background_color = [0,0,0,0]
         self.ids._buttonSauter.text = ""
@@ -182,14 +180,6 @@ class CustomLevelScreen(Screen):
             limite =  str(Data[int(lvl) - 1]["limite"])
         texteCoupe = texte.splitlines()
         self.ids._labelInstruction.text = " Instructions : " + str(len(texteCoupe)) + " / " + limite
-    def changeLvlMax(self):
-        fichierLvl = open("assets/current_lvl.txt", "r")
-        lvl = fichierLvl.read()
-        fichierMax = open("assets/max_level.txt", "r+")
-        if (int(lvl) +1) > int(fichierMax.read()):
-            fichierMax.seek(0)
-            fichierMax.truncate()
-            fichierMax.write(str(int(lvl) +1))
     def getOrigin(self, lvl) :
         MyJson = open('assets/data.json',)
         Data = json.load(MyJson)
@@ -304,7 +294,11 @@ class CustomLevelScreen(Screen):
                 elif Data[int(lvl) - 1][str(position)] == "f" :
                     if (nb + 1) == len(texteCoupe) :
                         message = "REUSSI : Bravo, tu as réussi le niveau " + lvl
-                        self.changeLvlMax()
+                        fichierMax = open("assets/max_level.txt", "r+")
+                        if (int(lvl) +1) > int(fichierMax.read()):
+                            fichierMax.seek(0)
+                            fichierMax.truncate()
+                            fichierMax.write(str(int(lvl) +1))
                         Terminer = True
                 else:
                     message = "ERREUR : Faudrait corriger le json/le code"
