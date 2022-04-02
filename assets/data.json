@@ -1,6 +1,7 @@
 [
 	{
         "niveau" : "1",
+        "indice" : "Indice : Essaye et observe",
 		"43": "d",
         "44":"c",
         "45":"c",
@@ -8,6 +9,7 @@
 	},
 	{
         "niveau" : "2",
+        "indice" : "Indice : Essaye de tourner puis d'avancer",
 		"43" : "d",
         "44" : "c",
         "45" : "c",
@@ -39,6 +41,7 @@
 	},
     {
         "niveau" : "5",
+        "indice" : "Indice : Et si on reculait ?",
         "limite" : 3,
 		"43" : "f",
         "44" : "c",
@@ -47,6 +50,7 @@
 	},
     {
         "niveau" : "6",
+        "indice" : "Indice : Prends toujours le chemin court",
         "limite" : 8,
 		"34" : "d",
         "35" : "c",
@@ -87,6 +91,7 @@
 	},
     {
         "niveau" : "8",
+        "indice" : "Indice : Des blocs invisibles... \nUne seule solution en 11",
         "limite" : 11,
 		"22" : "c",
         "23" : "c",
@@ -111,6 +116,7 @@
 	},
     {   
         "niveau": "9",
+        "indice" : "Indice : Tu peux avancer sur un tapis",
         "limite" : 2,
         "42" : "d",
         "43" : "t-d",
@@ -119,6 +125,7 @@
         "46" : "f"
     },
     {   "niveau": "10",
+        "indice" : "Indice : Essaye toi au saut",
         "limite" : 3,
         "42" : "d",
         "43" : "c",
@@ -154,6 +161,7 @@
     },
     {
         "niveau": "13",
+        "indice" : "Indice : La patience est une\n grande qualite. Attends !",
         "limite" : 15,
         "41" : "d",
         "42" : "t-b",
@@ -209,6 +217,7 @@
     },
     {
         "niveau": "15",
+        "indice" : "Indice : Attends d'etre en haut",
         "limite" : 6,
         "24": "t-h",
         "25": "t-b",
@@ -231,6 +240,7 @@
     },
     {
         "niveau": "16",
+        "indice" : "Indice : Cherche bien",
         "limite" : 5,
         "23" : "d",
         "24" : "t-d",
@@ -264,5 +274,69 @@
         "75" : "t-b",
         "76" : "t-b",
         "77" : "t-b"
-    }
+    },
+    {
+        "niveau" : "17",
+		"11": "d"
+	},
+    {
+        "niveau" : "18",
+		"11": "d"
+	},
+    {
+        "niveau" : "19",
+		"11": "d"
+	},
+    {
+        "niveau" : "20",
+		"11": "d"
+	},
+    {
+        "niveau" : "21",
+		"11": "d"
+	},
+    {
+        "niveau" : "22",
+		"11": "d"
+	},
+    {
+        "niveau" : "23",
+		"11": "d"
+	},
+    {
+        "niveau" : "24",
+		"11": "d"
+	},
+    {
+        "niveau" : "25",
+		"11": "d"
+	},
+    {
+        "niveau" : "26",
+		"11": "d"
+	},
+    {
+        "niveau" : "27",
+		"11": "d"
+	},
+    {
+        "niveau" : "28",
+		"11": "d"
+	},
+    {
+        "niveau" : "29",
+		"11": "d"
+	},
+    {
+        "niveau" : "30",
+		"11": "d"
+	},
+    {
+        "niveau" : "31",
+		"11": "d"
+	},
+    {
+        "niveau" : "32",
+		"11": "d"
+	}
 ]

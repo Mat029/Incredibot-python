@@ -207,29 +207,33 @@ WindowManager:
         Image:
             id: _imageLvl
             source:'Images/lvl/lvl1.png'
-            pos_hint:{'x': 0.4374,'y':0.05}
-            size_hint: 0.50625 , 0.9
+            pos_hint:{'x': 0.455625,'y':0.025}
+            size_hint: 0.534375 , 0.95
             keep_ratio: False
             allow_stretch: True
 		Button:
-			text: "Back"
-			font_size: 0.5 * self.height
 			size_hint: .05, .06
 			pos_hint: {'center_x': .075,'center_y':.95}
             on_press:
                 root.clean()
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'levels'
+			Image:
+				source: 'Images/icon/home_icon.png'
+				center_x: self.parent.center_x
+				center_y: self.parent.center_y
+				size: self.parent.width, self.parent.height
 		Button:
             id: _buttonPrevious
+            bold: True
 			text: "<" 
 			font_size: 0.5 * self.height
 			size_hint: .04, .06
+            pos_hint: {'center_x': .14,'center_y':.95}
             on_press:
                 root.clean()
                 root.setLvl(root.getLvl() - 1)
                 root.chargement()
-			pos_hint: {'center_x': .14,'center_y':.95}
 		Label:
 			id: _labelNomLvl
             bold: True
@@ -240,6 +244,7 @@ WindowManager:
 		Button:
             id: _buttonNext
 			text: ">"
+            bold: True
 			font_size: 0.5 * self.height
 			size_hint: .04, .06
 			pos_hint: {'center_x': .3,'center_y':.95}
@@ -247,16 +252,18 @@ WindowManager:
                 root.clean()
                 root.setLvl(root.getLvl() + 1)
                 root.chargement()
-
         Button:
-			text: "Cours"
-			font_size: 0.5 * self.height
 			size_hint: .05, .06
 			pos_hint: {'center_x': .365,'center_y':.95}
             on_press:
                 root.clean()
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'cours'
+            Image:
+				source: 'Images/icon/book_icon.png'
+				center_x: self.parent.center_x
+				center_y: self.parent.center_y
+				size: self.parent.width, self.parent.height
         TextInput:
             id: _userInput
             font_size: .045 * self.height
@@ -351,12 +358,33 @@ WindowManager:
             on_press:
                 _userInput.text = ""
         Button:
-            text: "Play"
-            size_hint: 0.2 , 0.07
+			size_hint: .05, .07
+			pos_hint: {'x': .05,'center_y': 0.17}
+            on_press:
+                root.cancel()
+            Image:
+				source: 'Images/icon/cancel_icon.png'
+				center_x: self.parent.center_x
+				center_y: self.parent.center_y
+				size: self.parent.width, self.parent.height
+        Button:
+            text: "Lancer"
+            size_hint: 0.19 , 0.07
             font_size: 0.4 * self.height
-            pos_hint: {"center_x" : 0.2, "center_y" : 0.17}
+            bold: True
+            pos_hint: {"x" : 0.1, "center_y" : 0.17}
             on_press:
                 root.play(_userInput.text)
+        Button:
+			size_hint: .05, .07
+			pos_hint: {'x': .29,'center_y': 0.17}
+            on_press:
+                root.indice()
+            Image:
+				source: 'Images/icon/light_icon.png'
+				center_x: self.parent.center_x
+				center_y: self.parent.center_y
+				size: self.parent.width, self.parent.height
         Label:
             id: _labelResultat
             font_size: 0.3 * self.height

@@ -132,14 +132,13 @@ class CustomLevelScreen(Screen):
             self.ids._buttonBoucle.disabled = False
             self.ids._buttonBoucle.background_color = [1,1,1,1]
             self.ids._buttonBoucle.text = "Repeter X fois"
-        if int(lvl) <= len(Data) :
-                posRobot = self.posToCoord(self.getOrigin(lvl))
-                self.robot = Image(source = "Images/lvl/robot.png", size_hint =  [.050625 , .09],pos_hint = posRobot)
-                self.ids._layoutLvl.add_widget(self.robot)
-                if "limite" in Data[int(lvl) - 1] :
-                    self.ids._labelInstruction.text = "Instructions : 0 / " + str(Data[int(lvl) - 1]["limite"]) 
-                else:
-                    self.ids._labelInstruction.text = "Instructions : 0 / ∞"
+        posRobot = self.posToCoord(self.getOrigin(lvl))
+        self.robot = Image(source = "Images/lvl/robot.png", size_hint =  [.050625 , .09],pos_hint = posRobot)
+        self.ids._layoutLvl.add_widget(self.robot)
+        if "limite" in Data[int(lvl) - 1] :
+            self.ids._labelInstruction.text = "Instructions : 0 / " + str(Data[int(lvl) - 1]["limite"]) 
+        else:
+            self.ids._labelInstruction.text = "Instructions : 0 / ∞"
     def getLvl(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
@@ -148,13 +147,8 @@ class CustomLevelScreen(Screen):
         fichier = open("assets/current_lvl.txt", "w")
         fichier.write(str(lvl))
     def clean(self):
-        fichierLvl = open("assets/current_lvl.txt", "r")
-        lvl = fichierLvl.read()
-        MyJson = open('assets/data.json',)
-        Data = json.load(MyJson)
-        if int(lvl) <= len(Data) :
-            Animation.stop_all(self.robot)
-            self.ids._layoutLvl.remove_widget(self.robot)
+        Animation.cancel_all(self.robot)
+        self.ids._layoutLvl.remove_widget(self.robot)
     def delLine(self, texte) :
         if texte!= "" :
             texteCoupe = texte.splitlines()
@@ -184,9 +178,8 @@ class CustomLevelScreen(Screen):
         MyJson = open('assets/data.json',)
         Data = json.load(MyJson)
         limite = "∞"
-        if int(lvl) <= len(Data) :
-            if "limite" in Data[int(lvl) - 1] :
-                limite =  str(Data[int(lvl) - 1]["limite"])
+        if "limite" in Data[int(lvl) - 1] :
+            limite =  str(Data[int(lvl) - 1]["limite"])
         texteCoupe = texte.splitlines()
         self.ids._labelInstruction.text = " Instructions : " + str(len(texteCoupe)) + " / " + limite
     def changeLvlMax(self):
@@ -226,7 +219,7 @@ class CustomLevelScreen(Screen):
             anim3 += Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)
             anim3.start(self.robot)
     def posToCoord(self, pos) :
-        return {"center_x" : (0.469040625 + ((pos%10 - 1) * 0.06328125)), "center_y": (0.10625 + ((8 - (pos//10)) * 0.1125))} # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
+        return {"center_x" : (0.455625 + 0.0333984375 + ((pos%10 - 1) * 0.066796875)), "center_y": (0.025 + 0.059375 + ((8 - (pos//10)) * 0.11875))} # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
     def verif(self, texte):
         fichierLvl = open("assets/current_lvl.txt", "r")
         listePosition = []
@@ -236,96 +229,111 @@ class CustomLevelScreen(Screen):
         texteCoupe = texte.splitlines()
         MyJson = open('assets/data.json',)
         Data = json.load(MyJson)
-        if int(lvl) > len(Data) :
-            message = "ERREUR : On a pas encore mis ce niveau"
-        else :
-            position = self.getOrigin(lvl)
-            listePosition.append(position)
-            orientation = 1
-            nb = 0
-            Terminer = False
-            if "limite" in Data[int(lvl) - 1] :
-                if len(texteCoupe) > Data[int(lvl) - 1]["limite"] :
-                    Terminer = True
-                    message = "ECHEC : Limite dépassée !"
-            elif len(texteCoupe) > 100 :
+        position = self.getOrigin(lvl)
+        listePosition.append(position)
+        orientation = 1
+        nb = 0
+        Terminer = False
+        if "limite" in Data[int(lvl) - 1] :
+            if len(texteCoupe) > Data[int(lvl) - 1]["limite"] :
                 Terminer = True
                 message = "ECHEC : Limite dépassée !"
-            while not Terminer and nb != len(texteCoupe) :
-                if texteCoupe[nb] == "avancer" :
-                    position+= orientation
-                elif texteCoupe[nb] == "droite" :
-                    if orientation == 1 :
-                        orientation = 10
-                    elif orientation == 10 :
-                        orientation = - 1
-                    elif orientation == -1 :
-                        orientation = - 10
-                    elif orientation == -10 :
-                        orientation = 1
-                elif texteCoupe[nb] == "gauche" :
-                    if orientation == 1 :
-                        orientation = -10
-                    elif orientation == 10 :
-                        orientation = 1
-                    elif orientation == -1 :
-                        orientation = 10
-                    elif orientation == -10 :
-                        orientation = - 1
-                elif texteCoupe[nb] == "reculer" :
-                    position-= orientation
-                elif texteCoupe[nb] == "attendre" and int(lvl) >= 9 :
-                    pass
-                elif texteCoupe[nb] == "sauter" and int(lvl) >= 9 :
-                    if str((position) + orientation) in Data[int(lvl) - 1] :
-                        message = "ECHEC : Tu ne peux sauter que le vide"
-                        Terminer = True
-                    else:
-                        position += 2 * orientation
+        elif len(texteCoupe) > 100 :
+            Terminer = True
+            message = "ECHEC : Limite dépassée !"
+        while not Terminer and nb != len(texteCoupe) :
+            if texteCoupe[nb] == "avancer" :
+                position+= orientation
+            elif texteCoupe[nb] == "droite" :
+                if orientation == 1 :
+                    orientation = 10
+                elif orientation == 10 :
+                    orientation = - 1
+                elif orientation == -1 :
+                    orientation = - 10
+                elif orientation == -10 :
+                    orientation = 1
+            elif texteCoupe[nb] == "gauche" :
+                if orientation == 1 :
+                    orientation = -10
+                elif orientation == 10 :
+                    orientation = 1
+                elif orientation == -1 :
+                    orientation = 10
+                elif orientation == -10 :
+                    orientation = - 1
+            elif texteCoupe[nb] == "reculer" :
+                position-= orientation
+            elif texteCoupe[nb] == "attendre" and int(lvl) >= 9 :
+                pass
+            elif texteCoupe[nb] == "sauter" and int(lvl) >= 9 :
+                if str((position) + orientation) in Data[int(lvl) - 1] :
+                    message = "ECHEC : Tu ne peux sauter que le vide"
+                    Terminer = True
+                else:
+                    position += 2 * orientation
 
+            else:
+                message = "ECHEC : Mot incorrect dans le script"
+                Terminer = True
+            listePosition.append(position)
+            if str(position) in Data[int(lvl) - 1] :
+                if Data[int(lvl) - 1][str(position)] == "c" or Data[int(lvl) - 1][str(position)] == "d" or Data[int(lvl) - 1][str(position)] == "f" :
+                    pass
+                elif Data[int(lvl) - 1][str(position)] ==  "t-d" :
+                    position += 1
+                    listePosition.append(position)
+                elif Data[int(lvl) - 1][str(position)] ==  "t-g" :
+                    position -= 1
+                    listePosition.append(position)
+                elif Data[int(lvl) - 1][str(position)] ==  "t-h" :
+                    position -= 10
+                    listePosition.append(position)
+                elif Data[int(lvl) - 1][str(position)] ==  "t-b" :
+                    position += 10
+                    listePosition.append(position)
                 else:
-                    message = "ECHEC : Mot incorrect dans le script"
+                    message = "ERREUR : Faudrait corriger le json/le code"
                     Terminer = True
-                listePosition.append(position)
-                if str(position) in Data[int(lvl) - 1] :
-                    if Data[int(lvl) - 1][str(position)] == "c" or Data[int(lvl) - 1][str(position)] == "d" or Data[int(lvl) - 1][str(position)] == "f" :
-                        pass
-                    elif Data[int(lvl) - 1][str(position)] ==  "t-d" :
-                        position += 1
-                        listePosition.append(position)
-                    elif Data[int(lvl) - 1][str(position)] ==  "t-g" :
-                        position -= 1
-                        listePosition.append(position)
-                    elif Data[int(lvl) - 1][str(position)] ==  "t-h" :
-                        position -= 10
-                        listePosition.append(position)
-                    elif Data[int(lvl) - 1][str(position)] ==  "t-b" :
-                        position += 10
-                        listePosition.append(position)
-                    else:
-                        message = "ERREUR : Faudrait corriger le json/le code"
+            else:
+                message = "ECHEC : Hors champs"
+                Terminer = True
+            if str(position) in Data[int(lvl) - 1] :
+                if Data[int(lvl) - 1][str(position)] == "c" or Data[int(lvl) - 1][str(position)] == "d" or Data[int(lvl) - 1][str(position)] == "t-d" or Data[int(lvl) - 1][str(position)] == "t-g" or Data[int(lvl) - 1][str(position)] == "t-h" or Data[int(lvl) - 1][str(position)] == "t-b":
+                    pass
+                elif Data[int(lvl) - 1][str(position)] == "f" :
+                    if (nb + 1) == len(texteCoupe) :
+                        message = "REUSSI : Bravo, tu as réussi le niveau " + lvl
+                        self.changeLvlMax()
                         Terminer = True
                 else:
-                    message = "ECHEC : Hors champs"
+                    message = "ERREUR : Faudrait corriger le json/le code"
                     Terminer = True
-                if str(position) in Data[int(lvl) - 1] :
-                    if Data[int(lvl) - 1][str(position)] == "c" or Data[int(lvl) - 1][str(position)] == "d" or Data[int(lvl) - 1][str(position)] == "t-d" or Data[int(lvl) - 1][str(position)] == "t-g" or Data[int(lvl) - 1][str(position)] == "t-h" or Data[int(lvl) - 1][str(position)] == "t-b":
-                        pass
-                    elif Data[int(lvl) - 1][str(position)] == "f" :
-                        if (nb + 1) == len(texteCoupe) :
-                            message = "REUSSI : Bravo, tu as réussi le niveau " + lvl
-                            self.changeLvlMax()
-                            Terminer = True
-                    else:
-                        message = "ERREUR : Faudrait corriger le json/le code"
-                        Terminer = True
-                else:
-                    message = "ECHEC : Hors champs"
-                    Terminer = True
-                nb +=1
-            if not Terminer :
-                message = "ECHEC : Il manque une/plusieurs instructions"
+            else:
+                message = "ECHEC : Hors champs"
+                Terminer = True
+            nb +=1
+        if not Terminer :
+            message = "ECHEC : Il manque une/plusieurs instructions"
         return listePosition, message
+    
+    def indice(self):
+        fichierLvl = open("assets/current_lvl.txt", "r")
+        lvl = fichierLvl.read()
+        MyJson = open('assets/data.json',)
+        Data = json.load(MyJson)
+        if "indice" in Data[int(lvl) - 1] :
+            self.ids._labelResultat.text = Data[int(lvl) - 1]["indice"]
+        else:
+            self.ids._labelResultat.text = "Pas d'indice pour ce niveau"
+
+        
+    def cancel(self) :
+        fichierLvl = open("assets/current_lvl.txt", "r")
+        lvl = fichierLvl.read()
+        Animation.cancel_all(self.robot)
+        self.robot.pos_hint = self.posToCoord(self.getOrigin(lvl))
+        
 
 class CoursScreen(Screen):
     pass
