@@ -175,10 +175,14 @@ class CustomLevelScreen(Screen):
         lvl = fichierLvl.read()
         MyJson = open('assets/data.json',)
         Data = json.load(MyJson)
+        texteCoupe = texte.splitlines()
         limite = "∞"
         if "limite" in Data[int(lvl) - 1] :
             limite =  str(Data[int(lvl) - 1]["limite"])
-        texteCoupe = texte.splitlines()
+            if len(texteCoupe) > Data[int(lvl) - 1]["limite"] :
+                self.ids._labelInstruction.color = [1,0,0,1]
+            else:
+                self.ids._labelInstruction.color = [1,1,1,1]
         self.ids._labelInstruction.text = " Instructions : " + str(len(texteCoupe)) + " / " + limite
     def getOrigin(self, lvl) :
         MyJson = open('assets/data.json',)
