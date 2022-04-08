@@ -38,7 +38,6 @@ Soon...
 * Faire l'étage 4
 ### ----------"Vrai" Objectif----------
 * Ajouter des "paramètres"
-* Mode "étape par étape"
 * Animation des plateaux/du robot
 ### ----------Bonus----------
 * Mode multijoueur ou Create (Create est plus "logique" mais multi plus "fun" (et long à coder aussi))
