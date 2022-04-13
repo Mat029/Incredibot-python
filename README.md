@@ -20,7 +20,7 @@ Soon...
 * Ajouter les cours ⏱
 * Refonte graphique de l'interface des niveau ✅
 * Generateur d'image ⏱
-* Faire l'étage 3 🧠
+* Faire l'étage 3 ⏱
 
 (Symboles : ✅ : terminer (tester à fond) ❌ : annulé ⏱ : en cours de "coding"/terminé mais buggué 🧠 : en reflexion )
 

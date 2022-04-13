@@ -137,6 +137,18 @@ class CustomLevelScreen(Screen):
             self.ids._labelInstruction.text = "Instructions : 0 / " + str(Data[int(lvl) - 1]["limite"]) 
         else:
             self.ids._labelInstruction.text = "Instructions : 0 / ∞"
+        if "nbObjet" in Data[int(lvl) - 1] :
+            posObjet0 = self.posToCoord( Data[int(lvl) - 1]["dObjet0"])
+            self.obj0 = Image(source = "Images/lvl/objet0.png", size_hint =  [.050625 , .09],pos_hint = posObjet0)
+            self.ids._layoutLvl.add_widget(self.obj0)
+            if Data[int(lvl) - 1]["nbObjet"] >= 2:
+                posObjet1 = self.posToCoord( Data[int(lvl) - 1]["dObjet1"])
+                self.obj1 = Image(source = "Images/lvl/objet1.png", size_hint =  [.050625 , .09],pos_hint = posObjet1)
+                self.ids._layoutLvl.add_widget(self.obj1)
+            if Data[int(lvl) - 1]["nbObjet"] == 3:
+                posObjet2 = self.posToCoord( Data[int(lvl) - 1]["dObjet2"])
+                self.obj2 = Image(source = "Images/lvl/objet2.png", size_hint =  [.050625 , .09],pos_hint = posObjet2)
+                self.ids._layoutLvl.add_widget(self.obj2)
     def getLvl(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
@@ -145,8 +157,21 @@ class CustomLevelScreen(Screen):
         fichier = open("assets/current_lvl.txt", "w")
         fichier.write(str(lvl))
     def clean(self):
+        fichierLvl = open("assets/current_lvl.txt", "r")
+        lvl = fichierLvl.read()
+        MyJson = open('assets/data.json',)
+        Data = json.load(MyJson)
         Animation.cancel_all(self.robot)
         self.ids._layoutLvl.remove_widget(self.robot)
+        if "nbObjet" in Data[int(lvl) - 1] :
+            Animation.cancel_all(self.obj0)
+            self.ids._layoutLvl.remove_widget(self.obj0)
+            if Data[int(lvl) - 1]["nbObjet"] >= 2:
+                Animation.cancel_all(self.obj1)
+                self.ids._layoutLvl.remove_widget(self.obj1)
+            if Data[int(lvl) - 1]["nbObjet"] == 3:
+                Animation.cancel_all(self.obj2)
+                self.ids._layoutLvl.remove_widget(self.obj2)
     def delLine(self, texte) :
         if texte!= "" :
             texteCoupe = texte.splitlines()
@@ -191,19 +216,48 @@ class CustomLevelScreen(Screen):
             if Data[int(lvl) - 1][i] == "d" :
                 return int(i)
     def play(self, texte) :
-        listePos, message = self.verif(texte)
-        if len(listePos) >= 1 :
-            Animation.stop_all(self.robot)
-            anim = Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)
-            for i in range(1, len(listePos)) :
-                anim += Animation(pos_hint =self.posToCoord(listePos[i]), duration = .5)
-            anim.start(self.robot)
-            anim.bind(on_complete = partial(self.showMessage , message, listePos))
-        else:
-            self.showMessage(message, listePos)
-    def showMessage(self, message, listePos, *args) :
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
+        MyJson = open('assets/data.json',)
+        Data = json.load(MyJson)
+        listePos, listeObjet, message = self.verif(texte)
+        Animation.stop_all(self.robot)
+        anim = Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)
+        if "nbObjet" in Data[int(lvl) - 1] :
+            Animation.cancel_all(self.obj0)
+            animObj0 = Animation(pos_hint =self.posToCoord(listeObjet[0][0]), duration = 0)
+            if Data[int(lvl) - 1]["nbObjet"] >= 2:
+                Animation.cancel_all(self.obj1)
+                animObj1 = Animation(pos_hint =self.posToCoord(listeObjet[1][0]), duration = 0)
+            if Data[int(lvl) - 1]["nbObjet"] == 3:
+                Animation.cancel_all(self.obj2)
+                animObj2 = Animation(pos_hint =self.posToCoord(listeObjet[2][0]), duration = 0)
+        if len(listePos) >= 1 :
+            for i in range(1, len(listePos)) :
+                anim += Animation(pos_hint =self.posToCoord(listePos[i]), duration = .5)
+        if "nbObjet" in Data[int(lvl) - 1] :
+            for i in range(1, len(listeObjet[0])) :
+                animObj0 += Animation(pos_hint =self.posToCoord(listeObjet[0][i]), duration = 0) #permet a l'objet d'apparaitre/disparaitre instant
+                animObj0 += Animation(pos_hint =self.posToCoord(listeObjet[0][i]), duration = .5) 
+                if Data[int(lvl) - 1]["nbObjet"] >= 2:
+                    animObj1 += Animation(pos_hint =self.posToCoord(listeObjet[1][i]), duration = 0)
+                    animObj1 += Animation(pos_hint =self.posToCoord(listeObjet[1][i]), duration = .5)
+                if Data[int(lvl) - 1]["nbObjet"] == 3:
+                    animObj2 += Animation(pos_hint =self.posToCoord(listeObjet[2][i]),duration = 0)
+                    animObj2 += Animation(pos_hint =self.posToCoord(listeObjet[2][i]),duration = .5)
+        anim.start(self.robot)
+        anim.bind(on_complete = partial(self.showMessage , message, listePos, listeObjet))
+        if "nbObjet" in Data[int(lvl) - 1] :
+            animObj0.start(self.obj0)
+            if Data[int(lvl) - 1]["nbObjet"] >= 2:
+                animObj1.start(self.obj1)
+            if Data[int(lvl) - 1]["nbObjet"] == 3:
+                animObj2.start(self.obj2) 
+    def showMessage(self, message, listePos, listePosObjet, *args) :
+        fichierLvl = open("assets/current_lvl.txt", "r")
+        lvl = fichierLvl.read()
+        MyJson = open('assets/data.json',)
+        Data = json.load(MyJson)
         fichierMax = open("assets/max_level.txt", "r")
         lvlMax = fichierMax.read()
         self.ids._labelResultat.text = message
@@ -212,6 +266,18 @@ class CustomLevelScreen(Screen):
             anim3= Animation(pos_hint = self.posToCoord(listePos[len(listePos) - 1]), duration =  2.5)
             anim3 += Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)
             anim3.start(self.robot)
+        if "nbObjet" in Data[int(lvl) - 1] :
+            anim4= Animation(pos_hint = self.posToCoord(listePosObjet[0][len(listePosObjet[0]) - 1]), duration =  2.5)
+            anim4 += Animation(pos_hint =self.posToCoord(listePosObjet[0][0]), duration = 0)
+            anim4.start(self.obj0)
+            if Data[int(lvl) - 1]["nbObjet"] >= 2:
+                anim5= Animation(pos_hint = self.posToCoord(listePosObjet[1][len(listePosObjet[1]) - 1]), duration =  2.5)
+                anim5 += Animation(pos_hint =self.posToCoord(listePosObjet[1][0]), duration = 0)
+                anim5.start(self.obj1)
+            if Data[int(lvl) - 1]["nbObjet"] == 3:
+                anim6= Animation(pos_hint = self.posToCoord(listePosObjet[2][len(listePosObjet[2]) - 1]), duration =  2.5)
+                anim6 = Animation(pos_hint =self.posToCoord(listePosObjet[2][0]), duration = 0)
+                anim6.start(self.obj2)
     def posToCoord(self, pos) :
         return {"center_x" : (0.455625 + 0.0333984375 + ((pos%10 - 1) * 0.066796875)), "center_y": (0.025 + 0.059375 + ((8 - (pos//10)) * 0.11875))} # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
     def verif(self, texte):
@@ -228,6 +294,14 @@ class CustomLevelScreen(Screen):
         orientation = 1
         nb = 0
         Terminer = False
+        posObjet = [0,0,0]
+        listeObjet = [[],[],[]]
+        objet = 3
+        tenirObjet = False
+        if "nbObjet" in Data[int(lvl) - 1] :
+            for p in range(Data[int(lvl) - 1]["nbObjet"]) :
+                posObjet[p] = Data[int(lvl) - 1]["dObjet" + str(p)]
+                listeObjet[p].append(posObjet[p])
         if "limite" in Data[int(lvl) - 1] :
             if len(texteCoupe) > Data[int(lvl) - 1]["limite"] :
                 Terminer = True
@@ -266,24 +340,64 @@ class CustomLevelScreen(Screen):
                     Terminer = True
                 else:
                     position += 2 * orientation
+            elif texteCoupe[nb] == "prendre" and int(lvl) >= 17 :
+                if not tenirObjet :
+                    i = 0
+                    while i < len(posObjet) and not tenirObjet:
+                        if posObjet[i] == (position + orientation) :
+                            objet = i
+                            posObjet[objet] = 0
+                            tenirObjet = True
+                            i +=1
+                else:
+                    message = "ECHEC : Tu tiens déja un objet"
+                    Terminer = True
+            elif texteCoupe[nb] == "déposer" and int(lvl) >= 17 :
+                if tenirObjet:
+                    if (Data[int(lvl) - 1][(str(position + orientation))] == "c" or Data[int(lvl) - 1][str(position + orientation)] == "d" or Data[int(lvl) - 1][str(position + orientation)] == "f") and (position + orientation) not in posObjet:
+                        posObjet[objet] = (position + orientation)
+                    else:
+                        message = "ECHEC : Tu ne peux pas poser un objet ici"
+                        Terminer = True
+                else:
+                    message = "ECHEC : Tu ne tiens pas d'objet"
+                    Terminer = True
+
+
+                
 
             else:
                 message = "ECHEC : Mot incorrect dans le script"
                 Terminer = True
             listePosition.append(position)
+            if "nbObjet" in Data[int(lvl) - 1] :
+                for p in range(Data[int(lvl) - 1]["nbObjet"]) :
+                    listeObjet[p].append(posObjet[p])
             if str(position) in Data[int(lvl) - 1] :
                 if Data[int(lvl) - 1][str(position)] == "c" or Data[int(lvl) - 1][str(position)] == "d" or Data[int(lvl) - 1][str(position)] == "f" :
                     pass
                 elif Data[int(lvl) - 1][str(position)] ==  "t-d" :
                     position += 1
                     listePosition.append(position)
+                    if "nbObjet" in Data[int(lvl) - 1] :
+                        for p in range(Data[int(lvl) - 1]["nbObjet"]) :
+                            listeObjet[p].append(posObjet[p])                 
                 elif Data[int(lvl) - 1][str(position)] ==  "t-g" :
                     position -= 1
+                    if "nbObjet" in Data[int(lvl) - 1] :
+                        for p in range(Data[int(lvl) - 1]["nbObjet"]) :
+                            listeObjet[p].append(posObjet[p])
                     listePosition.append(position)
                 elif Data[int(lvl) - 1][str(position)] ==  "t-h" :
                     position -= 10
+                    if "nbObjet" in Data[int(lvl) - 1] :
+                        for p in range(Data[int(lvl) - 1]["nbObjet"]) :
+                            listeObjet[p].append(posObjet[p])
                     listePosition.append(position)
                 elif Data[int(lvl) - 1][str(position)] ==  "t-b" :
+                    if "nbObjet" in Data[int(lvl) - 1] :
+                        for p in range(Data[int(lvl) - 1]["nbObjet"]) :
+                            listeObjet[p].append(posObjet[p])
                     position += 10
                     listePosition.append(position)
                 else:
@@ -297,12 +411,21 @@ class CustomLevelScreen(Screen):
                     pass
                 elif Data[int(lvl) - 1][str(position)] == "f" :
                     if (nb + 1) == len(texteCoupe) :
-                        message = "REUSSI : Bravo, tu as réussi le niveau " + lvl
-                        fichierMax = open("assets/max_level.txt", "r+")
-                        if (int(lvl) +1) > int(fichierMax.read()):
-                            fichierMax.seek(0)
-                            fichierMax.truncate()
-                            fichierMax.write(str(int(lvl) +1))
+                        fini = True
+                        if "nbObjet" in Data[int(lvl) - 1] :
+                            i = 0
+                            while i < Data[int(lvl) - 1]["nbObjet"] and fini:
+                                fini = posObjet[i] == Data[int(lvl) - 1]["fObjet" + str(i)]
+                                i+=1
+                        if fini :
+                            message = "REUSSI : Bravo, tu as réussi le niveau " + lvl
+                            fichierMax = open("assets/max_level.txt", "r+")
+                            if (int(lvl) +1) > int(fichierMax.read()):
+                                fichierMax.seek(0)
+                                fichierMax.truncate()
+                                fichierMax.write(str(int(lvl) +1))
+                        else:
+                            message = "ECHEC : Un objet n'est pas à sa place "
                         Terminer = True
                 else:
                     message = "ERREUR : Faudrait corriger le json/le code"
@@ -313,7 +436,7 @@ class CustomLevelScreen(Screen):
             nb +=1
         if not Terminer :
             message = "ECHEC : Il manque une/plusieurs instructions"
-        return listePosition, message
+        return listePosition, listeObjet, message
     
     def indice(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
