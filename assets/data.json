@@ -162,7 +162,7 @@
     {
         "niveau": "13",
         "indice" : "Indice : La patience est une\n grande qualite. Attends !",
-        "limite" : 15,
+        "limite" : 12,
         "41" : "d",
         "42" : "t-b",
         "52" : "t-b",
@@ -241,7 +241,7 @@
     {
         "niveau": "16",
         "indice" : "Indice : Cherche bien",
-        "limite" : 5,
+        "limite" : 4,
         "23" : "d",
         "24" : "t-d",
         "25" : "t-d",
