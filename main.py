@@ -35,6 +35,7 @@ class LevelScreen(Screen):
     def getLvlMax(self):
         fichierMax = open("assets/max_level.txt", "r")
         lvlMax = fichierMax.read()
+        fichierMax.close()
         return int(lvlMax)
     def getImage(self, lvl):
         lvlMax = self.getLvlMax()
@@ -257,6 +258,7 @@ class CustomLevelScreen(Screen):
         DataLvl = self.getLvlJson()
         fichierMax = open("assets/max_level.txt", "r")
         lvlMax = fichierMax.read()
+        fichierMax.close()
         self.ids._labelResultat.text = message
         self.ids._buttonNext.disabled = int(lvlMax) <= lvl or lvl == 32
         if len(listePos) >= 1:
