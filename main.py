@@ -50,7 +50,7 @@ class LevelScreen(Screen):
         self.etage+=1
         self.ids._boutonAugmente.disabled = (self.etage == 2)
         self.ids._boutonBaisse.disabled = (self.etage == 0)
-        self.ids._labelEtage.text = str(self.etage +1)
+        self.ids._labelEtage.text = "Etage " + str(self.etage +1)
         self.ids._bouton1.text = "Niveau " + str(self.etage * 8 + 1)
         self.ids._bouton2.text = "Niveau " + str(self.etage * 8 + 2)
         self.ids._bouton3.text = "Niveau " + str(self.etage * 8 + 3)
@@ -64,7 +64,7 @@ class LevelScreen(Screen):
         self.etage-=1
         self.ids._boutonAugmente.disabled = (self.etage == 2)
         self.ids._boutonBaisse.disabled = (self.etage == 0)
-        self.ids._labelEtage.text = str(self.etage +1)
+        self.ids._labelEtage.text = "Etage " + str(self.etage +1)
         self.ids._bouton1.text = "Niveau " + str(self.etage * 8 + 1)
         self.ids._bouton2.text = "Niveau " + str(self.etage * 8 + 2)
         self.ids._bouton3.text = "Niveau " + str(self.etage * 8 + 3)
@@ -83,6 +83,8 @@ class LevelScreen(Screen):
         self.ids._Indicateur6.source = self.getImage((self.etage * 8 + 6))
         self.ids._Indicateur7.source = self.getImage((self.etage * 8 + 7))
         self.ids._Indicateur8.source = self.getImage((self.etage * 8 + 8))
+        self.ids._imageAugmente.source = 'Images/icon/next_icon.png' if (self.etage != 2) else 'Images/icon/next_icon_dark.png'
+        self.ids._imageBaisse.source = 'Images/icon/previous_icon.png' if (self.etage != 0) else 'Images/icon/previous_icon_dark.png'
 
 class CustomLevelScreen(Screen):
     def chargement(self):

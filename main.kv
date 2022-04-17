@@ -71,29 +71,52 @@ WindowManager:
             on_press:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'home'
+        HomeButton:
+            text: "Cours"
+            size_hint: .12,.12
+            pos_hint: {'center_x': .86,'center_y':.86}
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'cours'
         Label:
             id: _labelEtage
-            text: "1"
-            pos_hint: {'center_x': .76,'center_y':.86}
-            size_hint: .04,.04
-            font_size: self.height
+            text: "Etage 1"
+            pos_hint: {'center_x': .5,'center_y':.86}
+            size_hint: .12,.08
+            font_size: self.height * 0.8
             bold: True
         Button:
             id: _boutonAugmente
             font_size: 0.35 * self.height
-            text: " + "
+            text: ""
             size_hint: .06,.06
-            pos_hint: {'center_x': .82,'center_y':.86}
+            pos_hint: {'center_x': .6,'center_y':.86}
             disabled: False
+            background_color: (0,0,0,0)
             on_release: root.augmente()
+            Image:
+                id: _imageAugmente
+				source: 'Images/icon/next_icon.png'
+                allow_stretch: True
+				center_x: self.parent.center_x
+				center_y: self.parent.center_y
+				size: self.parent.width, self.parent.height
         Button:
             id: _boutonBaisse
-            text: " - "
+            text: ""
             font_size: 0.35 * self.height
             size_hint: .06,.06
-            pos_hint: {'center_x': .70,'center_y':.86}
+            pos_hint: {'center_x': .4,'center_y':.86}
             disabled: True
+            background_color: (0,0,0,0)
             on_press: root.baisse()
+            Image:
+                id: _imageBaisse
+				source: 'Images/icon/previous_icon_dark.png'
+                allow_stretch: True
+				center_x: self.parent.center_x
+				center_y: self.parent.center_y
+				size: self.parent.width, self.parent.height
         HomeButton:
             id: _bouton1
             text: "Niveau 1"
