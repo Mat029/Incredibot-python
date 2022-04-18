@@ -133,7 +133,7 @@ class CustomLevelScreen(Screen):
             self.ids._buttonBoucle.background_color = [1,1,1,1]
             self.ids._buttonBoucle.text = "Repeter X fois"
         posRobot = self.posToCoord(DataLvl["d"])
-        self.robot = Image(source = "Images/lvl/robot.png", size_hint =  [.050625 , .09],pos_hint = posRobot)
+        self.robot = Image(source = "Images/lvl/robot.png", size_hint =  [.066796875 , .11875],pos_hint = posRobot)
         self.ids._layoutLvl.add_widget(self.robot)
         if "limite" in DataLvl :
             self.ids._labelInstruction.text = "Instructions : 0 / " + str(DataLvl["limite"]) 
@@ -141,15 +141,15 @@ class CustomLevelScreen(Screen):
             self.ids._labelInstruction.text = "Instructions : 0 / ∞"
         if "nbObjets" in DataLvl :
             posObjet0 = self.posToCoord( DataLvl["dObjet0"])
-            self.obj0 = Image(source = "Images/lvl/objet0.png", size_hint =  [.050625 , .09],pos_hint = posObjet0)
+            self.obj0 = Image(source = "Images/lvl/objet0.png", size_hint =  [.066796875 , .11875],pos_hint = posObjet0, allow_stretch = True)
             self.ids._layoutLvl.add_widget(self.obj0)
             if DataLvl["nbObjets"] >= 2:
                 posObjet1 = self.posToCoord( DataLvl["dObjet1"])
-                self.obj1 = Image(source = "Images/lvl/objet1.png", size_hint =  [.050625 , .09],pos_hint = posObjet1)
+                self.obj1 = Image(source = "Images/lvl/objet1.png", size_hint =  [.066796875 , .11875],pos_hint = posObjet1, allow_stretch = True)
                 self.ids._layoutLvl.add_widget(self.obj1)
             if DataLvl["nbObjets"] == 3:
                 posObjet2 = self.posToCoord( DataLvl["dObjet2"])
-                self.obj2 = Image(source = "Images/lvl/objet2.png", size_hint =  [.050625 , .09],pos_hint = posObjet2)
+                self.obj2 = Image(source = "Images/lvl/objet2.png", size_hint =  [.066796875 , .11875],pos_hint = posObjet2, allow_stretch = True)
                 self.ids._layoutLvl.add_widget(self.obj2)
 
     def getLvl(self):
@@ -223,6 +223,7 @@ class CustomLevelScreen(Screen):
     def play(self, texte) :
         DataLvl = self.getLvlJson()
         listePos, listeObjet, message = self.verif(texte)
+        print(listeObjet)
         Animation.stop_all(self.robot)
         anim = Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)
         if "nbObjets" in DataLvl :
@@ -277,7 +278,7 @@ class CustomLevelScreen(Screen):
                 anim5.start(self.obj1)
             if DataLvl["nbObjets"] == 3:
                 anim6= Animation(pos_hint = self.posToCoord(listePosObjet[2][len(listePosObjet[2]) - 1]), duration =  2.5)
-                anim6 = Animation(pos_hint =self.posToCoord(listePosObjet[2][0]), duration = 0)
+                anim6 += Animation(pos_hint =self.posToCoord(listePosObjet[2][0]), duration = 0)
                 anim6.start(self.obj2)
     def posToCoord(self, pos) :
         return {"center_x" : (0.455625 + 0.0333984375 + ((pos%10 - 1) * 0.066796875)), "center_y": (0.025 + 0.059375 + ((8 - (pos//10)) * 0.11875))} # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
@@ -297,7 +298,7 @@ class CustomLevelScreen(Screen):
         cycleTapis = {"t-d" : 1, "t-g" : -1, "t-h" : -10, "t-b" : 10}
         if "nbObjets" in DataLvl : 
             posObjets = [DataLvl["dObjet" + str(s)] for s in range(DataLvl["nbObjets"])]
-            listePosObjets = [[DataLvl["dObjet" + str(s)]] for s in range(DataLvl["nbObjets"])]
+            listePosObjets = [[s] for s in posObjets]
             objet = {"tenir" : False, "numero" : 0}
         terminer = ("limite" in DataLvl and DataLvl["limite"] < len(listeInstructions) or (len(listeInstructions) > 100))
         if terminer :
@@ -400,9 +401,18 @@ class CustomLevelScreen(Screen):
             self.ids._labelResultat.text = "Pas d'indice pour ce niveau"
         
     def cancel(self) :
-        DataLvl = self.getLvlJson
+        DataLvl = self.getLvlJson()
         Animation.cancel_all(self.robot)
         self.robot.pos_hint = self.posToCoord(DataLvl["d"])
+        if "nbObjets" in DataLvl :
+            Animation.cancel_all(self.obj0)
+            self.obj0.pos_hint = self.posToCoord( DataLvl["dObjet0"])
+            if DataLvl["nbObjets"] >=2 :
+                Animation.cancel_all(self.obj1)
+                self.obj1.pos_hint = self.posToCoord( DataLvl["dObjet1"])
+                if DataLvl["nbObjets"] == 3 :
+                    Animation.cancel_all(self.obj2)
+                    self.obj2.pos_hint = self.posToCoord( DataLvl["dObjet2"])
         
 
 class CoursScreen(Screen):
