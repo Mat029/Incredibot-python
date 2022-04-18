@@ -223,7 +223,6 @@ class CustomLevelScreen(Screen):
     def play(self, texte) :
         DataLvl = self.getLvlJson()
         listePos, listeObjet, message = self.verif(texte)
-        print(listeObjet)
         Animation.stop_all(self.robot)
         anim = Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)
         if "nbObjets" in DataLvl :
