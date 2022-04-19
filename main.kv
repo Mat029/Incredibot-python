@@ -13,7 +13,7 @@ WindowManager:
     background_color: (0,0,0,0)
     markup: True
     Image:
-	    source: 'Images/btn_home.png'
+	    source: 'assets/Images/btn_home.png'
 		center_x: self.parent.center_x
 		center_y: self.parent.center_y
 		size: root.width, root.height
@@ -24,7 +24,7 @@ WindowManager:
     name: "home"
     FloatLayout:
         Image:
-            source:'Images/home_background.jpg'
+            source:'assets/Images/home_background.jpg'
             pos_hint:{'x': 0,'y':0}
             size_hint: 1 , 1
             keep_ratio: False
@@ -57,7 +57,7 @@ WindowManager:
 	on_pre_enter: root.update()
     FloatLayout:
         Image:
-            source:'Images/level_background.jpg'
+            source:'assets/Images/level_background.jpg'
             pos_hint:{'x': 0,'y':0}
             size_hint: 1 , 1
             keep_ratio: False
@@ -94,7 +94,7 @@ WindowManager:
             on_release: root.augmente()
             Image:
                 id: _imageAugmente
-				source: 'Images/icon/next_icon.png'
+				source: 'assets/Images/icon/next_icon.png'
                 allow_stretch: True
 				center_x: self.parent.center_x
 				center_y: self.parent.center_y
@@ -110,7 +110,7 @@ WindowManager:
             on_press: root.baisse()
             Image:
                 id: _imageBaisse
-				source: 'Images/icon/previous_icon_dark.png'
+				source: 'assets/Images/icon/previous_icon_dark.png'
                 allow_stretch: True
 				center_x: self.parent.center_x
 				center_y: self.parent.center_y
@@ -227,7 +227,7 @@ WindowManager:
         id: _layoutLvl
         Image:
             id: _imageLvl
-            source:'Images/lvl/lvl1.png'
+            source:'assets/Images/lvl/lvl1.png'
             pos_hint:{'x': 0.455625,'y':0.025}
             size_hint: 0.534375 , 0.95
             keep_ratio: False
@@ -240,7 +240,7 @@ WindowManager:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'levels'
 			Image:
-				source: 'Images/icon/home_icon.png'
+				source: 'assets/Images/icon/home_icon.png'
 				center_x: self.parent.center_x
 				center_y: self.parent.center_y
 				size: self.parent.width, self.parent.height
@@ -281,7 +281,7 @@ WindowManager:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'cours'
             Image:
-				source: 'Images/icon/book_icon.png'
+				source: 'assets/Images/icon/book_icon.png'
 				center_x: self.parent.center_x
 				center_y: self.parent.center_y
 				size: self.parent.width, self.parent.height
@@ -384,7 +384,7 @@ WindowManager:
             on_press:
                 root.cancel()
             Image:
-				source: 'Images/icon/cancel_icon.png'
+				source: 'assets/Images/icon/cancel_icon.png'
 				center_x: self.parent.center_x
 				center_y: self.parent.center_y
 				size: self.parent.width, self.parent.height
@@ -402,7 +402,7 @@ WindowManager:
             on_press:
                 root.indice()
             Image:
-				source: 'Images/icon/light_icon.png'
+				source: 'assets/Images/icon/light_icon.png'
 				center_x: self.parent.center_x
 				center_y: self.parent.center_y
 				size: self.parent.width, self.parent.height
@@ -416,7 +416,7 @@ WindowManager:
     name: "cours"
     FloatLayout:
         Image:
-            source:'Images/level_background.jpg'
+            source:'assets/Images/level_background.jpg'
             pos_hint:{'x': 0,'y':0}
             size_hint: 1 , 1
             keep_ratio: False

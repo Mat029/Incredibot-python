@@ -40,11 +40,11 @@ class LevelScreen(Screen):
     def getImage(self, lvl):
         lvlMax = self.getLvlMax()
         if lvlMax > lvl :
-            return "Images/valide.png"
+            return "assets/Images/valide.png"
         elif lvlMax == lvl :
-            return "Images/play.png"
+            return "assets/Images/play.png"
         else:
-            return "Images/cadenas.png"
+            return "assets/Images/cadenas.png"
     etage = 0
     def augmente(self):
         self.etage+=1
@@ -83,8 +83,8 @@ class LevelScreen(Screen):
         self.ids._Indicateur6.source = self.getImage((self.etage * 8 + 6))
         self.ids._Indicateur7.source = self.getImage((self.etage * 8 + 7))
         self.ids._Indicateur8.source = self.getImage((self.etage * 8 + 8))
-        self.ids._imageAugmente.source = 'Images/icon/next_icon.png' if (self.etage != 2) else 'Images/icon/next_icon_dark.png'
-        self.ids._imageBaisse.source = 'Images/icon/previous_icon.png' if (self.etage != 0) else 'Images/icon/previous_icon_dark.png'
+        self.ids._imageAugmente.source = 'assets/Images/icon/next_icon.png' if (self.etage != 2) else 'assets/Images/icon/next_icon_dark.png'
+        self.ids._imageBaisse.source = 'assets/Images/icon/previous_icon.png' if (self.etage != 0) else 'assets/Images/icon/previous_icon_dark.png'
 
 class CustomLevelScreen(Screen):
     def chargement(self):
@@ -96,7 +96,7 @@ class CustomLevelScreen(Screen):
         self.ids._labelNomLvl.text = " Niveau " + str(lvl)
         self.ids._buttonPrevious.disabled = lvl == 1
         self.ids._buttonNext.disabled = int(lvlMax) <= lvl or lvl == 24
-        self.ids._imageLvl.source = "Images/lvl/lvl" + str(lvl) + ".png"
+        self.ids._imageLvl.source = "assets/Images/lvl/lvl" + str(lvl) + ".png"
         self.ids._labelResultat.text = ""
         self.ids._userInput.text = ""
         self.ids._buttonSauter.disabled = True
@@ -133,7 +133,7 @@ class CustomLevelScreen(Screen):
             self.ids._buttonBoucle.background_color = [1,1,1,1]
             self.ids._buttonBoucle.text = "Repeter X fois"
         posRobot = self.posToCoord(DataLvl["d"])
-        self.robot = Image(source = "Images/lvl/robot.png", size_hint =  [.066796875 , .11875],pos_hint = posRobot)
+        self.robot = Image(source = "assets/Images/lvl/robot.png", size_hint =  [.066796875 , .11875],pos_hint = posRobot)
         self.ids._layoutLvl.add_widget(self.robot)
         if "limite" in DataLvl :
             self.ids._labelInstruction.text = "Instructions : 0 / " + str(DataLvl["limite"]) 
@@ -141,15 +141,15 @@ class CustomLevelScreen(Screen):
             self.ids._labelInstruction.text = "Instructions : 0 / ∞"
         if "nbObjets" in DataLvl :
             posObjet0 = self.posToCoord( DataLvl["dObjet0"])
-            self.obj0 = Image(source = "Images/lvl/objet0.png", size_hint =  [.066796875 , .11875],pos_hint = posObjet0, allow_stretch = True)
+            self.obj0 = Image(source = "assets/Images/lvl/objet0.png", size_hint =  [.066796875 , .11875],pos_hint = posObjet0, allow_stretch = True)
             self.ids._layoutLvl.add_widget(self.obj0)
             if DataLvl["nbObjets"] >= 2:
                 posObjet1 = self.posToCoord( DataLvl["dObjet1"])
-                self.obj1 = Image(source = "Images/lvl/objet1.png", size_hint =  [.066796875 , .11875],pos_hint = posObjet1, allow_stretch = True)
+                self.obj1 = Image(source = "assets/Images/lvl/objet1.png", size_hint =  [.066796875 , .11875],pos_hint = posObjet1, allow_stretch = True)
                 self.ids._layoutLvl.add_widget(self.obj1)
             if DataLvl["nbObjets"] == 3:
                 posObjet2 = self.posToCoord( DataLvl["dObjet2"])
-                self.obj2 = Image(source = "Images/lvl/objet2.png", size_hint =  [.066796875 , .11875],pos_hint = posObjet2, allow_stretch = True)
+                self.obj2 = Image(source = "assets/Images/lvl/objet2.png", size_hint =  [.066796875 , .11875],pos_hint = posObjet2, allow_stretch = True)
                 self.ids._layoutLvl.add_widget(self.obj2)
 
     def getLvl(self):
@@ -426,7 +426,7 @@ class WindowManager(ScreenManager):
 class Incredibot(App):
     def build(self):
         self.title = 'Incredibot'
-        self.icon = 'Images/icon.png'
+        self.icon = 'assets/Images/icon.png'
         kv = Builder.load_file("main.kv")
         return kv
     def close_application(self):
