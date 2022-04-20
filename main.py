@@ -16,6 +16,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.image import Image
 from kivy.animation import Animation
+from kivy.core.audio import SoundLoader
 from functools import partial
 from kivy.core.window import Window
 from kivy.config import Config
@@ -152,6 +153,8 @@ class CustomLevelScreen(Screen):
                 self.obj2 = Image(source = "assets/Images/lvl/objet2.png", size_hint =  [.066796875 , .11875],pos_hint = posObjet2, allow_stretch = True)
                 self.ids._layoutLvl.add_widget(self.obj2)
 
+        self.sound = SoundLoader.load("assets/Sound/empty.mp3")
+
     def getLvl(self):
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
@@ -175,6 +178,7 @@ class CustomLevelScreen(Screen):
         DataLvl = self.getLvlJson()
         Animation.cancel_all(self.robot)
         self.ids._layoutLvl.remove_widget(self.robot)
+        #self.sound.stop()
         if "nbObjets" in DataLvl :
             Animation.cancel_all(self.obj0)
             self.ids._layoutLvl.remove_widget(self.obj0)
@@ -222,40 +226,41 @@ class CustomLevelScreen(Screen):
         self.ids._labelInstruction.text = " Instructions : " + str(len(texteCoupe)) + " / " + limite
     def play(self, texte) :
         DataLvl = self.getLvlJson()
-        listePos, listeObjet, message = self.verif(texte)
-        Animation.stop_all(self.robot)
+        listePos, listePosObjets, message, son = self.verif(texte)
+        Animation.cancel_all(self.robot)
+        self.sound.stop()
         anim = Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)
         if "nbObjets" in DataLvl :
             Animation.cancel_all(self.obj0)
-            animObj0 = Animation(pos_hint =self.posToCoord(listeObjet[0][0]), duration = 0)
+            animObj0 = Animation(pos_hint =self.posToCoord(listePosObjets[0][0]), duration = 0)
             if DataLvl["nbObjets"] >= 2:
                 Animation.cancel_all(self.obj1)
-                animObj1 = Animation(pos_hint =self.posToCoord(listeObjet[1][0]), duration = 0)
+                animObj1 = Animation(pos_hint =self.posToCoord(listePosObjets[1][0]), duration = 0)
             if DataLvl["nbObjets"] == 3:
                 Animation.cancel_all(self.obj2)
-                animObj2 = Animation(pos_hint =self.posToCoord(listeObjet[2][0]), duration = 0)
+                animObj2 = Animation(pos_hint =self.posToCoord(listePosObjets[2][0]), duration = 0)
         if len(listePos) >= 1 :
             for i in range(1, len(listePos)) :
                 anim += Animation(pos_hint =self.posToCoord(listePos[i]), duration = .5)
         if "nbObjets" in DataLvl :
-            for i in range(1, len(listeObjet[0])) :
-                animObj0 += Animation(pos_hint =self.posToCoord(listeObjet[0][i]), duration = 0) #permet a l'objet d'apparaitre/disparaitre instant
-                animObj0 += Animation(pos_hint =self.posToCoord(listeObjet[0][i]), duration = .5) 
+            for i in range(1, len(listePosObjets[0])) :
+                animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i]), duration = 0) #permet a l'objet d'apparaitre/disparaitre instant
+                animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i]), duration = .5) 
                 if DataLvl["nbObjets"] >= 2:
-                    animObj1 += Animation(pos_hint =self.posToCoord(listeObjet[1][i]), duration = 0)
-                    animObj1 += Animation(pos_hint =self.posToCoord(listeObjet[1][i]), duration = .5)
+                    animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i]), duration = 0)
+                    animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i]), duration = .5)
                 if DataLvl["nbObjets"] == 3:
-                    animObj2 += Animation(pos_hint =self.posToCoord(listeObjet[2][i]),duration = 0)
-                    animObj2 += Animation(pos_hint =self.posToCoord(listeObjet[2][i]),duration = .5)
+                    animObj2 += Animation(pos_hint =self.posToCoord(listePosObjets[2][i]),duration = 0)
+                    animObj2 += Animation(pos_hint =self.posToCoord(listePosObjets[2][i]),duration = .5)
         anim.start(self.robot)
-        anim.bind(on_complete = partial(self.finAnim , message, listePos, listeObjet))
+        anim.bind(on_complete = partial(self.finAnim , message, listePos, listePosObjets, son))
         if "nbObjets" in DataLvl :
             animObj0.start(self.obj0)
             if DataLvl["nbObjets"] >= 2:
                 animObj1.start(self.obj1)
             if DataLvl["nbObjets"] == 3:
                 animObj2.start(self.obj2) 
-    def finAnim(self, message, listePos, listePosObjet, *args) :
+    def finAnim(self, message, listePos, listePosObjet, son, *args) :
         lvl = self.getLvl()
         DataLvl = self.getLvlJson()
         fichierMax = open("assets/max_level.txt", "r")
@@ -279,6 +284,10 @@ class CustomLevelScreen(Screen):
                 anim6= Animation(pos_hint = self.posToCoord(listePosObjet[2][len(listePosObjet[2]) - 1]), duration =  2.5)
                 anim6 += Animation(pos_hint =self.posToCoord(listePosObjet[2][0]), duration = 0)
                 anim6.start(self.obj2)
+        if son != "" :
+            self.sound = SoundLoader.load(son)
+            self.sound.volume = 0.8
+            self.sound.play()
     def posToCoord(self, pos) :
         return {"center_x" : (0.455625 + 0.0333984375 + ((pos%10 - 1) * 0.066796875)), "center_y": (0.025 + 0.059375 + ((8 - (pos//10)) * 0.11875))} # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
     def verif(self,texte) :
@@ -290,6 +299,7 @@ class CustomLevelScreen(Screen):
         listePosObjets = []
         posObjets = []
         message = "ECHEC : Il manque une/des instruction(s)"
+        son = ""
         posRobot = DataLvl["d"]
         listePosRobot.append(posRobot)
         orientationRobot = 1
@@ -319,6 +329,7 @@ class CustomLevelScreen(Screen):
                 if str(posRobot + orientationRobot) in DataLvl :
                     terminer = True
                     message = "ECHEC : Tu ne peut sauter que par dessus le vide"
+                    son = "assets/Sound/error.mp3"
                 else :
                     posRobot += 2 * orientationRobot
             elif instruction == "prendre" and lvl >= 17 :
@@ -326,6 +337,7 @@ class CustomLevelScreen(Screen):
                     if objet["tenir"] :
                         terminer = True
                         message = "ECHEC : Tu tiens déjà un objet"
+                        son = "assets/Sound/error.mp3"
                     else: 
                         objet["tenir"] = True
                         objet["numero"] = posObjets.index((posRobot + orientationRobot))
@@ -333,6 +345,7 @@ class CustomLevelScreen(Screen):
                 else :
                     terminer = True
                     message = "ECHEC : Il n'y a pas d'objet à prendre"
+                    son = "assets/Sound/error.mp3"
             elif instruction == "déposer" and lvl >= 17 :
                 if "nbObjets" in DataLvl and objet["tenir"] :
                     if str(posRobot + orientationRobot) in DataLvl and DataLvl[str(posRobot + orientationRobot)] in ["c","f"] and (posRobot + orientationRobot) not in posObjets :
@@ -341,12 +354,15 @@ class CustomLevelScreen(Screen):
                     else:
                         terminer = True
                         message = "ECHEC : Tu ne peux pas poser d'objet ici"
+                        son = "assets/Sound/error.mp3"
                 else:
                     terminer = True
                     message = "ECHEC : Tu n'as pas d'objet à poser"
+                    son = "assets/Sound/error.mp3"
             else :
                 terminer = True
                 message = "ECHEC : Mot incorrect dans le script"
+                son = "assets/Sound/error.mp3"
             listePosRobot.append(posRobot)
             for c in range(len(listePosObjets)) :
                 listePosObjets[c].append(posObjets[c])
@@ -373,6 +389,7 @@ class CustomLevelScreen(Screen):
                             if succes :
                                 message = "REUSSI : Bravo, tu as réussi le niveau " + str(lvl)
                                 fichierMax = open("assets/max_level.txt", "r+")
+                                son = "assets/Sound/victory.mp3"
                                 if (lvl +1) > int(fichierMax.read()):
                                     fichierMax.seek(0)
                                     fichierMax.truncate()
@@ -390,7 +407,7 @@ class CustomLevelScreen(Screen):
                 terminer = True
                 message = "ECHEC : Tu sors du parcours"
             nbExecution += 1
-        return listePosRobot, listePosObjets, message
+        return listePosRobot, listePosObjets, message, son
     
     def indice(self):
         DataLvl = self.getLvlJson()
@@ -412,6 +429,7 @@ class CustomLevelScreen(Screen):
                 if DataLvl["nbObjets"] == 3 :
                     Animation.cancel_all(self.obj2)
                     self.obj2.pos_hint = self.posToCoord( DataLvl["dObjet2"])
+        self.sound.stop()
         
 
 class CoursScreen(Screen):
@@ -427,6 +445,10 @@ class Incredibot(App):
     def build(self):
         self.title = 'Incredibot'
         self.icon = 'assets/Images/icon.png'
+        music = SoundLoader.load("assets/Sound/music.mp3")
+        music.loop = True
+        music.volume = 0.5
+        music.play()
         kv = Builder.load_file("main.kv")
         return kv
     def close_application(self):
