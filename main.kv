@@ -1,4 +1,5 @@
 #:kivy 2.1.0
+#:import Factory kivy.factory.Factory
 WindowManager:
     HomeScreen:
     LevelScreen:
@@ -19,6 +20,39 @@ WindowManager:
 		size: root.width, root.height
 <LevelLock@Image>:
 	size_hint: .1, .1
+<SettingsPopup@Popup>:
+    auto_dismiss: True
+    title: "PARAMETRES "
+    separator_color: [1,69/255,0,1]
+    separator_height: 4
+    title_align: "center"
+    title_size: self.height * 0.05
+    size_hint: .2,.45
+    pos_hint: {"x": .02, "y" : .04}
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            orientation: "vertical"
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    text: "Musique"
+                    color: (1, 1, 1, 1)
+            Slider:
+                min: 0
+                max: 1
+                step: 0.1
+                value: app.getVolumeMusic()
+                orientation: 'horizontal'
+                on_value: app.changeVolumeMusic(*args)
+        BoxLayout:
+            orientation: "vertical"
+            BoxLayout:
+                orientation: "horizontal"
+        Button:
+            text: "Réinitialiser"
+        Button:
+            text: "Tricher"
 
 <HomeScreen>:
     name: "home"
@@ -51,6 +85,18 @@ WindowManager:
             text:'[b]Quit[/b]'
             pos_hint: {'center_x': .5,'center_y':.15}
             on_release: app.close_application()
+        Button:
+            size_hint: .08,.08
+            pos_hint: {"center_x": .03,'center_y':.05}
+            background_color: (0,0,0,0)
+            on_release: 
+                Factory.SettingsPopup().open()
+            Image:
+				source: 'assets/Images/icon/settings_icon.png'
+                allow_stretch: True
+				center_x: self.parent.center_x
+				center_y: self.parent.center_y
+				size: self.parent.width, self.parent.height
 
 <LevelScreen>:
     name: "levels"
@@ -86,7 +132,6 @@ WindowManager:
         Button:
             id: _boutonAugmente
             font_size: 0.35 * self.height
-            text: ""
             size_hint: .06,.06
             pos_hint: {'center_x': .6,'center_y':.86}
             disabled: False
@@ -101,7 +146,6 @@ WindowManager:
 				size: self.parent.width, self.parent.height
         Button:
             id: _boutonBaisse
-            text: ""
             font_size: 0.35 * self.height
             size_hint: .06,.06
             pos_hint: {'center_x': .4,'center_y':.86}

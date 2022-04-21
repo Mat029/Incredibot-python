@@ -445,12 +445,35 @@ class Incredibot(App):
     def build(self):
         self.title = 'Incredibot'
         self.icon = 'assets/Images/icon.png'
-        music = SoundLoader.load("assets/Sound/music.mp3")
-        music.loop = True
-        music.volume = 0.5
-        music.play()
+        self.music = SoundLoader.load("assets/Sound/music.mp3")
+        JsonSettings = open('assets/settings.json',)
+        SettingsData = json.load(JsonSettings)
+        JsonSettings.close()
+        self.music.loop = True
+        self.music.volume = SettingsData["musiqueVolume"]
+        self.music.play()
         kv = Builder.load_file("main.kv")
         return kv
+    def getVolumeMusic(self):
+        JsonSettings = open('assets/settings.json',)
+        SettingsData = json.load(JsonSettings)
+        JsonSettings.close()
+        return SettingsData["musiqueVolume"]
+    def getVolumeSound(self):
+        JsonSettings = open('assets/settings.json',)
+        SettingsData = json.load(JsonSettings)
+        JsonSettings.close()
+        return SettingsData["sonVolume"]
+    def changeVolumeMusic(self,*args):
+        JsonSettings = open('assets/settings.json',"r+")
+        SettingsData = json.load(JsonSettings)
+        SettingsData["musiqueVolume"] = args[1]
+        JsonSettings.seek(0)
+        JsonSettings.write(json.dumps(SettingsData))
+        JsonSettings.truncate()
+        JsonSettings.close()
+        self.music.volume = args[1]
+        pass
     def close_application(self):
         App.get_running_app().stop()
         Window.close()
