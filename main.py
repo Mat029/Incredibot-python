@@ -436,7 +436,12 @@ class CoursScreen(Screen):
     pass
 
 class CustomCoursScreen(Screen):
-    pass
+   def showtext(self):
+     fichier = open("assets/cour_paul.txt","r")
+     texte = fichier.read()
+     fichier.close()
+     return texte 
+  pass
 
 class WindowManager(ScreenManager):
     pass
