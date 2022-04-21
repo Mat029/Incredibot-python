@@ -539,10 +539,29 @@ WindowManager:
 <CustomCoursScreen>:
     name: "custom_cours"
     FloatLayout:
+        Image:
+            source:'Images/backround_cour_2.jpg'
+            pos_hint:{'x': 0,'y':0}
+            size_hint: 1 , 1
+            keep_ratio: False
+            allow_stretch: True
         HomeButton:
-            text: "Cours"
+            text: "back"
             size_hint: .12,.12
-            pos_hint: {'center_x': .14,'center_y':.86}
+            pos_hint: {'center_x': .94,'center_y':.92}
             on_press:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'cours'
+        Label:
+            text: root.showtext()
+            font_size: 20
+            text_size: self.width, None
+            size_hint_y: None
+            height: self.texture_size[0]
+            pos_hint: {'center_x': .5,'center_y':.5}
+        Image:
+            source:'Images/lvl/introduction2.png'
+            pos_hint:{'x': .3,'y': .27}
+            size_hint: .4 , .4
+            keep_ratio: False
+            allow_stretch: True
