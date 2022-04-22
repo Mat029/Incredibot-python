@@ -31,28 +31,83 @@ WindowManager:
     pos_hint: {"x": .02, "y" : .04}
     BoxLayout:
         orientation: "vertical"
+        padding: [12,0,12,12]
         BoxLayout:
-            orientation: "vertical"
-            BoxLayout:
-                orientation: "horizontal"
-                Label:
-                    text: "Musique"
-                    color: (1, 1, 1, 1)
-            Slider:
-                min: 0
-                max: 1
-                step: 0.1
-                value: app.getVolumeMusic()
-                orientation: 'horizontal'
-                on_value: app.changeVolumeMusic(*args)
+            orientation: "horizontal"
+            Label:
+                text: "Musique :"
+                color: (1, 1, 1, 1)
+                font_size : self.height * .5
+                size_hint: .5 , .7
+                halign: "left"
+                bold: True
+            ToggleButton:
+                id: _tbym
+                size_hint: .2 , .7
+                text: "Oui"
+                font_size : self.height * .5
+                group: "musiqueOnOff"
+                allow_no_selection: False
+                state: app.getMusicState()[0]
+                on_press: 
+                    app.changeMusic(self.state, "Oui")
+            ToggleButton:
+                id: _tbnm
+                size_hint: .2 , .7
+                text: "Non"
+                font_size : self.height * .5
+                group: "musiqueOnOff"
+                allow_no_selection: False
+                state: app.getMusicState()[1]
+                on_press: 
+                    app.changeMusic(self.state, "Non")
+        Slider:
+            min: 0
+            max: 1
+            step: 0.1
+            value: app.getVolumeMusic()
+            orientation: 'horizontal'
+            on_value: app.changeVolumeMusic(*args)
         BoxLayout:
-            orientation: "vertical"
-            BoxLayout:
-                orientation: "horizontal"
+            orientation: "horizontal"
+            Label:
+                text: "Sons :"
+                color: (1, 1, 1, 1)
+                size_hint: .5 , .7
+                font_size : self.height * 0.5
+                bold: True
+            ToggleButton:
+                size_hint: .2 , .7
+                text: "Oui"
+                font_size : self.height * .5
+                group: "sonOnOff"
+                allow_no_selection: False
+                state: app.getSonState()[0]
+                on_press: 
+                    app.changeSon(self.state, "Oui")
+            ToggleButton:
+                size_hint: .2 , .7
+                font_size : self.height * .5
+                text: "Non"
+                group: "sonOnOff"
+                allow_no_selection: False
+                state: app.getSonState()[1]
+                on_press: 
+                    app.changeSon(self.state, "Non")
+        Slider:
+            min: 0
+            max: 1
+            step: 0.1
+            value: app.getVolumeSon()
+            orientation: 'horizontal'
+            on_value: app.changeVolumeSon(*args)
         Button:
-            text: "Réinitialiser"
-        Button:
-            text: "Tricher"
+            text: "Reset"
+            font_size: 0.4 * self.height
+            bold: True
+            on_press: 
+                app.resetSettings()
+                root.dismiss()
 
 <HomeScreen>:
     name: "home"

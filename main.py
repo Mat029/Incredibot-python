@@ -178,7 +178,6 @@ class CustomLevelScreen(Screen):
         DataLvl = self.getLvlJson()
         Animation.cancel_all(self.robot)
         self.ids._layoutLvl.remove_widget(self.robot)
-        #self.sound.stop()
         if "nbObjets" in DataLvl :
             Animation.cancel_all(self.obj0)
             self.ids._layoutLvl.remove_widget(self.obj0)
@@ -284,9 +283,12 @@ class CustomLevelScreen(Screen):
                 anim6= Animation(pos_hint = self.posToCoord(listePosObjet[2][len(listePosObjet[2]) - 1]), duration =  2.5)
                 anim6 += Animation(pos_hint =self.posToCoord(listePosObjet[2][0]), duration = 0)
                 anim6.start(self.obj2)
-        if son != "" :
+        JsonSettings = open('assets/settings.json',)
+        SettingsData = json.load(JsonSettings)
+        JsonSettings.close()
+        if son != "" and SettingsData["son"]:
             self.sound = SoundLoader.load(son)
-            self.sound.volume = 0.8
+            self.sound.volume = SettingsData["sonVolume"]
             self.sound.play()
     def posToCoord(self, pos) :
         return {"center_x" : (0.455625 + 0.0333984375 + ((pos%10 - 1) * 0.066796875)), "center_y": (0.025 + 0.059375 + ((8 - (pos//10)) * 0.11875))} # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
@@ -455,7 +457,8 @@ class Incredibot(App):
         JsonSettings.close()
         self.music.loop = True
         self.music.volume = SettingsData["musiqueVolume"]
-        self.music.play()
+        if SettingsData["musique"] :
+            self.music.play()
         kv = Builder.load_file("main.kv")
         return kv
     def getVolumeMusic(self):
@@ -463,11 +466,35 @@ class Incredibot(App):
         SettingsData = json.load(JsonSettings)
         JsonSettings.close()
         return SettingsData["musiqueVolume"]
-    def getVolumeSound(self):
+    def getVolumeSon(self):
         JsonSettings = open('assets/settings.json',)
         SettingsData = json.load(JsonSettings)
         JsonSettings.close()
         return SettingsData["sonVolume"]
+    def getMusicState(self) :
+        JsonSettings = open('assets/settings.json',)
+        SettingsData = json.load(JsonSettings)
+        JsonSettings.close()
+        if SettingsData["musique"] :
+            return("down","normal")
+        else: 
+            return ("normal", "down")
+    def getSonState(self) :
+        JsonSettings = open('assets/settings.json',)
+        SettingsData = json.load(JsonSettings)
+        JsonSettings.close()
+        if SettingsData["son"] :
+            return("down","normal")
+        else: 
+            return ("normal", "down")
+    def changeVolumeSon(self,*args):
+        JsonSettings = open('assets/settings.json',"r+")
+        SettingsData = json.load(JsonSettings)
+        SettingsData["sonVolume"] = args[1]
+        JsonSettings.seek(0)
+        JsonSettings.write(json.dumps(SettingsData))
+        JsonSettings.truncate()
+        JsonSettings.close()
     def changeVolumeMusic(self,*args):
         JsonSettings = open('assets/settings.json',"r+")
         SettingsData = json.load(JsonSettings)
@@ -477,10 +504,42 @@ class Incredibot(App):
         JsonSettings.truncate()
         JsonSettings.close()
         self.music.volume = args[1]
+    def changeMusic(self, state, element) :
+        JsonSettings = open('assets/settings.json',"r+")
+        SettingsData = json.load(JsonSettings)
+        if (state == "down" and element == "Oui") or (state == "normal" and element == "Non") :
+            SettingsData["musique"] = True
+            self.music.play()
+        else: 
+            SettingsData["musique"] = False
+            self.music.stop()
+        JsonSettings.seek(0)
+        JsonSettings.write(json.dumps(SettingsData))
+        JsonSettings.truncate()
+        JsonSettings.close()
+    def changeSon(self, state, element) :
+        JsonSettings = open('assets/settings.json',"r+")
+        SettingsData = json.load(JsonSettings)
+        if (state == "down" and element == "Oui") or (state == "normal" and element == "Non") :
+            SettingsData["son"] = True
+        else: 
+            SettingsData["son"] = False
+        JsonSettings.seek(0)
+        JsonSettings.write(json.dumps(SettingsData))
+        JsonSettings.truncate()
+        JsonSettings.close()
+    def resetSettings(self):
+        JsonSettings = open('assets/settings.json',"r+")
+        SettingsData = {'musique': True, 'musiqueVolume': 0.5 , 'son': True, 'sonVolume': 0.8}
+        JsonSettings = open('assets/settings.json',"r+")
+        JsonSettings.seek(0)
+        JsonSettings.write(json.dumps(SettingsData))
+        JsonSettings.truncate()
+        JsonSettings.close()
     def close_application(self):
         App.get_running_app().stop()
         Window.close()
-    def on_stop(self):
+    def on_stop(self): #permet de régler le bug thonny
         Window.close()
 if __name__ == "__main__":
     Config.set("input","mouse","mouse,multitouch_on_demand")

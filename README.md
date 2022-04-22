@@ -40,7 +40,7 @@ Soon...
 * Faire une interface de cours et en rajouter
 ### ----------Objectif----------
 * Ajouter de la musique/des sons
-* Ajouter des "paramètres"
+* Ajouter des "paramètres" ✅
 * Animation des plateaux/du robot
 ### ----------Bonus----------
 * Mode multijoueur ou Create (Create est plus "logique" mais multi plus "fun" (et long à coder aussi))
