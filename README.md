@@ -26,6 +26,11 @@ Soon...
 
 ## Road Map  :
 
+## road map des cour (si jamais loann li ca) :
+-abandon de la scollview pendant l'openening d'un fichier en lecture car impossibilité de mettre des images
+-on reutilise les widjets comme pour lvls avec des widjets reutilisables
+-environ 6/7h dessus et c fini
+
 ### ----------Stric Minimum pour le projet final----------
 * Finir les 8 premiers niveaux fonctionnels ✅
 * Faire fonctionner le mouvement du robot ✅
