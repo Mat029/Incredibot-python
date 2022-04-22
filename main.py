@@ -437,11 +437,10 @@ class CoursScreen(Screen):
 
 class CustomCoursScreen(Screen):
    def showtext(self):
-     fichier = open("assets/cour_paul.txt","r")
+     fichier = open("assets/Cours/cour_paul.txt","r")
      texte = fichier.read()
      fichier.close()
      return texte 
-  pass
 
 class WindowManager(ScreenManager):
     pass
@@ -478,9 +477,10 @@ class Incredibot(App):
         JsonSettings.truncate()
         JsonSettings.close()
         self.music.volume = args[1]
-        pass
     def close_application(self):
         App.get_running_app().stop()
+        Window.close()
+    def on_stop(self):
         Window.close()
 if __name__ == "__main__":
     Config.set("input","mouse","mouse,multitouch_on_demand")
