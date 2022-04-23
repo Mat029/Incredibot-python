@@ -539,6 +539,7 @@ WindowManager:
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .14,'center_y':.6}
             on_press:
+                root.setCours("1")
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
         HomeButton:
@@ -546,6 +547,7 @@ WindowManager:
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .38,'center_y':.6}
             on_press:
+                root.setCours("2")
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
         HomeButton:
@@ -553,6 +555,7 @@ WindowManager:
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .62,'center_y':.6}
             on_press:
+                root.setCours("3")
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
         HomeButton:
@@ -560,6 +563,7 @@ WindowManager:
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .86,'center_y':.6}
             on_press:
+                root.setCours("4")
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
         HomeButton:
@@ -567,6 +571,7 @@ WindowManager:
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .14,'center_y':.25}
             on_press:
+                root.setCours("5")
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
         HomeButton:
@@ -574,6 +579,7 @@ WindowManager:
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .38,'center_y':.25}
             on_press:
+                root.setCours("6")
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
         HomeButton:
@@ -581,6 +587,7 @@ WindowManager:
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .62,'center_y':.25}
             on_press:
+                root.setCours("7")
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
         HomeButton:
@@ -588,14 +595,16 @@ WindowManager:
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .86,'center_y':.25}
             on_press:
+                root.setCours("7")
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
 
 <CustomCoursScreen>:
     name: "custom_cours"
+    on_pre_enter : root.chargementCours()
     FloatLayout:
         Image:
-            source:'Images/background_cour_2.jpg'
+            source:'assets/Images/home_background.jpg'
             pos_hint:{'x': 0,'y':0}
             size_hint: 1 , 1
             keep_ratio: False
@@ -608,15 +617,18 @@ WindowManager:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'cours'
         Label:
-            text: root.showtext()
+            id : _labelCours
+            text: ""
             font_size: 20
             text_size: self.width, None
             size_hint_y: None
             height: self.texture_size[0]
             pos_hint: {'center_x': .5,'center_y':.5}
+            markup: True
         Image:
-            source:'Images/lvl/introduction2.png'
-            pos_hint:{'x': .3,'y': .27}
-            size_hint: .4 , .4
+            id : _imageCours
+            source:'Images/cours/img_cours_1.png'
+            pos_hint:{'x': .3,'y': .25}
+            size_hint: .43 , .43
             keep_ratio: False
             allow_stretch: True

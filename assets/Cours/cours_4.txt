@@ -1,0 +1,26 @@
+
+
+
+Les sauts (etage 2)
+Les sauts, sont sur Incrdibot... comme des sauts dans la vrai vie. Concrètement, a cela permetra à quill de sauter par dessus des trous. Cependant Quill ne peut sauter que par dessus des trous et JAMAIS par dessus de case (on vous connaît vous allez essyer de gruger les limites d’instru bande de petit batard vous nous prenez pour qui?). Par exemple :
+
+
+Photo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(Bon ici on doit mettre avancer mais chut) Voici donc comment utiliser l’instruction saut (ptn on vous donne tt les rep des niveaux mais bon vous etes tellement con que vouys allez rien voire). Si vous essayer d’utiliser saut qu’il y a des cases devant vous, un message d’erreur apparaitra (che)

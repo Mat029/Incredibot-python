@@ -1,0 +1,26 @@
+Instruction de base
+Ici nous allons vous présenter le fonctionnement concrèt de Incredibot ainsi que les instructions de bases.
+Nous nous sommes arrêté à la parti de gauche tout à l’heure, reprenons :
+Pour que Quill puisse aller à la fin du niveau, VOUS aller le guider en lui donnant des instructions.
+Quill fera exactement les instructions que vous lui avez donner. « Mais de quels instruction il parle vous aller me dire ». Laisser moi vous expliquer. Les instructions sont une suite d’ordres, envoyés a Quill, qu’il appliquera. Par exemple, l’instruction « avancer » permetra à Quill d’avancer d’une case. Quill se retrouva donc dans la case juste d’à coter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pour l’instruction reculer, il reculera d’une case avec le même modèle que celle d’« avancer »
+Pour les instructions « Droite et Gauche », Quill s’orientera soit de 90° vers la droite pour droite et 90° vers la gauche pour gauche. Attention, Quill s’orientera de 90° en fonction de SA droite et de SA gauche et non pas de la votre...

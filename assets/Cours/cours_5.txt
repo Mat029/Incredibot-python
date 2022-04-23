@@ -1,0 +1,24 @@
+
+
+
+Déplacement d’objet :
+A partir de l’etage 3, vous aller decouvrir les objets ainsi que les instructions « prendre » et « deposer ». Les objets sont des objets comme dans la vrai vie. Votre but, mettre ses objets sur leurs emplacements adéquats afin de pouvoir atteindre l’arrivé. Ces objets seront représentés par des étoiles (le premier qui dit que je suis anti juif je le bifle) et leur emplacement par des cercle avec un trou en forme d’etoile dedans. Voici un exemple d’un niveau avec un objet :
+
+
+PHOTO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pour chaque pouvoir mettre un objet sur son emplacement, vous devrez adapter vos mouvement pour que Quill prenne l’objet, aille jusqu’à l’emplacement adéquat, et le dépose. 

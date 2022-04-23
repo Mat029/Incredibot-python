@@ -1,0 +1,31 @@
+
+
+
+
+
+Pour prendre et deposer un objet, quill doit se trouver face à l’objet puis doit recevoir l’instruction prendre pour recuperer l’objet.
+Pour pouvoir aller à l’arriver, il faut impérativement que tous les objets soient sur leur emplacement respectif.
+
+
+Photo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ici Quill peut recuepre l’objet en face de lui et peut ainsi bouger normalement pour le deposer sur son emplacement.
+Cependant plusieurs contraintes existent avec les objets. Tout d’abord vous ne pouvez pas marcher sur un objet, ni sauter par dessus les objets.
+Cependant Quill peut passer sur un emplacement d’objets seulement si l’objet n’y es pas dessus.
+De, plus il peut y avoir plusieurs objets par niveau (maximum 3) qui, ne vous inquitez pas, seront différenciable gräce à leur couleur.

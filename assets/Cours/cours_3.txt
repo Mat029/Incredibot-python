@@ -1,0 +1,24 @@
+# Les tapis roulant (etage 2)
+Si vous vous demander ce qu’est le tapis roulants c’est que vous etes a l’etage 2.
+* Les tapis seront reprensenter ici par des flèches.
+* Jusqu’à présent, le robot executait les instructions les unes après les autres, sans évenement entre elles. Maintenant, entre chaque instructions, les tapis roulants s’activeront et feront bouger quill d’une case. Comme c’est pas très parlant, voici un exemple:
+Voici comment il faudra resoner pour les niveaux avec les tapis roulants. Ici, si on donne juste l’instruction « avancer » à Quill, il va aller su le tapis roulants. Puis les tapis roulants s’activeront et il se retrouvera donc à 2 cases de la case de depart : Voici la position de Quill avec seulement l’instruction de « Avancer » sur un tapis un roulant.
+
+
+image
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+En avancant sur le tapis roulants, quill effectuera une action et se retrouvera donc sur un tapis roulants. Puis les tapis roualnts "jouent". Ils s'activent tous en même temps, ce qui fait donc deplacer Quill d'une case en plus.
+Faire attention à comment sont orienter les tapis roulants et pas oublier qu’un tapis roulants peu mener au vide, ou un autre tapis roulants… Vous pouvez egalement demander à Quill d’effectuer des orientations à droite ou a gauche tout en etant sur un tapis roulants. Il s’orientera alors vers la direction demander et cela contera comme une instruction (logique).
