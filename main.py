@@ -444,12 +444,12 @@ class CustomCoursScreen(Screen):
         fichier_cours = open("assets/current_cours.txt", "r")
         cours = fichier_cours.read()
         fichier_cours.close()
-        fichier_text = open("assets/Cours/cours_"+cours+".txt", "r", encoding="utf8")
+        fichier_text = open("assets/cours/cour_" + cours + ".txt", "r", encoding="utf8")
         texte = fichier_text.read()
         fichier_text.close()
         self.ids._labelCours.markup = True
         self.ids._labelCours.text = texte
-        self.ids._imageCours.source = "assets/Images/cours/img_cours_"+ str(cours) + ".png"
+        self.ids._imageCours.source = "assets/Images/cours/img_cours_" + str(cours) + ".png"
 
 class WindowManager(ScreenManager):
     pass
