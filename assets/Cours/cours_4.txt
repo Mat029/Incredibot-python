@@ -23,4 +23,4 @@ Photo
 
 
 
-(Bon ici on doit mettre avancer mais chut) Voici donc comment utiliser l’instruction saut (ptn on vous donne tt les rep des niveaux mais bon vous etes tellement con que vouys allez rien voire). Si vous essayer d’utiliser saut qu’il y a des cases devant vous, un message d’erreur apparaitra (che)
+(Bon ici on doit mettre avancer mais chut) Voici donc comment utiliser l’instruction saut (ptn on vous donne tt les rep des niveaux mais bon vous etes tellement con que vouys allez rien voire). Si vous essayer d’utiliser saut qu’il y a des cases devant vous, un message d’erreur apparaitra (cheh)
