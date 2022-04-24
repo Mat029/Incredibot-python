@@ -109,6 +109,20 @@ WindowManager:
                 app.resetSettings()
                 root.dismiss()
 
+<InfoPopup@Popup>:
+    auto_dismiss: True
+    title: "INFOS "
+    separator_color: [1,69/255,0,1]
+    separator_height: 4
+    title_align: "center"
+    title_size: self.height * 0.05
+    size_hint: .2,.45
+    pos_hint: {"x": .78, "y" : .04}
+    Label:
+        text: "Texte à écrire"
+        markup: True
+        color: (1, 1, 1, 1)
+        font_size : self.height * 0.08
 <HomeScreen>:
     name: "home"
     FloatLayout:
@@ -148,6 +162,18 @@ WindowManager:
                 Factory.SettingsPopup().open()
             Image:
 				source: 'assets/Images/icon/settings_icon.png'
+                allow_stretch: True
+				center_x: self.parent.center_x
+				center_y: self.parent.center_y
+				size: self.parent.width, self.parent.height
+        Button:
+            size_hint: .08,.08
+            pos_hint: {"center_x": .96,'center_y':.05}
+            background_color: (0,0,0,0)
+            on_release: 
+                Factory.InfoPopup().open()
+            Image:
+				source: 'assets/Images/icon/info_icon.png'
                 allow_stretch: True
 				center_x: self.parent.center_x
 				center_y: self.parent.center_y
