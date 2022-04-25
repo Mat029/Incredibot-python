@@ -119,10 +119,11 @@ WindowManager:
     size_hint: .2,.45
     pos_hint: {"x": .78, "y" : .04}
     Label:
-        text: "Texte à écrire"
+        text: "\n[b]Incredibot[/b] est une application écrite en \nPython avec le module Kivy par :\n\n_ Mat029\n_ Gazpascho\n\n[u][b]Credits :[/b][/u]\n\n * Icon8 pour toutes les icones de l'app\n * Orange Free Sounds pour les sons\n * WallepaperCave pour les fonds d'écran\n * AShamaluevMusic pour la musique\n\nIncredibot © 2021-2022 \nAucun droits résevés\n"
+        text_size: self.width, self.height
         markup: True
         color: (1, 1, 1, 1)
-        font_size : self.height * 0.08
+        font_size : self.height * 0.05
 <HomeScreen>:
     name: "home"
     FloatLayout:
