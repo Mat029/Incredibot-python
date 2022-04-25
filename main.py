@@ -301,7 +301,7 @@ class CustomLevelScreen(Screen):
         listePosObjets = []
         posObjets = []
         message = "ECHEC : Il manque une/des instruction(s)"
-        son = ""
+        son =  "assets/Sound/fail.mp3"
         posRobot = DataLvl["d"]
         listePosRobot.append(posRobot)
         orientationRobot = 1
@@ -314,6 +314,7 @@ class CustomLevelScreen(Screen):
         terminer = ("limite" in DataLvl and DataLvl["limite"] < len(listeInstructions) or (len(listeInstructions) > 100))
         if terminer :
             message = "ECHEC : Limite d'instructions dépassé"
+            son = "assets/Sound/error.mp3"
         nbExecution = 0
         while not terminer and nbExecution < len(listeInstructions) :
             instruction = listeInstructions[nbExecution]
@@ -331,7 +332,7 @@ class CustomLevelScreen(Screen):
                 if str(posRobot + orientationRobot) in DataLvl :
                     terminer = True
                     message = "ECHEC : Tu ne peut sauter que par dessus le vide"
-                    son = "assets/Sound/error.mp3"
+                    son = "assets/Sound/impossible.mp3"
                 else :
                     posRobot += 2 * orientationRobot
             elif instruction == "prendre" and lvl >= 17 :
@@ -339,7 +340,7 @@ class CustomLevelScreen(Screen):
                     if objet["tenir"] :
                         terminer = True
                         message = "ECHEC : Tu tiens déjà un objet"
-                        son = "assets/Sound/error.mp3"
+                        son = "assets/Sound/impossible.mp3"
                     else: 
                         objet["tenir"] = True
                         objet["numero"] = posObjets.index((posRobot + orientationRobot))
@@ -347,7 +348,7 @@ class CustomLevelScreen(Screen):
                 else :
                     terminer = True
                     message = "ECHEC : Il n'y a pas d'objet à prendre"
-                    son = "assets/Sound/error.mp3"
+                    son = "assets/Sound/impossible.mp3"
             elif instruction == "déposer" and lvl >= 17 :
                 if "nbObjets" in DataLvl and objet["tenir"] :
                     if str(posRobot + orientationRobot) in DataLvl and DataLvl[str(posRobot + orientationRobot)] in ["c","f"] and (posRobot + orientationRobot) not in posObjets :
@@ -356,15 +357,15 @@ class CustomLevelScreen(Screen):
                     else:
                         terminer = True
                         message = "ECHEC : Tu ne peux pas poser d'objet ici"
-                        son = "assets/Sound/error.mp3"
+                        son = "assets/Sound/impossible.mp3"
                 else:
                     terminer = True
                     message = "ECHEC : Tu n'as pas d'objet à poser"
-                    son = "assets/Sound/error.mp3"
+                    son = "assets/Sound/impossible.mp3"
             else :
                 terminer = True
                 message = "ECHEC : Mot incorrect dans le script"
-                son = "assets/Sound/error.mp3"
+                son = "assets/Sound/impossible.mp3"
             listePosRobot.append(posRobot)
             for c in range(len(listePosObjets)) :
                 listePosObjets[c].append(posObjets[c])
@@ -399,15 +400,19 @@ class CustomLevelScreen(Screen):
                                 fichierMax.close
                             else :
                                 message = "ECHEC : Un objet n'est pas à sa place "
+                                son = "assets/Sound/fail.mp3"
                     else :
                         terminer = True
                         message = "ECHEC : Tu ne peux pas traverser un objet"
+                        son = "assets/Sound/punch.mp3"
                 else: 
                     terminer = True
                     message = "ECHEC : Tu sors du parcours"
+                    son = "assets/Sound/fall.mp3"
             else :
                 terminer = True
                 message = "ECHEC : Tu sors du parcours"
+                son = "assets/Sound/fall.mp3"
             nbExecution += 1
         return listePosRobot, listePosObjets, message, son
     

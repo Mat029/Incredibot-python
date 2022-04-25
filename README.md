@@ -1,9 +1,5 @@
 # Incredibot
 
-## IDEE
-Pourquoi ne pas faire les cours (mdr ca je le fait), puis si l'utilisateur à pas compris le rediriger vers une vidéo qui montre, plus en détails, comment ca marche en vrai (je m'occupe de la vidéo (Paul))
-
-
 ## Nécessaire:
 * Python 3.7.9 (OBLIGATOIRE)
 * Les trucs de base (pip, setuptools, docutils ...) à jour
@@ -43,9 +39,9 @@ Soon...
 * Faire l'étage 3 ✅
 * Refonte totale des cours de facon à donner un truc en lien avec la programation de base
 ### ----------Objectif----------
-* Ajouter de la musique/des sons
+* Ajouter de la musique/des sons ✅
 * Ajouter des "paramètres" ✅
 * Animation des plateaux/du robot
-### ----------Bonus----------
+### ----------Bonus (c'est mort laisse tomber----------
 * Mode multijoueur ou Create (Create est plus "logique" mais multi plus "fun" (et long à coder aussi))
 * Faire l'étage 4
