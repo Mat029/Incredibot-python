@@ -1,26 +1,7 @@
-Instruction de base
-Ici nous allons vous présenter le fonctionnement concrèt de Incredibot ainsi que les instructions de bases.
-Nous nous sommes arrêté à la parti de gauche tout à l’heure, reprenons :
-Pour que Quill puisse aller à la fin du niveau, VOUS aller le guider en lui donnant des instructions.
-Quill fera exactement les instructions que vous lui avez donner. « Mais de quels instruction il parle vous aller me dire ». Laisser moi vous expliquer. Les instructions sont une suite d’ordres, envoyés a Quill, qu’il appliquera. Par exemple, l’instruction « avancer » permetra à Quill d’avancer d’une case. Quill se retrouva donc dans la case juste d’à coter.
+[b]Les tapis roulant (etage 2) :[/b]
+Les tapis seront reprensenter ici par des flèches.
+Jusqu’à présent, le robot executait les instructions les unes après les autres, sans évenement entre elles. Maintenant, entre chaque instructions, les tapis roulants "s’activeront" et feront bouger Quill d’une case. Voici un exemple (image de gauche):
+Voici comment il faudra resoner pour les niveaux avec les tapis roulants. Ici, si on donne juste l’instruction « avancer » à Quill, il va aller su le tapis roulants. Puis les tapis roulants s’activeront et il se retrouvera donc à 2 cases de la case de depart :
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Pour l’instruction reculer, il reculera d’une case avec le même modèle que celle d’« avancer »
-Pour les instructions « Droite et Gauche », Quill s’orientera soit de 90° vers la droite pour droite et 90° vers la gauche pour gauche. Attention, Quill s’orientera de 90° en fonction de SA droite et de SA gauche et non pas de la votre...
+En avancant sur le tapis roulants (image de gauche), Quill effectuera une action et se retrouvera donc sur un tapis roulants. Puis les tapis roualnts "s'activeront" ce qui fera donc deplacer Quill d'une case en plus. Il se retrouvera donc sur (l'image de droite):
+Faire attention à comment sont orienter les tapis roulants et pas oublier qu’un tapis roulants peu mener au vide, ou un autre tapis roulants… Quill peut également s'orienter sur un tapis roulants, ce qui comptera comme une instruction.
