@@ -134,7 +134,7 @@ class CustomLevelScreen(Screen):
             self.ids._buttonBoucle.background_color = [1,1,1,1]
             self.ids._buttonBoucle.text = "Repeter X fois"
         posRobot = self.posToCoord(DataLvl["d"])
-        self.robot = Image(source = "assets/Images/lvl/robot.png", size_hint =  [.066796875 , .11875],pos_hint = posRobot)
+        self.robot = Image(source = "assets/Images/robot/robot_droite_sans.png", size_hint =  [.066796875 , .11875],pos_hint = posRobot)
         self.ids._layoutLvl.add_widget(self.robot)
         if "limite" in DataLvl :
             self.ids._labelInstruction.text = "Instructions : 0 / " + str(DataLvl["limite"]) 
@@ -225,9 +225,13 @@ class CustomLevelScreen(Screen):
         self.ids._labelInstruction.text = " Instructions : " + str(len(texteCoupe)) + " / " + limite
     def play(self, texte) :
         DataLvl = self.getLvlJson()
-        listePos, listePosObjets, message, son = self.verif(texte)
+        listePos, listePosObjets, listeOrientation, listeObjet, message, son = self.verif(texte)
         Animation.cancel_all(self.robot)
         self.sound.stop()
+        def animerRobot(orientation, objet, robot):
+            traductionOrientation = { 1 : "droite", -1 : "gauche", 10 : "bas", -10 : "haut"}
+            traductionObjet = { "sans" : "sans", 0 : "bleu", 1 : "violet", 2 : "rouge"}
+            robot.source = "assets/Images/robot/robot_" + traductionOrientation[orientation] + "_" + traductionObjet[objet] + ".png"
         anim = Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)
         if "nbObjets" in DataLvl :
             Animation.cancel_all(self.obj0)
@@ -240,7 +244,9 @@ class CustomLevelScreen(Screen):
                 animObj2 = Animation(pos_hint =self.posToCoord(listePosObjets[2][0]), duration = 0)
         if len(listePos) >= 1 :
             for i in range(1, len(listePos)) :
-                anim += Animation(pos_hint =self.posToCoord(listePos[i]), duration = .5)
+                animProvisoire = Animation(pos_hint =self.posToCoord(listePos[i]), duration = .5)
+                animProvisoire.on_complete = partial(animerRobot, listeOrientation[i], listeObjet[i])
+                anim += animProvisoire
         if "nbObjets" in DataLvl :
             for i in range(1, len(listePosObjets[0])) :
                 animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i]), duration = 0) #permet a l'objet d'apparaitre/disparaitre instant
@@ -251,8 +257,8 @@ class CustomLevelScreen(Screen):
                 if DataLvl["nbObjets"] == 3:
                     animObj2 += Animation(pos_hint =self.posToCoord(listePosObjets[2][i]),duration = 0)
                     animObj2 += Animation(pos_hint =self.posToCoord(listePosObjets[2][i]),duration = .5)
+        anim.on_complete = partial(self.finAnim , message, listePos, listePosObjets, son)
         anim.start(self.robot)
-        anim.bind(on_complete = partial(self.finAnim , message, listePos, listePosObjets, son))
         if "nbObjets" in DataLvl :
             animObj0.start(self.obj0)
             if DataLvl["nbObjets"] >= 2:
@@ -298,6 +304,8 @@ class CustomLevelScreen(Screen):
         texte = texte.lower()
         listeInstructions = texte.splitlines()
         listePosRobot = []
+        listeOrientation = []
+        listeObjet = []
         listePosObjets = []
         posObjets = []
         message = "ECHEC : Il manque une/des instruction(s)"
@@ -305,12 +313,14 @@ class CustomLevelScreen(Screen):
         posRobot = DataLvl["d"]
         listePosRobot.append(posRobot)
         orientationRobot = 1
+        listeOrientation.append(orientationRobot)
+        objet = {"tenir" : False, "numero" : 0}
+        listeObjet.append("sans")
         cyleOrientation = { 1 : 10, 10 : -1, -1 : -10, -10 : 1} # Permet de changer l'orientation sans avoir à faire 40 milles if/elif (gain de perfs), initialement orienté pour tourner à droite
         cycleTapis = {"t-d" : 1, "t-g" : -1, "t-h" : -10, "t-b" : 10}
         if "nbObjets" in DataLvl : 
             posObjets = [DataLvl["dObjet" + str(s)] for s in range(DataLvl["nbObjets"])]
             listePosObjets = [[s] for s in posObjets]
-            objet = {"tenir" : False, "numero" : 0}
         terminer = ("limite" in DataLvl and DataLvl["limite"] < len(listeInstructions) or (len(listeInstructions) > 100))
         if terminer :
             message = "ECHEC : Limite d'instructions dépassé"
@@ -367,19 +377,34 @@ class CustomLevelScreen(Screen):
                 message = "ECHEC : Mot incorrect dans le script"
                 son = "assets/Sound/impossible.mp3"
             listePosRobot.append(posRobot)
+            listeOrientation.append(orientationRobot)
             for c in range(len(listePosObjets)) :
                 listePosObjets[c].append(posObjets[c])
+            if objet["tenir"] :
+                listeObjet.append(objet["numero"])
+            else: 
+                listeObjet.append("sans")
             if str(posRobot) in DataLvl :
                 if "tp" in DataLvl[str(posRobot)] :
                     posRobot = int(DataLvl[str(posRobot)][-2:])
                     listePosRobot.append(posRobot)
+                    listeOrientation.append(orientationRobot)
                     for c in range(len(listePosObjets)) :
                         listePosObjets[c].append(posObjets[c])
+                    if objet["tenir"] :
+                        listeObjet.append(objet["numero"])
+                    else: 
+                        listeObjet.append("sans")         
                 elif "t-" in DataLvl[str(posRobot)] :
                     posRobot += cycleTapis[DataLvl[str(posRobot)]]
                     listePosRobot.append(posRobot)
+                    listeOrientation.append(orientationRobot)
                     for c in range(len(listePosObjets)) :
                         listePosObjets[c].append(posObjets[c])  #(nécessaire pour que les anims des objets et du robot soit synchro)
+                    if objet["tenir"] :
+                        listeObjet.append(objet["numero"])
+                    else: 
+                        listeObjet.append("sans")
                 if str(posRobot) in DataLvl :
                     if not (posRobot in posObjets) :
                         if DataLvl[str(posRobot)] == "f" and (nbExecution +1) == len(listeInstructions) :
@@ -414,7 +439,7 @@ class CustomLevelScreen(Screen):
                 message = "ECHEC : Tu sors du parcours"
                 son = "assets/Sound/fall.mp3"
             nbExecution += 1
-        return listePosRobot, listePosObjets, message, son
+        return listePosRobot, listePosObjets, listeOrientation, listeObjet, message, son
     
     def indice(self):
         DataLvl = self.getLvlJson()
