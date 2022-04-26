@@ -455,6 +455,7 @@ class CustomCoursScreen(Screen):
         self.ids._labelCours.markup = True
         self.ids._labelCours.text = texte
         self.ids._imageCours.source = "assets/Images/cours/img_cours_" + str(cours) + ".png"
+        self.ids._imageCours2.source = "assets/Images/cours/img_cours_" + str(cours + str(1)) + ".png"
 
 class WindowManager(ScreenManager):
     pass
