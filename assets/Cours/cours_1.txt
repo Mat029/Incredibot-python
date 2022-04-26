@@ -1,32 +1,14 @@
-
-Introduction :
-Bonjour, 
-[b] Bienvenue sur l’application Incredibot [/b]
+[b]Introduction :[/b]
+Bonjour,
+Bienvenue sur l’application Incredibot
 Incredibot est une application destinée aux novices en informatique de facon à comprendre les bases de la programmation.
+Vous aller devoir aider un petit robot, Quill, à sortir de l’usine où il est enfermé.
 
-[*] Nous allons vous montrer ici les bases ainsi que le fonctionnement de l’implication.
-[*] Vous aller devoir aider un petit robot, Quill, à sortir de l’usine où il est enfermé.
-
-Cette usine se découpe en 4 étages, chacun muni de 8 levels. Pour que Quill puisse quitter l’usine, il faut qu’il est accompli tout les niveaux. Pour que quill puisse passer d’un étage à l’autre, il doit d’abord avoir accompli tout les levels de l’étage précedant. Plus Quill se rapproche de la sorti, plus les niveaux seront dur. Pour que se soit un peu plus clair, voici comment se décompose un level :
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Cette usine se découpe en 4 étages, chacun muni de 8 levels. Pour que Quill puisse quitter l’usine, il faut qu’il est accompli tout les niveaux. Pour que quill puisse passer d’un étage à l’autre, il doit d’abord avoir accompli tout les levels de l’étage précedant. Pour que se soit un peu plus clair, voici comment se décompose un level :
 Vous avez à droite le plan du robot. Le robot avec marqué « Incredibot » représente Quill. Le triangle vert montre le depart du robot et le drapeau rouge la fin du niveau.
 Chaque petit carré noire représente une case. C’est ici et seulement ici ou Quill peut passer pour aller vers la fin du niveau.
 A gauche vous avez plusieurs bouton :
-Le bouton Retour permet de retourner à l’écran en arrière.
-Les boutons Avancer, reculer, droite, play et gauche vous seront expliquer dans la leçon suivante.
-Pour continuer de vous expliquer l’application, nous vous invitons à lire la leçon suivante pour comprendre.
+Pour que Quill puisse aller à la fin du niveau, VOUS aller le guider en lui donnant des instructions.
+Quill fera exactement les instructions que vous lui avez donner. Les instructions sont une suite d’ordres, envoyés a Quill, qu’il appliquera. Par exemple, l’instruction « avancer » permetra à Quill d’avancer d’une case. Quill se retrouva donc dans la case juste d’à coter. (voire la photo ci dessus)
+Pour l’instruction reculer, il reculera d’une case avec le même modèle que celle d’« avancer »
+Pour les instructions « Droite et Gauche », Quill s’orientera soit de 90° vers la droite pour droite et 90° vers la gauche pour gauche.
