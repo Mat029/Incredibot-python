@@ -1,24 +1,17 @@
 
 
 
-Déplacement d’objet :
-A partir de l’etage 3, vous aller decouvrir les objets ainsi que les instructions « prendre » et « deposer ». Les objets sont des objets comme dans la vrai vie. Votre but, mettre ses objets sur leurs emplacements adéquats afin de pouvoir atteindre l’arrivé. Ces objets seront représentés par des étoiles (le premier qui dit que je suis anti juif je le bifle) et leur emplacement par des cercle avec un trou en forme d’etoile dedans. Voici un exemple d’un niveau avec un objet :
 
+Ici nous allons vous présenter les relations entre ce que vouys venez de faire et les liens avec la programation.
+Tout d'abord, ce que vous avez ecrit en cliquant sur les boutons, s'apelle un programme. Il contient de taches que Quill ressevra et qu'il transformera en actions.
+Prenons un exemple de programme python:
 
-PHOTO
+print("j'aime Incredibot")
+print("3, 1415926535897932384626 vaut Pi")
 
+Ce programme affichera :
+j'aime Incredibot
+3, 1415926535897932384626 vaut Pi
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-Pour chaque pouvoir mettre un objet sur son emplacement, vous devrez adapter vos mouvement pour que Quill prenne l’objet, aille jusqu’à l’emplacement adéquat, et le dépose. 
+l'instruction print demande au programme d'afficher le texte écrit entre le (" de début et le ") de fin.
+Il s'apparente aux instructions que vous avez donner à Quill tout au long des niveaux de cette apli.
