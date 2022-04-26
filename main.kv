@@ -562,7 +562,7 @@ WindowManager:
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'levels'
         HomeButton:
-            text: "Intro"
+            text: "Intro et \n base"
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .14,'center_y':.6}
             on_press:
@@ -570,7 +570,7 @@ WindowManager:
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
         HomeButton:
-            text: "Base"
+            text: "    Tapis \n Roulants"
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .38,'center_y':.6}
             on_press:
@@ -586,7 +586,7 @@ WindowManager:
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
         HomeButton:
-            text: " Sauts "
+            text: "les objets"
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .86,'center_y':.6}
             on_press:
@@ -594,7 +594,7 @@ WindowManager:
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
         HomeButton:
-            text: "      Prendre  \n  Deposer 1/2"
+            text: "les tp"
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .14,'center_y':.25}
             on_press:
@@ -602,7 +602,7 @@ WindowManager:
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
         HomeButton:
-            text: "      Prendre  \n  Deposer 2/2"
+            text: "Les liens "
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .38,'center_y':.25}
             on_press:
@@ -610,7 +610,7 @@ WindowManager:
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
         HomeButton:
-            text: "téléporta \n    -tion"
+            text: "avec la "
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .62,'center_y':.25}
             on_press:
@@ -618,11 +618,19 @@ WindowManager:
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
         HomeButton:
-            text: "La suite"
+            text: "progra"
             font_size: 0.25 * self.height
             pos_hint: {'center_x': .86,'center_y':.25}
             on_press:
                 root.setCours("7")
+                root.manager.transition.direction = 'left'
+                root.manager.current = "custom_cours"
+	HomeButton:
+            text: "mation"
+            font_size: 0.25 * self.height
+            pos_hint: {'center_x': .86,'center_y':.25}
+            on_press:
+                root.setCours("8")
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
 
@@ -630,12 +638,6 @@ WindowManager:
     name: "custom_cours"
     on_pre_enter : root.chargementCours()
     FloatLayout:
-        Image:
-            source:'assets/Images/cours_background.jpg'
-            pos_hint:{'x': 0,'y':0}
-            size_hint: 1 , 1
-            keep_ratio: False
-            allow_stretch: True
         HomeButton:
             text: "back"
             size_hint: .12,.12
@@ -657,5 +659,12 @@ WindowManager:
             source:'assets/Images/cours/img_cours_1.png'
             pos_hint:{'x': .3,'y': .25}
             size_hint: .43 , .43
+            keep_ratio: False
+            allow_stretch: True
+	Image:
+            id : _imageCours2
+            source:'assets/Images/cours/img_cours_1.png'
+            pos_hint:{'x': .6,'y': .07}
+            size_hint: .33 , .33
             keep_ratio: False
             allow_stretch: True
