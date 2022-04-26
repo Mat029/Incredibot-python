@@ -1,0 +1,22 @@
+
+
+
+Les téléportations ressemble de loin aux fonction en python. Reprenons notre programme de la dernière fois :
+a = 3
+print("j'aime" a "fois plus Incredibot que Google")
+a = a + 2
+print("j'aime" a "fois plus Incredibot que Google")
+
+R'écrire plusieurs fois ce programme n'est pas trop dérengeant sur un petit programme d'une trantaine de lignes, mais pour des programmes plus importants tels que celui qui tourne au moment ou vous lissez ses lignes, cela est plus complex.
+C'est pourquoi, il existe des fonctions en python qui permettent de stocker une partie du code et de la rappeler à plusieurs endroits.
+Par exemple :
+def egaux(x, y, z):
+  if x == y or x == z or y == z:
+    return True
+  else :
+    return False
+
+permet de tester si 3 nombres sont égaux. On peut appeler cette fonction avec :
+print(egaux(4, 6, 6))
+Elle revenvera False, mais l'interet est ici de ne pas à avoir à réecrire à chaque fois les 4 lignes de code de la foction. En autre elle permet de gagner du temps, d'optimiser du code et faciliter la création d'un programme important (environ 500 lignes)
+N.B : Nous utilisons une 20 aine de fonction dans le code de l'app Incredibot

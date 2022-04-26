@@ -2,26 +2,20 @@
 
 
 
-Téléportations :
-Pour créé encore plus de difficulté, il y aura en plus des objets, de points de téléportations (abrégés en t-p). Comme la téléportation tels que nous l’imaginons aujourd’hui, en entrant dans une case donner, Quill en ressortira de l’autre coté. Sur un level, il y aura toujours une porte d’entré et une porte de sorti de façon à ce que vous puissiez prévoir ou arrivera Quill si il prend se passage là. Voici un exemple :
+Prendre ou déposer peut se traduire en algorithmie par la modification d'une variable.
+Une variable en python est l'association d'une valeur à un champ de texte, par exemple :
 
+a = 3
+print("j'aime" a "fois plus Incredibot que Google")
+renvoie :
+j'aime 3 fois plus Incredibot que Google
 
-Photo
+la valeur de la variable peut également être modifier comme par exemple : (n'oublions pas que a vaut 3)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Ici, si Quill prend la porte, « d’entré », qui est devant lui, il ressortira par la porte de sorti qui se trouve devant l’arrivé. La téléportation marche comme une case normale qui vous enmaine au point d’arriver sans prendre compte les autres composants du niveau. Cependant une teleportation ne peut pas être à double sens (soit si vous l’avez pris dans un sens, vous ne pouvez pas prende la tp dans l’autre sens). Bien entendu, vous pouvez prendre des tp avec des objets dans la main tels que des blocs.
+a = 3
+print("j'aime" a "fois plus Incredibot que Google")
+a = a + 2
+print("j'aime" a "fois plus Incredibot que Google")
+renvera :
+j'aime 3 fois plus Incredibot que Google
+j'aime 5 fois plus Incredibot que Google
