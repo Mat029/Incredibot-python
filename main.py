@@ -227,6 +227,7 @@ class CustomLevelScreen(Screen):
         DataLvl = self.getLvlJson()
         listePos, listePosObjets, listeOrientation, listeObjet, message, son = self.verif(texte)
         Animation.cancel_all(self.robot)
+        self.robot.source = "assets/Images/robot/robot_droite_sans.png"
         self.sound.stop()
         def animerRobot(orientation, objet, robot):
             traductionOrientation = { 1 : "droite", -1 : "gauche", 10 : "bas", -10 : "haut"}
@@ -274,8 +275,11 @@ class CustomLevelScreen(Screen):
         self.ids._labelResultat.text = message
         self.ids._buttonNext.disabled = int(lvlMax) <= lvl or lvl == 24
         if len(listePos) >= 1:
+            def resetImage(*args):
+                self.robot.source = "assets/Images/robot/robot_droite_sans.png"
             anim3= Animation(pos_hint = self.posToCoord(listePos[len(listePos) - 1]), duration =  2.5)
             anim3 += Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)
+            anim3.on_complete = resetImage
             anim3.start(self.robot)
         if "nbObjets" in DataLvl :
             anim4= Animation(pos_hint = self.posToCoord(listePosObjet[0][len(listePosObjet[0]) - 1]), duration =  2.5)
@@ -452,6 +456,7 @@ class CustomLevelScreen(Screen):
         DataLvl = self.getLvlJson()
         Animation.cancel_all(self.robot)
         self.robot.pos_hint = self.posToCoord(DataLvl["d"])
+        self.robot.source = "assets/Images/robot/robot_droite_sans.png"
         if "nbObjets" in DataLvl :
             Animation.cancel_all(self.obj0)
             self.obj0.pos_hint = self.posToCoord( DataLvl["dObjet0"])
