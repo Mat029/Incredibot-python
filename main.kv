@@ -648,23 +648,23 @@ WindowManager:
         Label:
             id : _labelCours
             text: ""
-            font_size: 20
-            text_size: self.width, None
-            size_hint_y: None
-            height: self.texture_size[0]
-            pos_hint: {'center_x': .5,'center_y':.5}
+            font_size: .015 * self.height + .0075 * self.width
+            size_hint: 1 , .6
+            text_size: self.width, self.height
+            valign: "top"
+            pos_hint: {'x' : 0 ,'center_y':.7}
             markup: True
         Image:
             id : _imageCours
             source:'assets/Images/cours/img_cours_1.png'
-            pos_hint:{'x': .3,'y': .25}
-            size_hint: .43 , .43
+            pos_hint:{'x': .11,'y': .07}
+            size_hint: .33 , .33
             keep_ratio: False
             allow_stretch: True
 	    Image:
             id : _imageCours2
             source:'assets/Images/cours/img_cours_1.png'
-            pos_hint:{'x': .6,'y': .07}
+            pos_hint:{'x': .55,'y': .07}
             size_hint: .33 , .33
             keep_ratio: False
             allow_stretch: True
