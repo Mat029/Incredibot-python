@@ -21,7 +21,8 @@
 * Ajouter des paramètres ✅
 * Refonte des cours ⏱
 * Ajouter la pop-up info ✅
-* Animations du robot ⏱
+* Animations du robot ✅
+* Animation du plateau 🧠
 
 (Symboles : ✅ : terminer (tester à fond) ❌ : annulé ⏱ : en cours de "coding"/terminé mais buggué 🧠 : en reflexion )
 
@@ -38,6 +39,5 @@
 * Ajouter de la musique/des sons ✅
 * Ajouter des "paramètres" ✅
 * Animation des plateaux/du robot
-### ----------Bonus (c'est mort laisse tomber)----------
-* Mode multijoueur ou Create (Create est plus "logique" mais multi plus "fun" (et long à coder aussi))
-* Faire l'étage 4
+
+* Clean le code/le commenter

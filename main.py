@@ -245,9 +245,13 @@ class CustomLevelScreen(Screen):
                 animObj2 = Animation(pos_hint =self.posToCoord(listePosObjets[2][0]), duration = 0)
         if len(listePos) >= 1 :
             for i in range(1, len(listePos)) :
-                animProvisoire = Animation(pos_hint =self.posToCoord(listePos[i]), duration = .5)
+                coordonei = self.posToCoord(listePos[i])
+                coordoneimoins = self.posToCoord(listePos[i - 1])
+                animProvisoire = Animation(pos_hint = {"center_x" : (coordonei["center_x"] + coordoneimoins["center_x"])/2, "center_y" : (coordonei["center_y"] + coordoneimoins["center_y"])/2}, duration = .25)
                 animProvisoire.on_complete = partial(animerRobot, listeOrientation[i], listeObjet[i])
                 anim += animProvisoire
+                animProvisoire2 = Animation(pos_hint = coordonei, duration = .25)
+                anim += animProvisoire2
         if "nbObjets" in DataLvl :
             for i in range(1, len(listePosObjets[0])) :
                 animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i]), duration = 0) #permet a l'objet d'apparaitre/disparaitre instant
