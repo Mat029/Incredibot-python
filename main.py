@@ -254,8 +254,9 @@ class CustomLevelScreen(Screen):
                 anim += animProvisoire2
         if "nbObjets" in DataLvl :
             for i in range(1, len(listePosObjets[0])) :
+                animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i - 1]), duration = .25)
                 animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i]), duration = 0) #permet a l'objet d'apparaitre/disparaitre instant
-                animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i]), duration = .5) 
+                animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i]), duration = .25) 
                 if DataLvl["nbObjets"] >= 2:
                     animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i]), duration = 0)
                     animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i]), duration = .5)
@@ -583,6 +584,9 @@ class Incredibot(App):
         JsonSettings.write(json.dumps(SettingsData))
         JsonSettings.truncate()
         JsonSettings.close()
+        self.music.volume = 0.5
+        self.music.play()
+
     def close_application(self):
         App.get_running_app().stop()
         Window.close()

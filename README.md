@@ -22,7 +22,7 @@
 * Refonte des cours ⏱
 * Ajouter la pop-up info ✅
 * Animations du robot ✅
-* Animation du plateau 🧠
+* Animation du plateau ❌
 
 (Symboles : ✅ : terminer (tester à fond) ❌ : annulé ⏱ : en cours de "coding"/terminé mais buggué 🧠 : en reflexion )
 
@@ -38,6 +38,6 @@
 ### ----------Objectif----------
 * Ajouter de la musique/des sons ✅
 * Ajouter des "paramètres" ✅
-* Animation des plateaux/du robot
+* Animation du robot ✅
 
 * Clean le code/le commenter
