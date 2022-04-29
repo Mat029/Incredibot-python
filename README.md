@@ -19,7 +19,7 @@
 * Faire l'étage 3 ✅
 * Ajouter de la musique/sons ✅
 * Ajouter des paramètres ✅
-* Refonte des cours ⏱
+* Refonte des cours ✅
 * Ajouter la pop-up info ✅
 * Animations du robot ✅
 * Animation du plateau ❌
