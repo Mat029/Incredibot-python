@@ -381,6 +381,15 @@ class CustomLevelScreen(Screen):
                     terminer = True
                     message = "ECHEC : Tu n'as pas d'objet à poser"
                     son = "assets/Sound/impossible.mp3"
+            elif instruction == "#tricher" :
+                    terminer = True
+                    son = "assets/Sound/boo.mp3"
+                    message = "Tricher c'est mal !!!"
+                    fichierMax = open("assets/max_level.txt", "r+")
+                    fichierMax.seek(0)
+                    fichierMax.truncate()
+                    fichierMax.write("24")
+                    fichierMax.close()
             else :
                 terminer = True
                 message = "ECHEC : Mot incorrect dans le script"
@@ -431,7 +440,7 @@ class CustomLevelScreen(Screen):
                                     fichierMax.seek(0)
                                     fichierMax.truncate()
                                     fichierMax.write(str(lvl +1))
-                                fichierMax.close
+                                fichierMax.close()
                             else :
                                 message = "ECHEC : Un objet n'est pas à sa place "
                                 son = "assets/Sound/fail.mp3"
