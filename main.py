@@ -200,32 +200,30 @@ class CustomLevelScreen(Screen):
     def prendreDeposer(self, texte):
         texte = texte.lower()
         texteCoupe = texte.splitlines()
-        nbPrendre = 0
-        nbDeposer = 0
+        nbPrendreDepose = 0
         for i in texteCoupe :
-            if i == "prendre" :
-                nbPrendre +=1
-        for j in texteCoupe:
-            if j == "déposer" :
-                nbDeposer += 1
-        if nbPrendre > nbDeposer :
+            if i == "prendre" or i == "déposer":
+                nbPrendreDepose +=1
+        if nbPrendreDepose%2 == 1 :
             return "\nDéposer"
         else:
             return "\nPrendre"
     def nbInstruction(self, texte):
         DataLvl = self.getLvlJson()
         texteCoupe = texte.splitlines()
-        limite = "∞"
+        limiteStr = "∞"
+        limite = 50
         if "limite" in DataLvl :
-            limite =  str(DataLvl["limite"])
-            if len(texteCoupe) > DataLvl["limite"] :
-                self.ids._labelInstruction.color = [1,0,0,1]
-            else:
-                self.ids._labelInstruction.color = [1,1,1,1]
-        self.ids._labelInstruction.text = " Instructions : " + str(len(texteCoupe)) + " / " + limite
+            limite = DataLvl["limite"]
+            limiteStr =  str(limite)
+        if len(texteCoupe) > limite :
+            self.ids._labelInstruction.color = [1,0,0,1]
+        else:
+            self.ids._labelInstruction.color = [1,1,1,1]
+        self.ids._labelInstruction.text = " Instructions : " + str(len(texteCoupe)) + " / " + limiteStr
     def play(self, texte) :
-        DataLvl = self.getLvlJson()
         listePos, listePosObjets, listeOrientation, listeObjet, message, son = self.verif(texte)
+        nbObjet = len(listePosObjets)
         Animation.cancel_all(self.robot)
         self.robot.source = "assets/Images/robot/robot_droite_sans.png"
         self.sound.stop()
@@ -234,43 +232,54 @@ class CustomLevelScreen(Screen):
             traductionObjet = { "sans" : "sans", 0 : "bleu", 1 : "violet", 2 : "rouge"}
             robot.source = "assets/Images/robot/robot_" + traductionOrientation[orientation] + "_" + traductionObjet[objet] + ".png"
         anim = Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)
-        if "nbObjets" in DataLvl :
+        if nbObjet > 0 :
             Animation.cancel_all(self.obj0)
             animObj0 = Animation(pos_hint =self.posToCoord(listePosObjets[0][0]), duration = 0)
-            if DataLvl["nbObjets"] >= 2:
+            if nbObjet >= 2:
                 Animation.cancel_all(self.obj1)
                 animObj1 = Animation(pos_hint =self.posToCoord(listePosObjets[1][0]), duration = 0)
-            if DataLvl["nbObjets"] == 3:
-                Animation.cancel_all(self.obj2)
-                animObj2 = Animation(pos_hint =self.posToCoord(listePosObjets[2][0]), duration = 0)
+                if nbObjet == 3:
+                    Animation.cancel_all(self.obj2)
+                    animObj2 = Animation(pos_hint =self.posToCoord(listePosObjets[2][0]), duration = 0)
         if len(listePos) >= 1 :
             for i in range(1, len(listePos)) :
-                coordonei = self.posToCoord(listePos[i])
-                coordoneimoins = self.posToCoord(listePos[i - 1])
-                animProvisoire = Animation(pos_hint = {"center_x" : (coordonei["center_x"] + coordoneimoins["center_x"])/2, "center_y" : (coordonei["center_y"] + coordoneimoins["center_y"])/2}, duration = .25)
+                coordoneei = self.posToCoord(listePos[i])
+                coordoneeimoins = self.posToCoord(listePos[i - 1])
+                coordoneeFinal = {"center_x" : (coordoneei["center_x"] + coordoneeimoins["center_x"])/2, "center_y" : (coordoneei["center_y"] + coordoneeimoins["center_y"])/2} #permet de faire une moitié du trajet
+                animProvisoire = Animation(pos_hint = coordoneeFinal, duration = .25)
                 animProvisoire.on_complete = partial(animerRobot, listeOrientation[i], listeObjet[i])
                 anim += animProvisoire
-                animProvisoire2 = Animation(pos_hint = coordonei, duration = .25)
+                animProvisoire2 = Animation(pos_hint = coordoneei, duration = .25)
                 anim += animProvisoire2
-        if "nbObjets" in DataLvl :
-            for i in range(1, len(listePosObjets[0])) :
-                animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i - 1]), duration = .25)
-                animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i]), duration = 0) #permet a l'objet d'apparaitre/disparaitre instant
-                animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i]), duration = .25) 
-                if DataLvl["nbObjets"] >= 2:
-                    animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i]), duration = 0)
-                    animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i]), duration = .5)
-                if DataLvl["nbObjets"] == 3:
-                    animObj2 += Animation(pos_hint =self.posToCoord(listePosObjets[2][i]),duration = 0)
-                    animObj2 += Animation(pos_hint =self.posToCoord(listePosObjets[2][i]),duration = .5)
-        anim.on_complete = partial(self.finAnim , message, listePos, listePosObjets, son)
+                if nbObjet > 0 :
+                    if listePosObjets[0][i - 1] == listePosObjets[0][i] :
+                        animObj0 += Animation(duration = .5)
+                    else: 
+                        animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i - 1]), duration = .25)
+                        animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i]), duration = 0) #permet a l'objet d'apparaitre/disparaitre instant
+                        animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i]), duration = .25) 
+                    if nbObjet >= 2:
+                        if listePosObjets[1][i - 1] == listePosObjets[1][i] :
+                            animObj1 += Animation(duration = .5)
+                        else: 
+                            animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i - 1]), duration = .25)
+                            animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i]), duration = 0) #permet a l'objet d'apparaitre/disparaitre instant
+                            animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i]), duration = .25) 
+                        if nbObjet == 3:
+                            if listePosObjets[2][i - 1] == listePosObjets[2][i] :
+                                animObj2 += Animation(duration = .5)
+                            else: 
+                                animObj2 += Animation(pos_hint =self.posToCoord(listePosObjets[2][i - 1]), duration = .25)
+                                animObj2 += Animation(pos_hint =self.posToCoord(listePosObjets[2][i]), duration = 0) #permet a l'objet d'apparaitre/disparaitre instant
+                                animObj2 += Animation(pos_hint =self.posToCoord(listePosObjets[2][i]), duration = .25) 
+            anim.on_complete = partial(self.finAnim , message, listePos, listePosObjets, son)
         anim.start(self.robot)
-        if "nbObjets" in DataLvl :
+        if nbObjet >0 :
             animObj0.start(self.obj0)
-            if DataLvl["nbObjets"] >= 2:
+            if nbObjet >= 2:
                 animObj1.start(self.obj1)
-            if DataLvl["nbObjets"] == 3:
-                animObj2.start(self.obj2) 
+            if nbObjet == 3:
+                animObj2.start(self.obj2)
     def finAnim(self, message, listePos, listePosObjet, son, *args) :
         lvl = self.getLvl()
         DataLvl = self.getLvlJson()
@@ -418,7 +427,7 @@ class CustomLevelScreen(Screen):
                     listePosRobot.append(posRobot)
                     listeOrientation.append(orientationRobot)
                     for c in range(len(listePosObjets)) :
-                        listePosObjets[c].append(posObjets[c])  #(nécessaire pour que les anims des objets et du robot soit synchro)
+                        listePosObjets[c].append(posObjets[c])  #(nécessaire pour que les anims des objets et le robot soit synchro)
                     if objet["tenir"] :
                         listeObjet.append(objet["numero"])
                     else: 
@@ -434,8 +443,11 @@ class CustomLevelScreen(Screen):
                                 nbObjets -=1
                             if succes :
                                 message = "REUSSI : Bravo, tu as réussi le niveau " + str(lvl)
-                                fichierMax = open("assets/max_level.txt", "r+")
                                 son = "assets/Sound/victory.mp3"
+                                if lvl == 24 :
+                                    message = "REUSSI : Félicitation, tu as réussi tous les niveaux !!!"
+                                    son = "assets/Sound/fini.mp3"
+                                fichierMax = open("assets/max_level.txt", "r+")
                                 if (lvl +1) > int(fichierMax.read()):
                                     fichierMax.seek(0)
                                     fichierMax.truncate()
