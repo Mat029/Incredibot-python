@@ -350,7 +350,10 @@ class CustomLevelScreen(Screen):
             robot.source = "assets/Images/robot/robot_" + traductionOrientation[orientation] + "_" + traductionObjet[objet] + ".png"
 
         anim = Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)
-        if nbObjet > 0 >= 2:
+        if nbObjet > 0:
+            Animation.cancel_all(self.obj0)
+            animObj0 = Animation(pos_hint =self.posToCoord(listePosObjets[0][0]), duration = 0)
+            if nbObjet >= 2:
                 Animation.cancel_all(self.obj1)
                 animObj1 = Animation(pos_hint =self.posToCoord(listePosObjets[1][0]), duration = 0)
                 if nbObjet == 3:
