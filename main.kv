@@ -182,7 +182,7 @@ WindowManager:
 
 <LevelScreen>:
     name: "levels"
-	on_pre_enter: root.update()
+	on_pre_enter: root.changeEtage("aucun")
     FloatLayout:
         Image:
             source:'assets/Images/level_background.jpg'
@@ -218,7 +218,7 @@ WindowManager:
             pos_hint: {'center_x': .6,'center_y':.86}
             disabled: False
             background_color: (0,0,0,0)
-            on_release: root.augmente()
+            on_release: root.changeEtage("augmente")
             Image:
                 id: _imageAugmente
 				source: 'assets/Images/icon/next_icon.png'
@@ -233,7 +233,7 @@ WindowManager:
             pos_hint: {'center_x': .4,'center_y':.86}
             disabled: True
             background_color: (0,0,0,0)
-            on_press: root.baisse()
+            on_press: root.changeEtage("baisse")
             Image:
                 id: _imageBaisse
 				source: 'assets/Images/icon/previous_icon_dark.png'
@@ -415,7 +415,7 @@ WindowManager:
             id: _userInput
             font_size: .045 * self.height
             size_hint: 0.2 , 0.6
-            on_text: root.nbInstruction(_userInput.text)
+            on_text: root.nbInstructions(_userInput.text)
             pos_hint: {"center_x": 0.15, "center_y" : 0.6}
         GridLayout:
             id: _instructionGrid
@@ -470,21 +470,11 @@ WindowManager:
                 on_press:
                     _userInput.text += root.prendreDeposer(_userInput.text) if _userInput.text != "" else "Prendre"
             Button:
-                id: _buttonCollecter
-                text: ""
-                font_size: 0.45 * self.height
                 disabled: True
                 background_color: 0, 0, 0, 0
-                on_press:
-                    _userInput.text += "\nCollecter" if _userInput.text != "" else "Collecter"
             Button:
-                id: _buttonBoucle
-                text: ""
-                font_size: 0.45 * self.height
                 disabled: True
                 background_color: 0, 0, 0, 0
-                on_press:
-                    _userInput.text += "\nRepeter X fois" if _userInput.text != "" else "Repeter X fois"
             Button:
                 text: "Supprimer"
                 font_size: 0.45 * self.height

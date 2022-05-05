@@ -1,54 +1,102 @@
 """"
-DOC PROVISOIRE !!!!
-Voir ttes les recommandations précises dans readme sinon :
-installer Kivy :
-1) pip -m install kivy[base] dans votre terminal
-2) Si votre éditeur le supporte (Pycharme/Thonny, Anaconda aussi je crois etc...) Vous pouvez installer directement kivy. Bien prendre le "grand" Kivy, avec toutes les dépendances.
-ATTENTION IMPORTANT :
-1) Version de python utilisé : 3.7.9 (compatible avec les versions supérieurs aussi)
-2) Un bug de kivy qui affecte nottament les pc de l'écoles, detecte une version d'open Gl qui n'est pas la bonne, ce qui provoque un crash. Dans ce cas, rajouter :
- import os
- os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
- AU TOUT DEBUT DU FICHIER (avant les autres import)
+Pour lancer incredibot il vous faut :
+_ Python >= 3.7.9 
+_ Le module kivy : 2 façons :
+    * Si votre éditeur le supporte (Pycharme/Thonny, Anaconda etc...) :
+        Vous pouvez installer directement kivy. 
+        (Bien prendre le "grand" Kivy, avec toutes les dépendances.)
+    * Sinon : pip -m install kivy[base] dans votre terminal
+
 """
-from kivy.app import App
+
+from functools import partial
+import json
+
+""" IMPORTANT : 
+Il existe un bug/problème de compatibilité dans kivy qui fait que le programme ne démarre pas sur certains oridinateurs
+et affiche une erreur du type : wrong open gl version, you have xx and kivy need xx
+Si cela vous arrive, il vous suffit de copier coller ces deux lignes JUSTE AVANT L'IMPORT DE KIVY :
+import os
+os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
+"""
+import kivy
 from kivy.lang import Builder
+from kivy.core.window import Window
+from kivy.config import Config
+from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.image import Image
 from kivy.animation import Animation
 from kivy.core.audio import SoundLoader
-from functools import partial
-from kivy.core.window import Window
-from kivy.config import Config
-import kivy
-import json
-
-kivy.require("2.1.0")
 
 class HomeScreen(Screen):
+    """ HomeSreen
+    Dans kivy, on déclare chaque écran comme une classe qu'on modifie ensuite avec le fichier .kv
+    Cet écran est le premier à apparaitre quand on arrive sur incredibot
+    Args :
+        Screen (Screen) : affiche du contenu
+    """
     pass
 
 class LevelScreen(Screen):
+    """ LevelScreen
+    Cet écran permet la selection entre les niveaux 
+    Args :
+        Screen (Screen) : affiche du contenu
+    """
+
     def setLvl(self, lvl):
+        """ setLvl
+        Cette fonction écrit le niveau qu'on a selectionné dans un fichier
+        args : 
+            int : lvl
+        """
         fichier = open("assets/current_lvl.txt", "w")
         fichier.write(str(lvl))
-        pass
+        fichier.close()
+
     def getLvlMax(self):
+        """ getLvlMax
+        Cette fonction renvoi le niveau maximum (stocké dans un fichier text) débloqué
+        returns :
+            int : niveau maximum 
+        """
         fichierMax = open("assets/max_level.txt", "r")
         lvlMax = fichierMax.read()
         fichierMax.close()
         return int(lvlMax)
+
     def getImage(self, lvl):
+        """getImage
+        Cette fonction permet de savoir quel image il faut afficher devant un niveau (bloqué, réussi ou jouable), 
+        args : 
+            int : niveau pour lequel on veut l'image
+        return :
+            l'image a afficher : valide.png, play.png ou cadenas.png
+        """
         lvlMax = self.getLvlMax()
-        if lvlMax > lvl :
+        if lvlMax > lvl:
             return "assets/Images/valide.png"
-        elif lvlMax == lvl :
+        elif lvlMax == lvl:
             return "assets/Images/play.png"
         else:
             return "assets/Images/cadenas.png"
-    etage = 0
-    def augmente(self):
-        self.etage+=1
+
+    etage = 0  
+
+    """ C'est le numéro de l'étage auquel est acutelement l'utilisateru. 
+    Cette varibale est déclaré dans le classe car le fichier kv a besoin d'y accéder"""
+
+    def changeEtage(self, sens):
+        """ changeEtage
+        Cette fonction modifie l'étage où se situe l'utilisateur et met à jour visuelement les composants qui le nécessite
+        args :
+            str : "augmente", "baisse" ou "aucun" (pour l'initialisation)
+        """
+        if sens == "augmente":
+            self.etage+=1
+        elif sens == "baisse": 
+            self.etage-=1
         self.ids._boutonAugmente.disabled = (self.etage == 2)
         self.ids._boutonBaisse.disabled = (self.etage == 0)
         self.ids._labelEtage.text = "Etage " + str(self.etage +1)
@@ -60,22 +108,6 @@ class LevelScreen(Screen):
         self.ids._bouton6.text = "Niveau " + str(self.etage * 8 + 6)
         self.ids._bouton7.text = "Niveau " + str(self.etage * 8 + 7)
         self.ids._bouton8.text = "Niveau " + str(self.etage * 8 + 8)
-        self.update()
-    def baisse(self):
-        self.etage-=1
-        self.ids._boutonAugmente.disabled = (self.etage == 2)
-        self.ids._boutonBaisse.disabled = (self.etage == 0)
-        self.ids._labelEtage.text = "Etage " + str(self.etage +1)
-        self.ids._bouton1.text = "Niveau " + str(self.etage * 8 + 1)
-        self.ids._bouton2.text = "Niveau " + str(self.etage * 8 + 2)
-        self.ids._bouton3.text = "Niveau " + str(self.etage * 8 + 3)
-        self.ids._bouton4.text = "Niveau " + str(self.etage * 8 + 4)
-        self.ids._bouton5.text = "Niveau " + str(self.etage * 8 + 5)
-        self.ids._bouton6.text = "Niveau " + str(self.etage * 8 + 6)
-        self.ids._bouton7.text = "Niveau " + str(self.etage * 8 + 7)
-        self.ids._bouton8.text = "Niveau " + str(self.etage * 8 + 8)
-        self.update()
-    def update(self):
         self.ids._Indicateur1.source = self.getImage((self.etage * 8 + 1))
         self.ids._Indicateur2.source = self.getImage((self.etage * 8 + 2))
         self.ids._Indicateur3.source = self.getImage((self.etage * 8 + 3))
@@ -88,7 +120,18 @@ class LevelScreen(Screen):
         self.ids._imageBaisse.source = 'assets/Images/icon/previous_icon.png' if (self.etage != 0) else 'assets/Images/icon/previous_icon_dark.png'
 
 class CustomLevelScreen(Screen):
+    """ CustomLevelScrenen
+    Cet écran est le plus important de l'application, c'est celui qui affiche l'interface de jeu
+    Args :
+        Screen (Screen) : affiche du contenu
+    """
+
     def chargement(self):
+        """chargement
+        Cette fonction va être appelé dès que l'écran est affiché et met à jour visuelement tous les éléments
+        (titre, image, limite,mettre les  objet, placer le robot à la bonne postion, afficher les boutons en lien 
+        avec l'étage (sauter à partir de l'érage 2 par exemple))
+        """
         lvl = self.getLvl()
         fichierMax = open("assets/max_level.txt", "r")
         lvlMax = fichierMax.read()
@@ -109,12 +152,6 @@ class CustomLevelScreen(Screen):
         self.ids._buttonPrendre.disabled = True
         self.ids._buttonPrendre.background_color = [0,0,0,0]
         self.ids._buttonPrendre.text = ""
-        self.ids._buttonCollecter.disabled = True
-        self.ids._buttonCollecter.background_color = [0,0,0,0]
-        self.ids._buttonCollecter.text = ""
-        self.ids._buttonBoucle.disabled = True
-        self.ids._buttonBoucle.background_color = [0,0,0,0]
-        self.ids._buttonBoucle.text = ""
         if lvl >= 9:
             self.ids._buttonSauter.disabled = False
             self.ids._buttonSauter.background_color = [1,1,1,1]
@@ -126,21 +163,14 @@ class CustomLevelScreen(Screen):
             self.ids._buttonPrendre.disabled = False
             self.ids._buttonPrendre.background_color = [1,1,1,1]
             self.ids._buttonPrendre.text = "Prendre/Deposer"
-        if lvl >= 25:
-            self.ids._buttonCollecter.disabled = False
-            self.ids._buttonCollecter.background_color = [1,1,1,1]
-            self.ids._buttonCollecter.text = "Collecter"
-            self.ids._buttonBoucle.disabled = False
-            self.ids._buttonBoucle.background_color = [1,1,1,1]
-            self.ids._buttonBoucle.text = "Repeter X fois"
         posRobot = self.posToCoord(DataLvl["d"])
         self.robot = Image(source = "assets/Images/robot/robot_droite_sans.png", size_hint =  [.066796875 , .11875],pos_hint = posRobot)
         self.ids._layoutLvl.add_widget(self.robot)
-        if "limite" in DataLvl :
+        if "limite" in DataLvl:
             self.ids._labelInstruction.text = "Instructions : 0 / " + str(DataLvl["limite"]) 
         else:
             self.ids._labelInstruction.text = "Instructions : 0 / ∞"
-        if "nbObjets" in DataLvl :
+        if "nbObjets" in DataLvl:
             posObjet0 = self.posToCoord( DataLvl["dObjet0"])
             self.obj0 = Image(source = "assets/Images/lvl/objet0.png", size_hint =  [.066796875 , .11875],pos_hint = posObjet0, allow_stretch = True)
             self.ids._layoutLvl.add_widget(self.obj0)
@@ -153,15 +183,25 @@ class CustomLevelScreen(Screen):
                 self.obj2 = Image(source = "assets/Images/lvl/objet2.png", size_hint =  [.066796875 , .11875],pos_hint = posObjet2, allow_stretch = True)
                 self.ids._layoutLvl.add_widget(self.obj2)
 
-        self.sound = SoundLoader.load("assets/Sound/empty.mp3")
+        self.sound = SoundLoader.load("assets/Sound/empty.mp3")  # Initialise le son pour pouvoir jouer des sons plus tard
 
     def getLvl(self):
+        """ getLvl
+        Cette fonction retourne le niveau actuel
+        returns :
+        int : lvl : niveau actuel
+        """
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
         fichierLvl.close
         return int(lvl)
 
-    def getLvlJson(self) :
+    def getLvlJson(self):
+        """ getLvlJson
+        Cette foonction renvoi les donnés associé au nivau stocké dans le json
+        returns :
+            dictionary : DataLvl : les données Json du niveau actuel
+        """
         lvl = self.getLvl()
         MyJson = open('assets/data.json',)
         Data = json.load(MyJson)
@@ -170,15 +210,22 @@ class CustomLevelScreen(Screen):
         return DataLvl
 
     def setLvl(self, lvl):
+        """ setLvl
+        Cette fonction change le niveau actuel
+        args :
+            lvl : int : le niveau qui va devenir le niveau actuel"""
         fichier = open("assets/current_lvl.txt", "w")
         fichier.write(str(lvl))
         fichier.close()
 
     def clean(self):
+        """ clean
+        Cete fonction permet de supprimer tout les élements rajouté (robot et objets)
+        """
         DataLvl = self.getLvlJson()
         Animation.cancel_all(self.robot)
         self.ids._layoutLvl.remove_widget(self.robot)
-        if "nbObjets" in DataLvl :
+        if "nbObjets" in DataLvl:
             Animation.cancel_all(self.obj0)
             self.ids._layoutLvl.remove_widget(self.obj0)
             if DataLvl["nbObjets"] >= 2:
@@ -188,85 +235,153 @@ class CustomLevelScreen(Screen):
                 Animation.cancel_all(self.obj2)
                 self.ids._layoutLvl.remove_widget(self.obj2)
 
-    def delLine(self, texte) :
-        if texte!= "" :
+    def delLine(self, texte):
+        """ delLine
+        Cette fonction est appelé quand on appuie srue le bouton supprimer, 
+        elle enlève la dernière ligne du texte 
+        args :
+            str : texte : les instructions rentrés par l'utilisateur
+        returns :
+            str : texteFinal : les instructions de l'utilisateurs avec une ligne en moins
+        """
+        if texte!= "":
             texteCoupe = texte.splitlines()
             del texteCoupe[-1]
-            texte_final = "\n".join(texteCoupe)
-            return (texte_final)
+            texteFinal = "\n".join(texteCoupe)
+            return (texteFinal)
         else:
             return ""
 
     def prendreDeposer(self, texte):
+        """ prendreDeposer
+        Quand on appuie sur le bouton Prendre/Déposer, cette fonction calcule lequel elle doit écrire
+        args :
+            str : texte: les instructions rentrés par l'utilisateur
+        returns :
+            str : l'instruction a ajouté : Prendre ou Déposer
+        """
         texte = texte.lower()
         texteCoupe = texte.splitlines()
         nbPrendreDepose = 0
-        for i in texteCoupe :
+        for i in texteCoupe:
             if i == "prendre" or i == "déposer":
                 nbPrendreDepose +=1
-        if nbPrendreDepose%2 == 1 :
+        if nbPrendreDepose%2 == 1:
             return "\nDéposer"
         else:
             return "\nPrendre"
-    def nbInstruction(self, texte):
+    def indice(self):
+        """ indice
+        Cette fonction est appelé quand le bouton indice est cliqué, et affiche à l'écran l'indice du niveau si il existe
+        """
+        DataLvl = self.getLvlJson()
+        if "indice" in DataLvl:
+            self.ids._labelResultat.text = DataLvl["indice"]
+        else:
+            self.ids._labelResultat.text = "Pas d'indice pour ce niveau"
+        
+    def cancel(self):
+        """"cancel
+        Cette fonction est appelé quand on clique sur le bouton annuler. Elle remet les éléments du niveaux a leur position initiale.
+        """
+        DataLvl = self.getLvlJson()
+        Animation.cancel_all(self.robot)
+        self.robot.pos_hint = self.posToCoord(DataLvl["d"])
+        self.robot.source = "assets/Images/robot/robot_droite_sans.png"
+        if "nbObjets" in DataLvl:
+            Animation.cancel_all(self.obj0)
+            self.obj0.pos_hint = self.posToCoord( DataLvl["dObjet0"])
+            if DataLvl["nbObjets"] >= 2:
+                Animation.cancel_all(self.obj1)
+                self.obj1.pos_hint = self.posToCoord( DataLvl["dObjet1"])
+                if DataLvl["nbObjets"] == 3:
+                    Animation.cancel_all(self.obj2)
+                    self.obj2.pos_hint = self.posToCoord( DataLvl["dObjet2"])
+        self.sound.stop()
+
+    def nbInstructions(self, texte):
+        """ nbInsructions
+        Cette fonction est appelé à chaque fois que l'on écrit, elle calcule le nombre d'instructions
+        et vérifie qu'elle ne dépasse pas la limite du niveau (50 par défaut)
+        args : 
+            str : texte: les instructions rentrés par l'utilisateur
+        """
         DataLvl = self.getLvlJson()
         texteCoupe = texte.splitlines()
         limiteStr = "∞"
         limite = 50
-        if "limite" in DataLvl :
+        if "limite" in DataLvl:
             limite = DataLvl["limite"]
             limiteStr =  str(limite)
-        if len(texteCoupe) > limite :
+        if len(texteCoupe) > limite:
             self.ids._labelInstruction.color = [1,0,0,1]
         else:
             self.ids._labelInstruction.color = [1,1,1,1]
         self.ids._labelInstruction.text = " Instructions : " + str(len(texteCoupe)) + " / " + limiteStr
-    def play(self, texte) :
+
+    def play(self, texte):
+        """ play 
+        Cette fonction est la première appelé quand on clique sur le bouton play
+        Elle s'occupe des animations jusqu'a ce que le robot soit sur sa position final
+        Ce n'est pas elle qui calcule le parcours, c'est une autre fonction : verif
+        Elle se contente de faire bouger les objets en fonction des résultats, 
+        en appeleant finAnim pour faire revenir les objets à leur place , afficher le message et jouer le son
+        args :
+            str : texte: les instructions rentrés par l'utilisateur
+        """
         listePos, listePosObjets, listeOrientation, listeObjet, message, son = self.verif(texte)
         nbObjet = len(listePosObjets)
         Animation.cancel_all(self.robot)
         self.robot.source = "assets/Images/robot/robot_droite_sans.png"
         self.sound.stop()
+
         def animerRobot(orientation, objet, robot):
-            traductionOrientation = { 1 : "droite", -1 : "gauche", 10 : "bas", -10 : "haut"}
-            traductionObjet = { "sans" : "sans", 0 : "bleu", 1 : "violet", 2 : "rouge"}
+            """ animerRobot
+            Cette fonction change l'image du robot pour montrer l'orientation/ les objets du robot
+            Cette fonction dans une fonction était nécessaire pour faire changer l'image du robot car le module animation
+            que l'on utilise pour faire bouger le robot ne peut pas faire changer l'image. 
+            args :
+                orientation : int : le sens du robot
+                objet : str ou int : si le robot tient un objet/lequel
+                robot : l'objet kivy sur lequel on applique le changement d'image
+            """
+            traductionOrientation = {1: "droite", -1: "gauche", 10: "bas", -10: "haut"}
+            traductionObjet = {"sans": "sans", 0: "bleu", 1: "violet", 2: "rouge"}
             robot.source = "assets/Images/robot/robot_" + traductionOrientation[orientation] + "_" + traductionObjet[objet] + ".png"
+
         anim = Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)
-        if nbObjet > 0 :
-            Animation.cancel_all(self.obj0)
-            animObj0 = Animation(pos_hint =self.posToCoord(listePosObjets[0][0]), duration = 0)
-            if nbObjet >= 2:
+        if nbObjet > 0 >= 2:
                 Animation.cancel_all(self.obj1)
                 animObj1 = Animation(pos_hint =self.posToCoord(listePosObjets[1][0]), duration = 0)
                 if nbObjet == 3:
                     Animation.cancel_all(self.obj2)
                     animObj2 = Animation(pos_hint =self.posToCoord(listePosObjets[2][0]), duration = 0)
-        if len(listePos) >= 1 :
-            for i in range(1, len(listePos)) :
+        if len(listePos) >= 1:
+            for i in range(1, len(listePos)):
                 coordoneei = self.posToCoord(listePos[i])
                 coordoneeimoins = self.posToCoord(listePos[i - 1])
-                coordoneeFinal = {"center_x" : (coordoneei["center_x"] + coordoneeimoins["center_x"])/2, "center_y" : (coordoneei["center_y"] + coordoneeimoins["center_y"])/2} #permet de faire une moitié du trajet
+                coordoneeFinal = {"center_x": (coordoneei["center_x"] + coordoneeimoins["center_x"])/2, "center_y": (coordoneei["center_y"] + coordoneeimoins["center_y"])/2} #permet de faire une moitié du trajet
                 animProvisoire = Animation(pos_hint = coordoneeFinal, duration = .25)
                 animProvisoire.on_complete = partial(animerRobot, listeOrientation[i], listeObjet[i])
                 anim += animProvisoire
                 animProvisoire2 = Animation(pos_hint = coordoneei, duration = .25)
                 anim += animProvisoire2
-                if nbObjet > 0 :
-                    if listePosObjets[0][i - 1] == listePosObjets[0][i] :
+                if nbObjet > 0:
+                    if listePosObjets[0][i - 1] == listePosObjets[0][i]:
                         animObj0 += Animation(duration = .5)
                     else: 
                         animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i - 1]), duration = .25)
                         animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i]), duration = 0) #permet a l'objet d'apparaitre/disparaitre instant
                         animObj0 += Animation(pos_hint =self.posToCoord(listePosObjets[0][i]), duration = .25) 
                     if nbObjet >= 2:
-                        if listePosObjets[1][i - 1] == listePosObjets[1][i] :
+                        if listePosObjets[1][i - 1] == listePosObjets[1][i]:
                             animObj1 += Animation(duration = .5)
                         else: 
                             animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i - 1]), duration = .25)
                             animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i]), duration = 0) #permet a l'objet d'apparaitre/disparaitre instant
                             animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i]), duration = .25) 
                         if nbObjet == 3:
-                            if listePosObjets[2][i - 1] == listePosObjets[2][i] :
+                            if listePosObjets[2][i - 1] == listePosObjets[2][i]:
                                 animObj2 += Animation(duration = .5)
                             else: 
                                 animObj2 += Animation(pos_hint =self.posToCoord(listePosObjets[2][i - 1]), duration = .25)
@@ -274,15 +389,25 @@ class CustomLevelScreen(Screen):
                                 animObj2 += Animation(pos_hint =self.posToCoord(listePosObjets[2][i]), duration = .25) 
             anim.on_complete = partial(self.finAnim , message, listePos, listePosObjets, son)
         anim.start(self.robot)
-        if nbObjet >0 :
+        if nbObjet >0:
             animObj0.start(self.obj0)
             if nbObjet >= 2:
                 animObj1.start(self.obj1)
-            if nbObjet == 3:
-                animObj2.start(self.obj2)
-    def finAnim(self, message, listePos, listePosObjet, son, *args) :
+                if nbObjet == 3:
+                    animObj2.start(self.obj2)
+
+    def finAnim(self, message, listePos, listePosObjets, son, *args):
+        """ finAnim
+        Cette fonction est appelé quand l'animation est fini, pour faire revenir les élements à leur place, afficher le message et jouer le son
+        Elle vérifie aussi si les Icones pour changer d'étage rapidement doivent être activé (si on a réussi le niveau)
+        args : 
+            message : str : le message de réussite/ d'échec a affiché
+            listePos : liste : la liste des positions du robot pendant son parcours
+            listePosObjets : liste : la liste des position des objets pendant le parcours du robot
+            son : str : le chemin d'accès vers le son a joué
+        """
         lvl = self.getLvl()
-        DataLvl = self.getLvlJson()
+        nbObjets = len(listePosObjets)
         fichierMax = open("assets/max_level.txt", "r")
         lvlMax = fichierMax.read()
         fichierMax.close()
@@ -295,18 +420,18 @@ class CustomLevelScreen(Screen):
             anim3 += Animation(pos_hint =self.posToCoord(listePos[0]), duration = 0)
             anim3.on_complete = resetImage
             anim3.start(self.robot)
-        if "nbObjets" in DataLvl :
-            anim4= Animation(pos_hint = self.posToCoord(listePosObjet[0][len(listePosObjet[0]) - 1]), duration =  2.5)
-            anim4 += Animation(pos_hint =self.posToCoord(listePosObjet[0][0]), duration = 0)
+        if nbObjets >= 1:
+            anim4= Animation(pos_hint = self.posToCoord(listePosObjets[0][len(listePosObjets[0]) - 1]), duration =  2.5)
+            anim4 += Animation(pos_hint =self.posToCoord(listePosObjets[0][0]), duration = 0)
             anim4.start(self.obj0)
-            if DataLvl["nbObjets"] >= 2:
-                anim5= Animation(pos_hint = self.posToCoord(listePosObjet[1][len(listePosObjet[1]) - 1]), duration =  2.5)
-                anim5 += Animation(pos_hint =self.posToCoord(listePosObjet[1][0]), duration = 0)
+            if nbObjets >= 2:
+                anim5= Animation(pos_hint = self.posToCoord(listePosObjets[1][len(listePosObjets[1]) - 1]), duration =  2.5)
+                anim5 += Animation(pos_hint =self.posToCoord(listePosObjets[1][0]), duration = 0)
                 anim5.start(self.obj1)
-            if DataLvl["nbObjets"] == 3:
-                anim6= Animation(pos_hint = self.posToCoord(listePosObjet[2][len(listePosObjet[2]) - 1]), duration =  2.5)
-                anim6 += Animation(pos_hint =self.posToCoord(listePosObjet[2][0]), duration = 0)
-                anim6.start(self.obj2)
+                if nbObjets == 3:
+                    anim6= Animation(pos_hint = self.posToCoord(listePosObjets[2][len(listePosObjets[2]) - 1]), duration =  2.5)
+                    anim6 += Animation(pos_hint =self.posToCoord(listePosObjets[2][0]), duration = 0)
+                    anim6.start(self.obj2)
         JsonSettings = open('assets/settings.json',)
         SettingsData = json.load(JsonSettings)
         JsonSettings.close()
@@ -314,9 +439,41 @@ class CustomLevelScreen(Screen):
             self.sound = SoundLoader.load(son)
             self.sound.volume = SettingsData["sonVolume"]
             self.sound.play()
-    def posToCoord(self, pos) :
-        return {"center_x" : (0.455625 + 0.0333984375 + ((pos%10 - 1) * 0.066796875)), "center_y": (0.025 + 0.059375 + ((8 - (pos//10)) * 0.11875))} # (x : début de l'image + demi case  + (unité de la pos * taille d'un carreau) y : début de l'image + demi carrreau +  dizaine de la pos * 9/8 * 0.1)
-    def verif(self,texte) :
+
+    def posToCoord(self, pos):
+        """ posToCoord
+        Cette fonction est centrale dans le pogramme. Pour calculer la position du robot, on utilise un système de grille avec des 
+        cases qui vont de 11 à 88 (le premier chiffre est la ligne, qu'on compte de haut en bas et le deuxième la colonne,
+        qu'on compte de gauche à droite. Cette fonction 'traduis' ce numéro de grille en coordonée
+
+        Voila le calcul qu'effectue la fonction de façon plus ou moin compréhensible par un humain :
+        center_x : début de l'image + demi case  + unité de la pos * taille d'un carreau 
+        center_y : début de l'image + demi carrreau +  dizaine de la pos * taille d'un carreau
+
+        args: 
+            pos : int : la position, selon la notation de la grille
+        returns:
+            dictionary : la position de l'objet près pour l'affichage de kivy
+        """
+
+        return {"center_x": (0.455625 + 0.0333984375 + ((pos%10 - 1) * 0.066796875)), "center_y": (0.025 + 0.059375 + ((8 - (pos//10)) * 0.11875))} 
+
+    def verif(self,texte):
+        """verif
+        Cette fonction est le véritable alghorithme qui vérifie les instructions de l'utilisateur
+        Il execute et vérifie toutes les instructions, en ajoutant la positon/l'orientation/les objets dans des liste
+        Il renvoi ensuite toutes les données nécessaires pour l'affichage du résultat
+        args : 
+            str : texte: les instructions rentrés par l'utilisateur
+        returns :
+            listePosRobot : liste : la liste des positions du robot pendant son parcours
+            listePosObjets : liste : la liste des positions des objets pendant le parcours du robot
+            listeOrientation : liste : la liste des orientation du robot pendant son parcours
+            listeObjet : liste : liste des objet tenu par le robot pendant son parcours
+            message : str : le message de réussite/ d'échec a affiché
+            son : str : le chemin d'accès vers le son a joué
+    
+        """
         lvl = self.getLvl()
         DataLvl = self.getLvlJson()
         texte = texte.lower()
@@ -327,45 +484,45 @@ class CustomLevelScreen(Screen):
         listePosObjets = []
         posObjets = []
         message = "ECHEC : Il manque une/des instruction(s)"
-        son =  "assets/Sound/fail.mp3"
+        son = "assets/Sound/fail.mp3"
         posRobot = DataLvl["d"]
         listePosRobot.append(posRobot)
         orientationRobot = 1
         listeOrientation.append(orientationRobot)
-        objet = {"tenir" : False, "numero" : 0}
+        objet = {"tenir": False, "numero": 0}
         listeObjet.append("sans")
-        cyleOrientation = { 1 : 10, 10 : -1, -1 : -10, -10 : 1} # Permet de changer l'orientation sans avoir à faire 40 milles if/elif (gain de perfs), initialement orienté pour tourner à droite
-        cycleTapis = {"t-d" : 1, "t-g" : -1, "t-h" : -10, "t-b" : 10}
-        if "nbObjets" in DataLvl : 
+        cyleOrientation = {1: 10, 10: -1, -1: -10, -10: 1} # Permet de changer l'orientation sans avoir à faire 40 milles if/elif, initialement orienté pour tourner à droite
+        cycleTapis = {"t-d": 1, "t-g": -1, "t-h": -10, "t-b": 10}
+        if "nbObjets" in DataLvl: 
             posObjets = [DataLvl["dObjet" + str(s)] for s in range(DataLvl["nbObjets"])]
             listePosObjets = [[s] for s in posObjets]
-        terminer = ("limite" in DataLvl and DataLvl["limite"] < len(listeInstructions) or (len(listeInstructions) > 100))
-        if terminer :
+        terminer = ("limite" in DataLvl and DataLvl["limite"] < len(listeInstructions) or (len(listeInstructions) > 50))
+        if terminer:
             message = "ECHEC : Limite d'instructions dépassé"
             son = "assets/Sound/error.mp3"
         nbExecution = 0
-        while not terminer and nbExecution < len(listeInstructions) :
+        while not terminer and nbExecution < len(listeInstructions):
             instruction = listeInstructions[nbExecution]
-            if instruction == "avancer" :
+            if instruction == "avancer":
                 posRobot += orientationRobot
-            elif instruction == "reculer" :
+            elif instruction == "reculer":
                 posRobot -= orientationRobot
-            elif instruction == "droite" :
+            elif instruction == "droite":
                 orientationRobot = cyleOrientation[orientationRobot]
-            elif instruction == "gauche" :
+            elif instruction == "gauche":
                 orientationRobot = - cyleOrientation[orientationRobot]
-            elif instruction == "attendre" and lvl >= 9 :
+            elif instruction == "attendre" and lvl >= 9:
                 pass
-            elif instruction == "sauter" and lvl >= 9 :
-                if str(posRobot + orientationRobot) in DataLvl :
+            elif instruction == "sauter" and lvl >= 9:
+                if str(posRobot + orientationRobot) in DataLvl:
                     terminer = True
                     message = "ECHEC : Tu ne peut sauter que par dessus le vide"
                     son = "assets/Sound/impossible.mp3"
-                else :
+                else:
                     posRobot += 2 * orientationRobot
-            elif instruction == "prendre" and lvl >= 17 :
+            elif instruction == "prendre" and lvl >= 17:
                 if "nbObjets" in DataLvl and (posRobot + orientationRobot) in posObjets:
-                    if objet["tenir"] :
+                    if objet["tenir"]:
                         terminer = True
                         message = "ECHEC : Tu tiens déjà un objet"
                         son = "assets/Sound/impossible.mp3"
@@ -373,13 +530,13 @@ class CustomLevelScreen(Screen):
                         objet["tenir"] = True
                         objet["numero"] = posObjets.index((posRobot + orientationRobot))
                         posObjets[objet["numero"]] = 0
-                else :
+                else:
                     terminer = True
                     message = "ECHEC : Il n'y a pas d'objet à prendre"
                     son = "assets/Sound/impossible.mp3"
-            elif instruction == "déposer" and lvl >= 17 :
-                if "nbObjets" in DataLvl and objet["tenir"] :
-                    if str(posRobot + orientationRobot) in DataLvl and DataLvl[str(posRobot + orientationRobot)] in ["c","f"] and (posRobot + orientationRobot) not in posObjets :
+            elif instruction == "déposer" and lvl >= 17:
+                if "nbObjets" in DataLvl and objet["tenir"]:
+                    if str(posRobot + orientationRobot) in DataLvl and DataLvl[str(posRobot + orientationRobot)] in ["c","f"] and (posRobot + orientationRobot) not in posObjets:
                         objet["tenir"] = False
                         posObjets[objet["numero"]] = posRobot + orientationRobot
                     else:
@@ -390,7 +547,7 @@ class CustomLevelScreen(Screen):
                     terminer = True
                     message = "ECHEC : Tu n'as pas d'objet à poser"
                     son = "assets/Sound/impossible.mp3"
-            elif instruction == "#tricher" :
+            elif instruction == "#tricher":
                     terminer = True
                     son = "assets/Sound/boo.mp3"
                     message = "Tricher c'est mal !!!"
@@ -399,52 +556,52 @@ class CustomLevelScreen(Screen):
                     fichierMax.truncate()
                     fichierMax.write("24")
                     fichierMax.close()
-            else :
+            else:
                 terminer = True
                 message = "ECHEC : Mot incorrect dans le script"
                 son = "assets/Sound/impossible.mp3"
             listePosRobot.append(posRobot)
             listeOrientation.append(orientationRobot)
-            for c in range(len(listePosObjets)) :
+            for c in range(len(listePosObjets)):
                 listePosObjets[c].append(posObjets[c])
-            if objet["tenir"] :
+            if objet["tenir"]:
                 listeObjet.append(objet["numero"])
             else: 
                 listeObjet.append("sans")
-            if str(posRobot) in DataLvl :
-                if "tp" in DataLvl[str(posRobot)] :
+            if str(posRobot) in DataLvl:
+                if "tp" in DataLvl[str(posRobot)]:
                     posRobot = int(DataLvl[str(posRobot)][-2:])
                     listePosRobot.append(posRobot)
                     listeOrientation.append(orientationRobot)
-                    for c in range(len(listePosObjets)) :
+                    for c in range(len(listePosObjets)):
                         listePosObjets[c].append(posObjets[c])
-                    if objet["tenir"] :
+                    if objet["tenir"]:
                         listeObjet.append(objet["numero"])
                     else: 
                         listeObjet.append("sans")         
-                elif "t-" in DataLvl[str(posRobot)] :
+                elif "t-" in DataLvl[str(posRobot)]:
                     posRobot += cycleTapis[DataLvl[str(posRobot)]]
                     listePosRobot.append(posRobot)
                     listeOrientation.append(orientationRobot)
-                    for c in range(len(listePosObjets)) :
+                    for c in range(len(listePosObjets)):
                         listePosObjets[c].append(posObjets[c])  #(nécessaire pour que les anims des objets et le robot soit synchro)
-                    if objet["tenir"] :
+                    if objet["tenir"]:
                         listeObjet.append(objet["numero"])
                     else: 
                         listeObjet.append("sans")
-                if str(posRobot) in DataLvl :
-                    if not (posRobot in posObjets) :
-                        if DataLvl[str(posRobot)] == "f" and (nbExecution +1) == len(listeInstructions) :
+                if str(posRobot) in DataLvl:
+                    if not (posRobot in posObjets):
+                        if DataLvl[str(posRobot)] == "f" and (nbExecution +1) == len(listeInstructions):
                             terminer = True
                             succes = True
                             nbObjets = len(posObjets)
-                            while succes and nbObjets > 0 :
+                            while succes and nbObjets > 0:
                                 succes = (posObjets[nbObjets - 1] == DataLvl["fObjet" + str(nbObjets - 1)]) 
                                 nbObjets -=1
-                            if succes :
+                            if succes:
                                 message = "REUSSI : Bravo, tu as réussi le niveau " + str(lvl)
                                 son = "assets/Sound/victory.mp3"
-                                if lvl == 24 :
+                                if lvl == 24:
                                     message = "REUSSI : Félicitation, tu as réussi tous les niveaux !!!"
                                     son = "assets/Sound/fini.mp3"
                                 fichierMax = open("assets/max_level.txt", "r+")
@@ -453,10 +610,10 @@ class CustomLevelScreen(Screen):
                                     fichierMax.truncate()
                                     fichierMax.write(str(lvl +1))
                                 fichierMax.close()
-                            else :
+                            else:
                                 message = "ECHEC : Un objet n'est pas à sa place "
                                 son = "assets/Sound/fail.mp3"
-                    else :
+                    else:
                         terminer = True
                         message = "ECHEC : Tu ne peux pas traverser un objet"
                         son = "assets/Sound/punch.mp3"
@@ -464,44 +621,38 @@ class CustomLevelScreen(Screen):
                     terminer = True
                     message = "ECHEC : Tu sors du parcours"
                     son = "assets/Sound/fall.mp3"
-            else :
+            else:
                 terminer = True
                 message = "ECHEC : Tu sors du parcours"
                 son = "assets/Sound/fall.mp3"
             nbExecution += 1
         return listePosRobot, listePosObjets, listeOrientation, listeObjet, message, son
-    
-    def indice(self):
-        DataLvl = self.getLvlJson()
-        if "indice" in DataLvl :
-            self.ids._labelResultat.text = DataLvl["indice"]
-        else:
-            self.ids._labelResultat.text = "Pas d'indice pour ce niveau"
-        
-    def cancel(self) :
-        DataLvl = self.getLvlJson()
-        Animation.cancel_all(self.robot)
-        self.robot.pos_hint = self.posToCoord(DataLvl["d"])
-        self.robot.source = "assets/Images/robot/robot_droite_sans.png"
-        if "nbObjets" in DataLvl :
-            Animation.cancel_all(self.obj0)
-            self.obj0.pos_hint = self.posToCoord( DataLvl["dObjet0"])
-            if DataLvl["nbObjets"] >=2 :
-                Animation.cancel_all(self.obj1)
-                self.obj1.pos_hint = self.posToCoord( DataLvl["dObjet1"])
-                if DataLvl["nbObjets"] == 3 :
-                    Animation.cancel_all(self.obj2)
-                    self.obj2.pos_hint = self.posToCoord( DataLvl["dObjet2"])
-        self.sound.stop()
         
 class CoursScreen(Screen):
+    """ CoursScreen
+    Cet écran permet la selection entre les cours 
+    Args :
+        Screen (Screen) : affiche du contenu
+    """
     def setCours(self, cours):
+        """ setCours
+        Cette fonction change le cours qu'on va voir
+        args :
+            cours : int : le numéro du cours que l'on va voir"""
         fichier = open("assets/current_cours.txt", "w")
         fichier.write(cours)
         fichier.close()
 
 class CustomCoursScreen(Screen):
+    """ CustomCoursScreen
+    Cet écran est l'écran de base des cours qui est réutilisé à chaque fois que l'on va sur un cours
+    Args :
+        Screen (Screen) : affiche du contenu
+    """
     def chargementCours(self):
+        """chargement
+        Cette fonction va être appelé dès que l'écran est affiché et met à jour visuelement le texte/les images a affichés
+        """
         fichier_cours = open("assets/current_cours.txt", "r")
         cours = fichier_cours.read()
         fichier_cours.close()
@@ -514,10 +665,23 @@ class CustomCoursScreen(Screen):
         self.ids._imageCours2.source = "assets/Images/cours/img_cours_" + str(cours + str(1)) + ".png"
 
 class WindowManager(ScreenManager):
+    """ WindowManager
+    Ce composant est appelé au démarage de l'application, c'est lui qui gère quel écran affiché
+    Args :
+        SreenManager (SreenManager) : gère l'affichage des écrans
+    """
     pass
 
 class Incredibot(App):
+    """ Incredibot
+    C'est la base de l'application, qui initialise tout ces composants et affiche la fenetre de l'application
+    Args :
+        App(App) : classe qui s'execute quand on lance l'app
+    """
+
     def build(self):
+        """build
+        La première fonction a être appelé quand l'application se lance, elle défini les propriété de la fenêtre (et lance la musique)"""
         self.title = 'Incredibot'
         self.icon = 'assets/Images/icon.png'
         self.music = SoundLoader.load("assets/Sound/music.mp3")
@@ -526,37 +690,67 @@ class Incredibot(App):
         JsonSettings.close()
         self.music.loop = True
         self.music.volume = SettingsData["musiqueVolume"]
-        if SettingsData["musique"] :
+        if SettingsData["musique"]:
             self.music.play()
         kv = Builder.load_file("main.kv")
         return kv
+
     def getVolumeMusic(self):
+        """ getVolumeMusic
+        Cette fonction renvoi le volume de la musique défini dans data.json
+        returns :
+            float : volume de la musique
+        """
         JsonSettings = open('assets/settings.json',)
         SettingsData = json.load(JsonSettings)
         JsonSettings.close()
         return SettingsData["musiqueVolume"]
+
     def getVolumeSon(self):
+        """ getVolumeSon
+        Cette fonction renvoi le volume des effets sonores défini dans data.json
+        returns :
+            float : volume des effets sonores
+        """
         JsonSettings = open('assets/settings.json',)
         SettingsData = json.load(JsonSettings)
         JsonSettings.close()
         return SettingsData["sonVolume"]
-    def getMusicState(self) :
+
+    def getMusicState(self):
+        """ getMusicState
+        Cette fonction renvoi les valeurs que doivent prendre les boutons qui permette de couper la musique
+        returns:
+            tuple : l'état des boutons qui permette de couper la musique
+        """
         JsonSettings = open('assets/settings.json',)
         SettingsData = json.load(JsonSettings)
         JsonSettings.close()
-        if SettingsData["musique"] :
+        if SettingsData["musique"]:
             return("down","normal")
         else: 
             return ("normal", "down")
-    def getSonState(self) :
+
+    def getSonState(self):
+        """ getSonState
+        Cette fonction renvoi les valeurs que doivent prendre les boutons qui permette de couper les effets sonores
+        returns:
+            tuple : l'état des boutons qui permette de couper les effets sonores
+        """
         JsonSettings = open('assets/settings.json',)
         SettingsData = json.load(JsonSettings)
         JsonSettings.close()
-        if SettingsData["son"] :
+        if SettingsData["son"]:
             return("down","normal")
         else: 
             return ("normal", "down")
+
     def changeVolumeSon(self,*args):
+        """ changeVolumeSon
+        Cette fonction change le volume des effets sonores à partir du slider des paramètres
+        args:
+            liste : toutes les infos du slider ([0] : l'identifiant de l'objet, [1] : sa valeur)
+        """
         JsonSettings = open('assets/settings.json',"r+")
         SettingsData = json.load(JsonSettings)
         SettingsData["sonVolume"] = args[1]
@@ -564,7 +758,13 @@ class Incredibot(App):
         JsonSettings.write(json.dumps(SettingsData))
         JsonSettings.truncate()
         JsonSettings.close()
+
     def changeVolumeMusic(self,*args):
+        """ changeMusSon
+        Cette fonction change le volume de la musique à partir du slider des paramètres
+        args:
+            liste : toutes les infos du slider ([0] : l'identifiant de l'objet, [1] : sa valeur)
+        """
         JsonSettings = open('assets/settings.json',"r+")
         SettingsData = json.load(JsonSettings)
         SettingsData["musiqueVolume"] = args[1]
@@ -573,10 +773,17 @@ class Incredibot(App):
         JsonSettings.truncate()
         JsonSettings.close()
         self.music.volume = args[1]
-    def changeMusic(self, state, element) :
+
+    def changeMusic(self, state, element):
+        """ changeMusic
+        Cette fonction permet de couper/ d'activer la musique
+        args:
+            state : str : état du bouton (down ou normal)
+            element : str : type du bouton (Oui ou non)
+        """
         JsonSettings = open('assets/settings.json',"r+")
         SettingsData = json.load(JsonSettings)
-        if (state == "down" and element == "Oui") or (state == "normal" and element == "Non") :
+        if (state == "down" and element == "Oui") or (state == "normal" and element == "Non"):
             SettingsData["musique"] = True
             self.music.play()
         else: 
@@ -586,21 +793,32 @@ class Incredibot(App):
         JsonSettings.write(json.dumps(SettingsData))
         JsonSettings.truncate()
         JsonSettings.close()
-    def changeSon(self, state, element) :
+
+    def changeSon(self, state, element):
+        """ changeSon
+        Cette fonction permet de couper/ d'activer les effets sonores
+        args:
+            state : str : état du bouton (down ou normal)
+            element : str : type du bouton (Oui ou non)
+        """
         JsonSettings = open('assets/settings.json',"r+")
         SettingsData = json.load(JsonSettings)
-        if (state == "down" and element == "Oui") or (state == "normal" and element == "Non") :
+        if (state == "down" and element == "Oui") or (state == "normal" and element == "Non"):
             SettingsData["son"] = True
-        else: 
+        else:
             SettingsData["son"] = False
         JsonSettings.seek(0)
         JsonSettings.write(json.dumps(SettingsData))
         JsonSettings.truncate()
         JsonSettings.close()
+
     def resetSettings(self):
-        JsonSettings = open('assets/settings.json',"r+")
-        SettingsData = {'musique': True, 'musiqueVolume': 0.5 , 'son': True, 'sonVolume': 0.8}
-        JsonSettings = open('assets/settings.json',"r+")
+        """ resetSettings
+        Cette fonction remet les paramètres de l'application aux paramètres par défauts
+        """
+        JsonSettings = open('assets/settings.json', "r+")
+        SettingsData = {'musique': True, 'musiqueVolume': 0.5, 'son': True, 'sonVolume': 0.8}
+        JsonSettings = open('assets/settings.json', "r+")
         JsonSettings.seek(0)
         JsonSettings.write(json.dumps(SettingsData))
         JsonSettings.truncate()
@@ -609,11 +827,23 @@ class Incredibot(App):
         self.music.play()
 
     def close_application(self):
+        """ close_application
+        Cette fonction est appelé quand on appuie sur le bouton quit et permet de quitter l'application
+        """
         App.get_running_app().stop()
         Window.close()
-    def on_stop(self): #permet de régler le bug thonny
+
+    def on_stop(self):
+        """ on_stop
+        Cette fonction (qui est en fait un évenement) est appelé dès qu'on appuie sur la croix de la fenêtre pour quitter l'application. 
+        Le rajout de Window.close() à cet évenement permet à l'application de se fermer correctement sur tout les ide.
+        """
         Window.close()
+
+
 if __name__ == "__main__":
-    Config.set("input","mouse","mouse,multitouch_on_demand")
-    Window.maximize()
-    Incredibot().run()
+    """ Règles certains paramètres quand on lance l'application"""
+    kivy.require("2.1.0")  #vérifie la version de kivy
+    Config.set("input", "mouse", "mouse,multitouch_on_demand")  # permet de désactiver le mode multiTouch
+    Window.maximize()  # permet de lancer la fenêtre en taille maximal
+    Incredibot().run() #lance l'application quand on clique sur run (ou lancer)

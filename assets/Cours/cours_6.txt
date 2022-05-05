@@ -1,20 +1,8 @@
-
-
-
-
-
-
-
-Les tapis roulants ressemble de très loin au boucles (ne vous ennervenez pas amis codeurs, je n'ai pas trouvé d'autre rapprochement...)
-Les tapis roulants donc fonctionne tout au long de l'execution du programme, que vous soyez dessus ou non. Ils s'actionnent donc indéfiniment jusqu'à ce que votre programme soit totalement executer.
-Une boucle, comme son noml'indique, repetra les instructions qu'elle contient un nombre de fois demander. Par exemple :
-for i in range (360):
-    a = a + 1
-    print("j'ai un Q.I de", a)
-
-affichera :
-j'ai un Q.I de 0
-J'ai un Q.I de 1
-etc ...
-J'ai un Q.I de 359
-(car la valeur a vaut d'abord 0 puis 1 puis 2...)
+Pour faire des programmes, vous aurez besoin d’un ordinateur, d’un langage de programmation et d’un IDE mais c’est pas obligé.
+Un ordinateur est composé (d’après l'architecture de Von Neumann):
+-D’une mémoire à accès aléatoire appelé plus communément RAM
+-Une unité de contrôle AGATHE
+-Une unité arithmétique et logique qui est chargé des faire des calculs entre des chiffres écrits en binaire
+Ces composants fonctionnent ensemble et sont indissociables.
+Ensuite, pour des programmes, vous avez plusieurs langages disponibles, le C, C++, Java, Python, Pascal, etc… 
+Ces languages peuvent etre rapprocher aux différentes langues dans le monde. Cependant il n’existe pas de traduction entre les programmes. Les seuls commentaires que nous pouvons faire sur ces languages c’est que le C est un langage typé statiquement, tandis que Python est un langage typé dynamiquement.

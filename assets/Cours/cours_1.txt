@@ -1,14 +1,15 @@
-[b]Introduction :[/b]
+[b]Introduction :[/b]
 Bonjour,
-Bienvenue sur l’application Incredibot
-Incredibot est une application destinée aux novices en informatique de facon à comprendre les bases de la programmation.
-Vous aller devoir aider un petit robot, Quill, à sortir de l’usine où il est enfermé.
-
-Cette usine se découpe en 4 étages, chacun muni de 8 levels. Pour que Quill puisse quitter l’usine, il faut qu’il est accompli tout les niveaux. Pour que quill puisse passer d’un étage à l’autre, il doit d’abord avoir accompli tout les levels de l’étage précedant. Pour que se soit un peu plus clair, voici comment se décompose un level :
-Vous avez à droite le plan du robot. Le robot avec marqué « Incredibot » représente Quill. Le triangle vert montre le depart du robot et le drapeau rouge la fin du niveau.
-Chaque petit carré noire représente une case. C’est ici et seulement ici ou Quill peut passer pour aller vers la fin du niveau.
-A gauche vous avez plusieurs bouton :
-Pour que Quill puisse aller à la fin du niveau, VOUS aller le guider en lui donnant des instructions.
-Quill fera exactement les instructions que vous lui avez donner. Les instructions sont une suite d’ordres, envoyés a Quill, qu’il appliquera. Par exemple, l’instruction « avancer » permetra à Quill d’avancer d’une case. Quill se retrouva donc dans la case juste d’à coter. (voire la photo ci dessus)
-Pour l’instruction reculer, il reculera d’une case avec le même modèle que celle d’« avancer »
-Pour les instructions « Droite et Gauche », Quill s’orientera soit de 90° vers la droite pour droite et 90° vers la gauche pour gauche.
+Bienvenue sur l’application Incredibot.
+Incredibot est une application destinée aux novices en informatique qui leur permettra de comprendre les bases de la programmation.
+Dans l’application, vous allez devoir aider un robot à compléter des parcours à l’aide d'instructions . Cette application est composée de 24 niveaux, répartis en 3 étages. A chaque étage, il vous sera introduit de nouvelles instructions. Plus vous avancerez dans l'application, plus les niveaux seront difficiles. 
+ 
+ 
+ 
+Pour que ce soit un peu plus clair, voici comment se décompose un level (image) :
+Vous avez à droite le plan du niveau. Le robot représente le robot. Le triangle vert montre le départ du robot et le drapeau à damier, l'arrivée. Chaque carré blanc représente une case, et à l'inverse, ce qui est en gris est concidéré comme du vide.
+A gauche, vous avez plusieurs boutons  :
+Pour que le robot puisse aller à la fin du niveau, vous allez, le guider en lui donnant des instructions.
+Le robot suivra les instructions que vous lui avez données. Par exemple, l’instruction « avancer » permettra au robot d’avancer d’une case dans la direction indiquer par la flèche.
+Pour l’instruction « reculer », il reculera d’une case avec le même modèle que celle d’« avancer »
+Pour les instructions « Droite et Gauche », le robot s’orientera soit de 90° vers la droite pour « droite » et 90° vers la gauche pour « gauche »

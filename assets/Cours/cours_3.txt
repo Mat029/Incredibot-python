@@ -1,9 +1,10 @@
-[b]Déplacement d’objet :[/b]
-Les objets sont des objets comme dans la vrai vie. Votre but, mettre ses objets sur leurs emplacements adéquats afin de pouvoir atteindre l’arrivé. Ces objets seront représentés par des étoiles (le premier qui dit que je suis anti juif je le bifle) et leur emplacement par des cercle avec un trou en forme d’etoile dedans. Voici un exemple d’un niveau avec un objet  (image de gauche):
-
-Pour prendre et deposer un objet, quill doit se trouver face à l’objet puis doit recevoir l’instruction "prendre" pour recuperer l’objet (image de gauche).
-Pour pouvoir aller sur l'arrivée, il faut que tout les objets soit sur leur emplacements respectif.
-
-Ici Quill peut recuepre l’objet en face de lui et peut ainsi bouger normalement pour le deposer sur son emplacement (image de droite).
-Cependant plusieurs contraintes existent avec les objets. Tout d’abord vous ne pouvez pas marcher sur un objet, ni sauter par dessus les objets.
-Cependant Quill peut passer sur un emplacement d’objets seulement si l’objet n’y es pas dessus.
+[b]Déplacement d’objet :[/b]
+Les objets sont des objets comme dans la vraie vie. Votre but, mettre ces objets sur leurs emplacements adéquats afin de pouvoir atteindre l’arrivée. Ces objets seront représentés par des étoiles et leurs emplacements par des cercles. Voici un exemple d’un niveau avec un objet  (image de gauche):
+ 
+Pour prendre et déposer un objet, le robot doit se trouver face à l’objet puis doit recevoir l’instruction "prendre" pour récupérer l’objet (image de gauche).
+Pour pouvoir aller sur l'arrivée, il faut que tous les objets soient sur leurs emplacements respectifs.
+ 
+Ici le robot peut récupérer l’objet en face de lui (l'objet apparait au-dessus de lui pour que vous puissiez savoir si le robot porte un objet ou non). Il peut ainsi bouger normalement pour le déposer sur son emplacement (image de droite).
+Cependant, plusieurs contraintes existent avec les objets :
+Tout d’abord, vous ne pouvez pas marcher sur un objet, ni sauter par-dessus les objets.
+Le robot peut passer sur un emplacement d’objet seulement si l’objet n’est pas présent dessus.

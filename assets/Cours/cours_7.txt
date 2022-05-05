@@ -1,21 +1,15 @@
+En vous ayant introduit les bases des bases de l’informatique moderne, nous allons maintenant essayer de les completer.
+Tout d’abord, dans un premier temps, un programme peut contenir des affectations de variables.
+Une variable est un symbole dans lequel il est possible de stocker une valeur. L’affectation de variable est l’action de stocker une valeur dans une variable.
+Par exemple, si vous voulez compter le nombre de tour que fait une machine à laver vous aller d’abord definir votre variable à 0
+nbtour → 0 
+(j’ai volontairement miss une flèche ici car elle depend du language utilisé)
+Puis dès que vos capteurs se rencontrent, vous aller ajouter 1 à votre variable :
+nbtour → nbtour + 1
+C’est a peu près ce qui ce passe dans les niveaux avec des objets.
+En prenant un objet, la valeur 1 va être affecetrer à la variable charger de savoir si le robot à pris l’objet ou non ( en l’occurence AGATHE 0 COMPLETER dans notre code). 
+Enfin les tapis roulants sont des évènements exeternent qui viennent “pimenter” ou plustôt “nourir” votre programme. En algorithmie, ce genre d’évènements peut se définir par la définition de variable de l’utilisateur en lui même. En effet en python, on peut demander à l’utilisateur un nombre ou bien même une chaine de caractère. Celle ci peu être recupere par le programme avec 
+utilisateur = nombre( int(input()) en python )
+ou encore
+utlisatue = chaine G OUBLIER AGATHE
 
-
-
-
-Prendre ou déposer peut se traduire en algorithmie par la modification d'une variable.
-Une variable en python est l'association d'une valeur à un champ de texte, par exemple :
-
-a = 3
-print("j'aime" a "fois plus Incredibot que Google")
-renvoie :
-j'aime 3 fois plus Incredibot que Google
-
-la valeur de la variable peut également être modifier comme par exemple : (n'oublions pas que a vaut 3)
-
-a = 3
-print("j'aime" a "fois plus Incredibot que Google")
-a = a + 2
-print("j'aime" a "fois plus Incredibot que Google")
-renvera :
-j'aime 3 fois plus Incredibot que Google
-j'aime 5 fois plus Incredibot que Google

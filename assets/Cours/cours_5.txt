@@ -1,17 +1,7 @@
-
-
-
-
-Ici nous allons vous présenter les relations entre ce que vouys venez de faire et les liens avec la programation.
-Tout d'abord, ce que vous avez ecrit en cliquant sur les boutons, s'apelle un programme. Il contient de taches que Quill ressevra et qu'il transformera en actions.
-Prenons un exemple de programme python:
-
-print("j'aime Incredibot")
-print("3, 1415926535897932384626 vaut Pi")
-
-Ce programme affichera :
-j'aime Incredibot
-3, 1415926535897932384626 vaut Pi
-
-l'instruction print demande au programme d'afficher le texte écrit entre le (" de début et le ") de fin.
-Il s'apparente aux instructions que vous avez donner à Quill tout au long des niveaux de cette apli.
+Dans cette partie nous allons essayer de vous apprendre les bases de l’informatique.
+Tout d’abord, programmer consiste à construire un ensemble ordonné d'instructions qui, lorsqu'elles sont exécutées, produisent des effets précis et utiles sur les informations contenues dans un ordinateur. L'ensemble des instructions s'appelle un programme. 
+ 
+Un algorithme est est une idée, formulée sous forme d'instructions. Il ne dépend d'aucun formalisme, et ne constitue qu'une suite d'étapes permettant d'atteindre un but, quelle que soit la manière dont ces étapes sont décrites.
+ 
+Comme ces définitions sont un peu difficile à comprendre, nous pouvons faire une comparaison assez simple. la distinction entre un algorithme et un programme est de la même nature que celle qui différencie une histoire et un livre. Tout comme l'algorithme, l'histoire ne dépend d'aucun support, tandis que le livre ou le programme, eux, ne sont finalement rien d'autre que le support qui fixe ces paroles.
+Dans Incredibot, sans le savoir, vous avez écrit plusieurs programmes (car les instruction “avancer” et “reculer” n’ont que des significations dans incredibot) qui ont été transmis au robot qui a agi en suivant vos instructions. 
