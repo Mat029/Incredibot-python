@@ -584,7 +584,7 @@ WindowManager:
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
         HomeButton:
-            text: "Algorithme"
+            text: "Programmer"
             font_size: 0.2 * self.height
             pos_hint: {'center_x': .14,'center_y':.25}
             on_press:
@@ -592,7 +592,7 @@ WindowManager:
                 root.manager.transition.direction = 'left'
                 root.manager.current = "custom_cours"
         HomeButton:
-            text: "Les inputs"
+            text: "Eléments \nexternes"
             font_size: 0.2 * self.height
             pos_hint: {'center_x': .38,'center_y':.25}
             on_press:
@@ -630,8 +630,8 @@ WindowManager:
         Label:
             id : _labelCours
             text: ""
-            font_size: .015 * self.height + .0075 * self.width
-            size_hint: 1 , .6
+            font_size: .018 * self.height + .009 * self.width
+            size_hint: .87 , .6
             text_size: self.width, self.height
             valign: "top"
             pos_hint: {'x' : 0 ,'center_y':.7}

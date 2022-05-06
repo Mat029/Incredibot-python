@@ -1,7 +1,8 @@
-Dans cette partie nous allons essayer de vous apprendre les bases de l’informatique.
-Tout d’abord, programmer consiste à construire un ensemble ordonné d'instructions qui, lorsqu'elles sont exécutées, produisent des effets précis et utiles sur les informations contenues dans un ordinateur. L'ensemble des instructions s'appelle un programme. 
- 
-Un algorithme est est une idée, formulée sous forme d'instructions. Il ne dépend d'aucun formalisme, et ne constitue qu'une suite d'étapes permettant d'atteindre un but, quelle que soit la manière dont ces étapes sont décrites.
- 
-Comme ces définitions sont un peu difficile à comprendre, nous pouvons faire une comparaison assez simple. la distinction entre un algorithme et un programme est de la même nature que celle qui différencie une histoire et un livre. Tout comme l'algorithme, l'histoire ne dépend d'aucun support, tandis que le livre ou le programme, eux, ne sont finalement rien d'autre que le support qui fixe ces paroles.
-Dans Incredibot, sans le savoir, vous avez écrit plusieurs programmes (car les instruction “avancer” et “reculer” n’ont que des significations dans incredibot) qui ont été transmis au robot qui a agi en suivant vos instructions. 
+[b] Introduction à la programmation : [/b]
+
+Les premiers cours étaient des tutoriels pour le jeu. Dans cette partie nous allons vous donner quelques notions fondamentales sur la programmation.
+Tout d’abord, qu’est-ce que programmer ?
+Programmer consiste à mettre des instructions de façon ordonnée (comme vous le faîte pour le robot) de façon à ce qu’elles produisent quelque chose lorsqu’on les exécute. L'ensemble des instructions s'appelle un programme. C’est de la que vient le terme programmer, c’est-à-dire créer un programme.
+Dans Incredibot, sans le savoir, vous avez écrit plusieurs programmes (Un programme « Incredibot » car les instructions “avancer” et “reculer” n’ont de signification que dans Incredibot) qui ont été transmis au robot qui a agi en suivant vos instructions.
+Il en va de même si vous voulez programmer une application, un site web, ou une intelligence artificielle (même si là ça devient assez complexe). Dans tous les cas vous allez ajouter des instructions pour obtenir un résultat. On écrit ces instructions dans un langage spécial qu’on appelle un langage de programmation. Il en existe de nombreux (C++, Java, Python etc.…) qui permettent chacun de faire des choses différentes. Ce langage est ensuite transformé en instructions compréhensible par l’ordinateur à travers un procédé complexe que nous ne pouvons pas expliquer ici (si jamais cela vous intéresse, taper comment fonctionne un langage de programmation sur un moteur de recherche, vous trouverez plein de choses intéressantes). Pour le moment, le seul langage que vous avez utilisé est le langage Incredibot qui n’est utile que dans notre application. Notre application par contre,est elle codé dans un langage très populaire appelé le python.
+Dans les prochains chapitres, nous vous introduirons aux concepts principaux de la programmation pour que vous puissiez vous aussi commencer à apprendre le Python !

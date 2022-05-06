@@ -40,4 +40,4 @@
 * Ajouter des "paramètres" ✅
 * Animation du robot ✅
 
-* Clean le code/le commenter
+* Clean le code/le commenter ✅

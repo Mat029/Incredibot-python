@@ -1,15 +1,11 @@
-En vous ayant introduit les bases des bases de l’informatique moderne, nous allons maintenant essayer de les completer.
-Tout d’abord, dans un premier temps, un programme peut contenir des affectations de variables.
-Une variable est un symbole dans lequel il est possible de stocker une valeur. L’affectation de variable est l’action de stocker une valeur dans une variable.
-Par exemple, si vous voulez compter le nombre de tour que fait une machine à laver vous aller d’abord definir votre variable à 0
-nbtour → 0 
-(j’ai volontairement miss une flèche ici car elle depend du language utilisé)
-Puis dès que vos capteurs se rencontrent, vous aller ajouter 1 à votre variable :
-nbtour → nbtour + 1
-C’est a peu près ce qui ce passe dans les niveaux avec des objets.
-En prenant un objet, la valeur 1 va être affecetrer à la variable charger de savoir si le robot à pris l’objet ou non ( en l’occurence AGATHE 0 COMPLETER dans notre code). 
-Enfin les tapis roulants sont des évènements exeternent qui viennent “pimenter” ou plustôt “nourir” votre programme. En algorithmie, ce genre d’évènements peut se définir par la définition de variable de l’utilisateur en lui même. En effet en python, on peut demander à l’utilisateur un nombre ou bien même une chaine de caractère. Celle ci peu être recupere par le programme avec 
-utilisateur = nombre( int(input()) en python )
-ou encore
-utlisatue = chaine G OUBLIER AGATHE
+[b] Les variables : [/b] :
 
+Un autre concept fondamental de la programmation moderne est le stockage de donnés. Dans un programme, on stocke les données dans des variables. Une variable est un identifiant associé à une valeur. Un identifiant est souvent une chaine de caractère (par exemple age_utilisateur) à laquelle vous associer une valeur pour la réutiliser plus tard.
+La première chose est faire avec une variable est de l’initialiser. Par exemple, si vous voulez compter le nombre de tour que fait une machine à laver vous aller d’abord définir votre variable à 0
+nb_tour = 0 
+(Nous avons mis un signe égal ici car c’est le plus simple, mais en fonction du langage, vous le fait de façon différente).
+Puis dès que vos capteurs se rencontrent, vous aller ajouter 1 à votre variable :
+nb_tour = nb_tour + 1
+C’est à peu près ce qui se passe dans les niveaux avec des objets.
+Quand vous prenez un objet, le robot a deux variables qui change. Sa variable tenir_objet passe à Oui (en vérité elle passe à True, mais on simplifie ici), et sa variable couleur_objet passe à « bleu », « violet » ou « rouge ». 
+Les variables sont donc un concept essentiel de la programmation moderne, car elles permettent de stocker des valeurs, de les récupérer et de les modifier. 

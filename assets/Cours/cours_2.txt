@@ -1,13 +1,11 @@
 [b]Les tapis roulants :[/b]
+
 Les tapis seront représentés ici par des flèches.
-Jusqu’à présent, le robot exécutait les instructions les unes après les autres, sans évènements entre elles. Maintenant, entre chaque instruction, les tapis roulants s'activent et font bouger le robot d’une case. Voici un exemple (image de gauche)
- 
-En avançant sur le tapis roulant (image de gauche), le robot effectue une action et se retrouve donc sur un tapis roulant. Puis les tapis roulants "s'activent" ce qui fera donc déplacer le robot d'une case en plus. Il se retrouvera sur (l'image de droite) :
-Voici les détails du screen :
-avancer
-   "tapis-roulants"
-avancer
-   "tapis-roulants"
-Faire attention à comment sont orientés les tapis roulants et ne pas oublier qu’un tapis roulant peut mener au vide ou à un autre tapis roulant. Le robot peut également s'orienter sur un tapis roulant, ce qui comptera comme une instruction.
-Les tapis roulants sont légèrement complexes à comprendre, mais sont essentiels pour la suite des levels.
-Avec les tapis roulants, nous avons introduit l’instruction “attendre”. Elle permet au robot de rester sur place, de ne rien faire durant 1 tour. Utile pour attendre sur un tapis roulant…
+Jusqu’à présent, le robot exécutait les instructions les unes après les autres, sans évènements entre elles. Maintenant, entre chaque instruction, les tapis roulants s'activent et font bouger le robot d’une case. Voici un exemple :
+En avançant sur le tapis roulant (image de gauche), le robot effectue une action et se retrouve donc sur un tapis roulant. Puis les tapis roulants "s'activent" ce qui déplace le robot d'une case dans la direction du tapis roulant. Il se retrouvera sur (l'image de droite) :
+Voici ce qu’il se passe pour le robot :
+Avancer (avance d'une casse à droite)
+"tapis-roulants" (avancer à nouveau d'une case à droite, sous l'effet du tapis-roulants)
+Les tapis roulants sont donc un nouvel élément à prendre en compte quand vous écrivez un programme pour le robot.
+PS : Le robot peut également s'orienter sur un tapis roulant, ce qui comptera comme une instruction.
+PS- 2 : Avec les tapis roulants, nous avons introduit l’instruction “attendre”. Elle permet au robot de rester sur place, de ne rien faire durant 1 tour. Utile pour attendre sur un tapis roulant…

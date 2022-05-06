@@ -1,15 +1,13 @@
 [b]Introduction :[/b]
-Bonjour,
-Bienvenue sur l’application Incredibot.
-Incredibot est une application destinée aux novices en informatique qui leur permettra de comprendre les bases de la programmation.
-Dans l’application, vous allez devoir aider un robot à compléter des parcours à l’aide d'instructions . Cette application est composée de 24 niveaux, répartis en 3 étages. A chaque étage, il vous sera introduit de nouvelles instructions. Plus vous avancerez dans l'application, plus les niveaux seront difficiles. 
- 
- 
- 
-Pour que ce soit un peu plus clair, voici comment se décompose un level (image) :
-Vous avez à droite le plan du niveau. Le robot représente le robot. Le triangle vert montre le départ du robot et le drapeau à damier, l'arrivée. Chaque carré blanc représente une case, et à l'inverse, ce qui est en gris est concidéré comme du vide.
-A gauche, vous avez plusieurs boutons  :
+
+Incredibot est une application destinée aux novices en informatique pour les aider à comprendre les bases de l’informatique et plus particulièrement du code à travers un jeu. 
+Dans l’application, vous allez devoir aider un robot à compléter des parcours à l’aide d’instructions. Cette application est composée de 24 niveaux, répartis-en 3 étages. A chaque étage, il vous sera introduit de nouvelles instructions. Plus vous avancerez dans l'application, plus les niveaux seront difficiles. 
+
+[b] Fonctionnement de l’application : [/b]
+
+Quand vous lancer l’application, vous arrivez sur une interface comme celle que vous pouvez voir ci-dessous.
+Vous avez à droite le plan du niveau que le robot doit compléter. Le triangle vert montre le départ du robot et le drapeau à damier, l'arrivée. Chaque carré blanc représente une case, et à l'inverse, ce qui est en gris est considéré comme du vide.
 Pour que le robot puisse aller à la fin du niveau, vous allez, le guider en lui donnant des instructions.
 Le robot suivra les instructions que vous lui avez données. Par exemple, l’instruction « avancer » permettra au robot d’avancer d’une case dans la direction indiquer par la flèche.
-Pour l’instruction « reculer », il reculera d’une case avec le même modèle que celle d’« avancer »
-Pour les instructions « Droite et Gauche », le robot s’orientera soit de 90° vers la droite pour « droite » et 90° vers la gauche pour « gauche »
+Pour l’instruction « reculer », il reculera d’une case, c’est-à-dire qu’il avancera d’une case dans le sens contraire à la flèche.
+Pour les instructions « Droite et Gauche », le robot s’orientera soit de 90° vers la droite pour « Droite » et 90° vers la gauche pour « Gauche »

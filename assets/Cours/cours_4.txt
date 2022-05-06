@@ -1,4 +1,8 @@
 [b]Téléportations :[/b]
-La téléportation dans Incredibot est telle que nous l'imaginons. En entrant dans une case déterminée, le robot en ressortira de l’autre côté. Sur un level, il y aura toujours une porte d’entrée et une porte de sortie de façon à ce que vous puissiez prévoir où aboutira le robot s'il prend ce passage-là. Voici un exemple (image de gauche):
+
+La téléportation dans Incredibot est très simple. Si le robot passe sur une case porte d’entrée (flèche vers l’intérieur) il ressortira sur la case porte de sortie (flèche vers l’extérieur). Sur un niveau, il y aura toujours une porte d’entrée et une porte de sortie de façon à ce que vous puissiez prévoir où aboutira le robot s'il prend ce passage-là. Voici un exemple (image de gauche):
  
-Ici, si le robot prend la porte « d’entrée » qui est devant lui, il ressortira par la porte de sortie qui se trouve devant l’arrivée. La téléportation fonctionne comme une case normale qui vous emmène au point d’arrivée sans prendre en compte les autres composants du levels. Cependant, une téléportation est à sens unique (vous entrez par la porte d'entrée et vous en sortez par la porte de sortie). Bien entendu, vous pouvez prendre des téléportations avec des objets dans la main.
+Ici, si le robot prend la porte « d’entrée » qui est devant lui, il ressortira par la porte de sortie qui se trouve devant l’arrivée. La téléportation fonctionne comme une case normale qui vous emmène au point d’arrivée sans prendre en compte les autres composants du niveau. 
+PS : Une téléportation est à sens unique (vous entrez par la porte d'entrée et vous en sortez par la porte de sortie). 
+PS-2 : Vous pouvez prendre des téléportations avec des objets dans la main.
+PS-3 : La téléportation conserve votre orientation actuelle.

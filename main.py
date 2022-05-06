@@ -1,21 +1,18 @@
 """"
-Pour lancer incredibot il vous faut :
+Pour lancer Incredibot il vous faut :
 _ Python >= 3.7.9 
-_ Le module kivy : 2 façons :
-    * Si votre éditeur le supporte (Pycharme/Thonny, Anaconda etc...) :
-        Vous pouvez installer directement kivy. 
-        (Bien prendre le "grand" Kivy, avec toutes les dépendances.)
+_ Le module kivy : 2 façons de l'installer :
+    * Si votre éditeur le supporte (Pycharm, Thonny etc...) installer le "grand" Kivy, avec toutes les dépendances
     * Sinon : pip -m install kivy[base] dans votre terminal
-
 """
 
 from functools import partial
 import json
 
 """ IMPORTANT : 
-Il existe un bug/problème de compatibilité dans kivy qui fait que le programme ne démarre pas sur certains oridinateurs
+Il existe un bug/problème de compatibilité dans kivy qui fait que le programme ne démarre pas sur certains ordinateurs
 et affiche une erreur du type : wrong open gl version, you have xx and kivy need xx
-Si cela vous arrive, il vous suffit de copier coller ces deux lignes JUSTE AVANT L'IMPORT DE KIVY :
+Si cela vous arrive, il vous suffit de copier-coller ces deux lignes JUSTE AVANT L'IMPORT DE KIVY :
 import os
 os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
 """
@@ -32,7 +29,7 @@ from kivy.core.audio import SoundLoader
 class HomeScreen(Screen):
     """ HomeSreen
     Dans kivy, on déclare chaque écran comme une classe qu'on modifie ensuite avec le fichier .kv
-    Cet écran est le premier à apparaitre quand on arrive sur incredibot
+    Cet écran est le premier à apparaître quand on arrive sur incredibot
     Args :
         Screen (Screen) : affiche du contenu
     """
@@ -40,14 +37,14 @@ class HomeScreen(Screen):
 
 class LevelScreen(Screen):
     """ LevelScreen
-    Cet écran permet la selection entre les niveaux 
+    Cet écran permet la sélection entre les niveaux 
     Args :
         Screen (Screen) : affiche du contenu
     """
 
     def setLvl(self, lvl):
         """ setLvl
-        Cette fonction écrit le niveau qu'on a selectionné dans un fichier
+        Cette fonction écrit le niveau sélectionné dans un fichier
         args : 
             int : lvl
         """
@@ -68,7 +65,7 @@ class LevelScreen(Screen):
 
     def getImage(self, lvl):
         """getImage
-        Cette fonction permet de savoir quel image il faut afficher devant un niveau (bloqué, réussi ou jouable), 
+        Cette fonction permet de savoir quelle image il faut afficher devant un niveau (bloqué, réussi ou jouable), 
         args : 
             int : niveau pour lequel on veut l'image
         return :
@@ -84,12 +81,12 @@ class LevelScreen(Screen):
 
     etage = 0  
 
-    """ C'est le numéro de l'étage auquel est acutelement l'utilisateru. 
-    Cette varibale est déclaré dans le classe car le fichier kv a besoin d'y accéder"""
+    """ C'est le numéro de l'étage auquel est actuellement  l'utilisateur. 
+    Cette variable est déclaré directement dans la classe car le fichier kv a besoin d'y accéder"""
 
     def changeEtage(self, sens):
         """ changeEtage
-        Cette fonction modifie l'étage où se situe l'utilisateur et met à jour visuelement les composants qui le nécessite
+        Cette fonction modifie l'étage où se situe l'utilisateur et met à jour visuellement les composants qui le nécessite
         args :
             str : "augmente", "baisse" ou "aucun" (pour l'initialisation)
         """
@@ -128,9 +125,9 @@ class CustomLevelScreen(Screen):
 
     def chargement(self):
         """chargement
-        Cette fonction va être appelé dès que l'écran est affiché et met à jour visuelement tous les éléments
-        (titre, image, limite,mettre les  objet, placer le robot à la bonne postion, afficher les boutons en lien 
-        avec l'étage (sauter à partir de l'érage 2 par exemple))
+        Cette fonction va être appelé dès que l'écran est affiché et met à jour visuellement tous les éléments
+        (titre, image, limite, mettre les  objet, placer le robot à la bonne position, afficher les boutons en lien 
+        avec l'étage (sauter à partir de l'étage 2 par exemple))
         """
         lvl = self.getLvl()
         fichierMax = open("assets/max_level.txt", "r")
@@ -198,7 +195,7 @@ class CustomLevelScreen(Screen):
 
     def getLvlJson(self):
         """ getLvlJson
-        Cette foonction renvoi les donnés associé au nivau stocké dans le json
+        Cette fonction renvoi les donnés associées au niveau stocké dans le json
         returns :
             dictionary : DataLvl : les données Json du niveau actuel
         """
@@ -220,7 +217,7 @@ class CustomLevelScreen(Screen):
 
     def clean(self):
         """ clean
-        Cete fonction permet de supprimer tout les élements rajouté (robot et objets)
+        Cette fonction supprime tous les éléments rajouté (robot et objets)
         """
         DataLvl = self.getLvlJson()
         Animation.cancel_all(self.robot)
@@ -237,7 +234,7 @@ class CustomLevelScreen(Screen):
 
     def delLine(self, texte):
         """ delLine
-        Cette fonction est appelé quand on appuie srue le bouton supprimer, 
+        Cette fonction est appelée quand on appuie sur le bouton supprimer, 
         elle enlève la dernière ligne du texte 
         args :
             str : texte : les instructions rentrés par l'utilisateur
@@ -272,7 +269,7 @@ class CustomLevelScreen(Screen):
             return "\nPrendre"
     def indice(self):
         """ indice
-        Cette fonction est appelé quand le bouton indice est cliqué, et affiche à l'écran l'indice du niveau si il existe
+        Cette fonction est appelée quand le bouton indice est cliqué, et affiche à l'écran l'indice du niveau s'il existe
         """
         DataLvl = self.getLvlJson()
         if "indice" in DataLvl:
@@ -282,7 +279,7 @@ class CustomLevelScreen(Screen):
         
     def cancel(self):
         """"cancel
-        Cette fonction est appelé quand on clique sur le bouton annuler. Elle remet les éléments du niveaux a leur position initiale.
+        Cette fonction est appelée quand on clique sur le bouton annuler. Elle remet les éléments du niveau a leur position initiale.
         """
         DataLvl = self.getLvlJson()
         Animation.cancel_all(self.robot)
@@ -301,7 +298,7 @@ class CustomLevelScreen(Screen):
 
     def nbInstructions(self, texte):
         """ nbInsructions
-        Cette fonction est appelé à chaque fois que l'on écrit, elle calcule le nombre d'instructions
+        Cette fonction est appelée à chaque fois que l'on écrit, elle calcule le nombre d'instructions
         et vérifie qu'elle ne dépasse pas la limite du niveau (50 par défaut)
         args : 
             str : texte: les instructions rentrés par l'utilisateur
@@ -321,11 +318,11 @@ class CustomLevelScreen(Screen):
 
     def play(self, texte):
         """ play 
-        Cette fonction est la première appelé quand on clique sur le bouton play
-        Elle s'occupe des animations jusqu'a ce que le robot soit sur sa position final
+        Cette fonction est la première appelée quand on clique sur le bouton play
+        Elle s'occupe des animations jusqu'à ce que le robot soit sur sa position final
         Ce n'est pas elle qui calcule le parcours, c'est une autre fonction : verif
         Elle se contente de faire bouger les objets en fonction des résultats, 
-        en appeleant finAnim pour faire revenir les objets à leur place , afficher le message et jouer le son
+        en appelant finAnim pour faire revenir les objets à leur place , afficher le message et jouer le son
         args :
             str : texte: les instructions rentrés par l'utilisateur
         """
@@ -401,7 +398,7 @@ class CustomLevelScreen(Screen):
 
     def finAnim(self, message, listePos, listePosObjets, son, *args):
         """ finAnim
-        Cette fonction est appelé quand l'animation est fini, pour faire revenir les élements à leur place, afficher le message et jouer le son
+        Cette fonction est appelée quand l'animation est finie, pour faire revenir les éléments à leur place, afficher le message et jouer le son
         Elle vérifie aussi si les Icones pour changer d'étage rapidement doivent être activé (si on a réussi le niveau)
         args : 
             message : str : le message de réussite/ d'échec a affiché
@@ -445,13 +442,13 @@ class CustomLevelScreen(Screen):
 
     def posToCoord(self, pos):
         """ posToCoord
-        Cette fonction est centrale dans le pogramme. Pour calculer la position du robot, on utilise un système de grille avec des 
+        Cette fonction est centrale dans le programme. Pour calculer la position du robot, on utilise un système de grille avec des 
         cases qui vont de 11 à 88 (le premier chiffre est la ligne, qu'on compte de haut en bas et le deuxième la colonne,
-        qu'on compte de gauche à droite. Cette fonction 'traduis' ce numéro de grille en coordonée
+        qu'on compte de gauche à droite. Cette fonction 'traduit' ce numéro de grille en coordonnée
 
-        Voila le calcul qu'effectue la fonction de façon plus ou moin compréhensible par un humain :
+        Voila le calcul qu'effectue la fonction de façon plus ou moins compréhensible par un humain :
         center_x : début de l'image + demi case  + unité de la pos * taille d'un carreau 
-        center_y : début de l'image + demi carrreau +  dizaine de la pos * taille d'un carreau
+        center_y : début de l'image + demi carreau +  dizaine de la pos * taille d'un carreau
 
         args: 
             pos : int : la position, selon la notation de la grille
@@ -463,8 +460,8 @@ class CustomLevelScreen(Screen):
 
     def verif(self,texte):
         """verif
-        Cette fonction est le véritable alghorithme qui vérifie les instructions de l'utilisateur
-        Il execute et vérifie toutes les instructions, en ajoutant la positon/l'orientation/les objets dans des liste
+        Cette fonction est le véritable algorithme qui vérifie les instructions de l'utilisateur
+        Il exécute et vérifie toutes les instructions, en ajoutant la positon/l'orientation/les objets dans des liste
         Il renvoi ensuite toutes les données nécessaires pour l'affichage du résultat
         args : 
             str : texte: les instructions rentrés par l'utilisateur
@@ -475,7 +472,6 @@ class CustomLevelScreen(Screen):
             listeObjet : liste : liste des objet tenu par le robot pendant son parcours
             message : str : le message de réussite/ d'échec a affiché
             son : str : le chemin d'accès vers le son a joué
-    
         """
         lvl = self.getLvl()
         DataLvl = self.getLvlJson()
@@ -633,7 +629,7 @@ class CustomLevelScreen(Screen):
         
 class CoursScreen(Screen):
     """ CoursScreen
-    Cet écran permet la selection entre les cours 
+    Cet écran permet la sélection entre les cours 
     Args :
         Screen (Screen) : affiche du contenu
     """
@@ -641,7 +637,8 @@ class CoursScreen(Screen):
         """ setCours
         Cette fonction change le cours qu'on va voir
         args :
-            cours : int : le numéro du cours que l'on va voir"""
+            cours : int : le numéro du cours que l'on va voir
+        """
         fichier = open("assets/current_cours.txt", "w")
         fichier.write(cours)
         fichier.close()
@@ -654,7 +651,7 @@ class CustomCoursScreen(Screen):
     """
     def chargementCours(self):
         """chargement
-        Cette fonction va être appelé dès que l'écran est affiché et met à jour visuelement le texte/les images a affichés
+        Cette fonction va être appelée dès que l'écran est affiché et met à jour visuellement le texte/les images a affichés
         """
         fichier_cours = open("assets/current_cours.txt", "r")
         cours = fichier_cours.read()
@@ -662,14 +659,13 @@ class CustomCoursScreen(Screen):
         fichier_text = open("assets/Cours/cours_" + cours + ".txt", "r", encoding="utf8")
         texte = fichier_text.read()
         fichier_text.close()
-        self.ids._labelCours.markup = True
         self.ids._labelCours.text = texte
         self.ids._imageCours.source = "assets/Images/cours/img_cours_" + str(cours) + ".png"
-        self.ids._imageCours2.source = "assets/Images/cours/img_cours_" + str(cours + str(1)) + ".png"
+        self.ids._imageCours2.source = "assets/Images/cours/img_cours_" + str(cours) + "1.png"
 
 class WindowManager(ScreenManager):
     """ WindowManager
-    Ce composant est appelé au démarage de l'application, c'est lui qui gère quel écran affiché
+    Ce composant est appelé au démarrage de l'application, c'est lui qui gère quel écran affiché
     Args :
         SreenManager (SreenManager) : gère l'affichage des écrans
     """
@@ -677,14 +673,15 @@ class WindowManager(ScreenManager):
 
 class Incredibot(App):
     """ Incredibot
-    C'est la base de l'application, qui initialise tout ces composants et affiche la fenetre de l'application
+    C'est la base de l'application, qui initialise tous ces composants et affiche la fenêtre de l'application
     Args :
-        App(App) : classe qui s'execute quand on lance l'app
+        App(App) : classe qui s'exécute quand on lance l'app
     """
 
     def build(self):
         """build
-        La première fonction a être appelé quand l'application se lance, elle défini les propriété de la fenêtre (et lance la musique)"""
+        La première fonction à être appelé quand l'application se lance, elle définit les propriétés de la fenêtre (et lance la musique)
+        """
         self.title = 'Incredibot'
         self.icon = 'assets/Images/icon.png'
         self.music = SoundLoader.load("assets/Sound/music.mp3")
@@ -831,22 +828,22 @@ class Incredibot(App):
 
     def close_application(self):
         """ close_application
-        Cette fonction est appelé quand on appuie sur le bouton quit et permet de quitter l'application
+        Cette fonction est appelée quand on appuie sur le bouton quiter et permet de quitter l'application
         """
         App.get_running_app().stop()
         Window.close()
 
     def on_stop(self):
         """ on_stop
-        Cette fonction (qui est en fait un évenement) est appelé dès qu'on appuie sur la croix de la fenêtre pour quitter l'application. 
-        Le rajout de Window.close() à cet évenement permet à l'application de se fermer correctement sur tout les ide.
+        Cette fonction (qui est en fait un évènement) est appelée dès qu'on appuie sur la croix de la fenêtre pour quitter l'application. 
+        Le rajout de Window.close() à cet évènement permet à l'application de se fermer correctement sur tout les ide.
         """
         Window.close()
 
 
 if __name__ == "__main__":
     """ Règles certains paramètres quand on lance l'application"""
-    kivy.require("2.1.0")  #vérifie la version de kivy
+    kivy.require("2.1.0")  # vérifie la version de kivy
     Config.set("input", "mouse", "mouse,multitouch_on_demand")  # permet de désactiver le mode multiTouch
     Window.maximize()  # permet de lancer la fenêtre en taille maximal
     Incredibot().run() #lance l'application quand on clique sur run (ou lancer)

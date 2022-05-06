@@ -1,10 +1,9 @@
 [b]Déplacement d’objet :[/b]
-Les objets sont des objets comme dans la vraie vie. Votre but, mettre ces objets sur leurs emplacements adéquats afin de pouvoir atteindre l’arrivée. Ces objets seront représentés par des étoiles et leurs emplacements par des cercles. Voici un exemple d’un niveau avec un objet  (image de gauche):
- 
+
+Les objets représentés par des étoiles ici sont comme des objets comme dans la vraie vie, vous pouvez les prendre et les déposer. Votre but est de mettre ces objets sur leurs emplacements, représenté par des cercles de la même couleur afin de pouvoir atteindre l’arrivée. Voici un exemple d’un niveau avec un objet (image de gauche):
 Pour prendre et déposer un objet, le robot doit se trouver face à l’objet puis doit recevoir l’instruction "prendre" pour récupérer l’objet (image de gauche).
-Pour pouvoir aller sur l'arrivée, il faut que tous les objets soient sur leurs emplacements respectifs.
+Pour pouvoir réussir le niveau, il faut aller sur l'arrivée, avec tous les objets sur leurs emplacements respectifs.
  
-Ici le robot peut récupérer l’objet en face de lui (l'objet apparait au-dessus de lui pour que vous puissiez savoir si le robot porte un objet ou non). Il peut ainsi bouger normalement pour le déposer sur son emplacement (image de droite).
-Cependant, plusieurs contraintes existent avec les objets :
-Tout d’abord, vous ne pouvez pas marcher sur un objet, ni sauter par-dessus les objets.
-Le robot peut passer sur un emplacement d’objet seulement si l’objet n’est pas présent dessus.
+Ici le robot peut récupérer l’objet en face de lui (l'objet apparait au-dessus de lui pour que vous puissiez savoir si le robot porte un objet ou non). Il peut ainsi bouger normalement pour le déposer sur son emplacement (Image de droite).
+PS : Vous ne pouvez pas traverser un objet et vous ne pouvez tenir qu’un seul objet.
+PS-2 : Vous pouvez passer sur les emplacements d’objets tant qu’ils sont vides.
