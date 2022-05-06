@@ -8,6 +8,11 @@ _ Le module kivy : 2 façons de l'installer :
 
 from functools import partial
 import json
+import sys
+
+if sys.version_info > (3,7,9) :
+    print("Version de Python incompatible, mettez à jour vers une version compatible (>= 3.7.9)" )
+    sys.exit()
 
 """ IMPORTANT : 
 Il existe un bug/problème de compatibilité dans kivy qui fait que le programme ne démarre pas sur certains ordinateurs
@@ -105,14 +110,14 @@ class LevelScreen(Screen):
         self.ids._bouton6.text = "Niveau " + str(self.etage * 8 + 6)
         self.ids._bouton7.text = "Niveau " + str(self.etage * 8 + 7)
         self.ids._bouton8.text = "Niveau " + str(self.etage * 8 + 8)
-        self.ids._Indicateur1.source = self.getImage((self.etage * 8 + 1))
-        self.ids._Indicateur2.source = self.getImage((self.etage * 8 + 2))
-        self.ids._Indicateur3.source = self.getImage((self.etage * 8 + 3))
-        self.ids._Indicateur4.source = self.getImage((self.etage * 8 + 4))
-        self.ids._Indicateur5.source = self.getImage((self.etage * 8 + 5))
-        self.ids._Indicateur6.source = self.getImage((self.etage * 8 + 6))
-        self.ids._Indicateur7.source = self.getImage((self.etage * 8 + 7))
-        self.ids._Indicateur8.source = self.getImage((self.etage * 8 + 8))
+        self.ids._Indicateur1.source = self.getImage(self.etage * 8 + 1)
+        self.ids._Indicateur2.source = self.getImage(self.etage * 8 + 2)
+        self.ids._Indicateur3.source = self.getImage(self.etage * 8 + 3)
+        self.ids._Indicateur4.source = self.getImage(self.etage * 8 + 4)
+        self.ids._Indicateur5.source = self.getImage(self.etage * 8 + 5)
+        self.ids._Indicateur6.source = self.getImage(self.etage * 8 + 6)
+        self.ids._Indicateur7.source = self.getImage(self.etage * 8 + 7)
+        self.ids._Indicateur8.source = self.getImage(self.etage * 8 + 8)
         self.ids._imageAugmente.source = 'assets/Images/icon/next_icon.png' if (self.etage != 2) else 'assets/Images/icon/next_icon_dark.png'
         self.ids._imageBaisse.source = 'assets/Images/icon/previous_icon.png' if (self.etage != 0) else 'assets/Images/icon/previous_icon_dark.png'
 
