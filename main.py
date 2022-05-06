@@ -10,7 +10,7 @@ from functools import partial
 import json
 import sys
 
-if sys.version_info > (3,7,9) :
+if sys.version_info < (3,7,9) :
     print("Version de Python incompatible, mettez à jour vers une version compatible (>= 3.7.9)" )
     sys.exit()
 
