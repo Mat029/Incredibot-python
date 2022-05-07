@@ -4,6 +4,7 @@ _ Python >= 3.7.9
 _ Le module kivy : 2 façons de l'installer :
     * Si votre éditeur le supporte (Pycharm, Thonny etc...) installer le "grand" Kivy, avec toutes les dépendances
     * Sinon : pip -m install kivy[base] dans votre terminal
+(voir mode d'emploi pour plus d'informations)
 """
 
 from functools import partial
@@ -265,8 +266,8 @@ class CustomLevelScreen(Screen):
         texte = texte.lower()
         texteCoupe = texte.splitlines()
         nbPrendreDepose = 0
-        for i in texteCoupe:
-            if i == "prendre" or i == "déposer":
+        for instruction in texteCoupe:
+            if instruction == "prendre" or instruction == "déposer":
                 nbPrendreDepose +=1
         if nbPrendreDepose%2 == 1:
             return "\nDéposer"
@@ -365,7 +366,7 @@ class CustomLevelScreen(Screen):
             for i in range(1, len(listePos)):
                 coordoneei = self.posToCoord(listePos[i])
                 coordoneeimoins = self.posToCoord(listePos[i - 1])
-                coordoneeFinal = {"center_x": (coordoneei["center_x"] + coordoneeimoins["center_x"])/2, "center_y": (coordoneei["center_y"] + coordoneeimoins["center_y"])/2} #permet de faire une moitié du trajet
+                coordoneeFinal = {"center_x": (coordoneei["center_x"] + coordoneeimoins["center_x"])/2, "center_y": (coordoneei["center_y"] + coordoneeimoins["center_y"])/2} #permet de faire une moitié de l'animation
                 animProvisoire = Animation(pos_hint = coordoneeFinal, duration = .25)
                 animProvisoire.on_complete = partial(animerRobot, listeOrientation[i], listeObjet[i])
                 anim += animProvisoire
@@ -383,14 +384,14 @@ class CustomLevelScreen(Screen):
                             animObj1 += Animation(duration = .5)
                         else: 
                             animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i - 1]), duration = .25)
-                            animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i]), duration = 0) #permet a l'objet d'apparaitre/disparaitre instant
+                            animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i]), duration = 0)
                             animObj1 += Animation(pos_hint =self.posToCoord(listePosObjets[1][i]), duration = .25) 
                         if nbObjet == 3:
                             if listePosObjets[2][i - 1] == listePosObjets[2][i]:
                                 animObj2 += Animation(duration = .5)
                             else: 
                                 animObj2 += Animation(pos_hint =self.posToCoord(listePosObjets[2][i - 1]), duration = .25)
-                                animObj2 += Animation(pos_hint =self.posToCoord(listePosObjets[2][i]), duration = 0) #permet a l'objet d'apparaitre/disparaitre instant
+                                animObj2 += Animation(pos_hint =self.posToCoord(listePosObjets[2][i]), duration = 0)
                                 animObj2 += Animation(pos_hint =self.posToCoord(listePosObjets[2][i]), duration = .25) 
             anim.on_complete = partial(self.finAnim , message, listePos, listePosObjets, son)
         anim.start(self.robot)
@@ -849,6 +850,6 @@ class Incredibot(App):
 if __name__ == "__main__":
     """ Règles certains paramètres quand on lance l'application"""
     kivy.require("2.1.0")  # vérifie la version de kivy
-    Config.set("input", "mouse", "mouse,multitouch_on_demand")  # permet de désactiver le mode multiTouch
+    Config.set("input", "mouse", "mouse,multitouch_on_demand")  # permet de désactiver le mode multi touches
     Window.maximize()  # permet de lancer la fenêtre en taille maximal
     Incredibot().run() #lance l'application quand on clique sur run (ou lancer)

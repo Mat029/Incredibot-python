@@ -1,7 +1,7 @@
 [
 	{
         "niveau" : "1",
-        "indice" : "Indice : Essaye et observe",
+        "indice" : "Indice : lis les cours",
         "d" : 43,
 		"43": "c",
         "44":"c",
@@ -98,7 +98,7 @@
 	},
     {
         "niveau" : "8",
-        "indice" : "Indice : Des blocs invisibles... \nUne seule solution en 11",
+        "indice" : "Indice : Il y a x cases caché entre chaque case visible\nx est un nombre caché dans le premier cours",
         "limite" : 11,
         "d" : 27,
 		"22" : "c",
@@ -144,6 +144,7 @@
     },
     {
         "niveau": "11",
+        "indice": "Indice : Tout est dans le timing",
         "limite" : 3,
         "d" : 32,
         "32" : "c",
@@ -255,7 +256,7 @@
     },
     {
         "niveau": "16",
-        "indice" : "Indice : Cherche bien",
+        "indice" : "Indice : Droite",
         "limite" : 4,
         "d" : 23,
         "23" : "c",
@@ -316,7 +317,7 @@
 	},
     {
         "niveau" : "19",
-        "indice" : "Indice : Lis les fleches",
+        "indice" : "Indice : Lis les flèches",
         "limite" : 6,
         "d" : 42,
 		"33": "c",
@@ -458,7 +459,7 @@
     },
     {
         "niveau" : "24",
-        "indice" : "Indice : Courage c'est le dernier",
+        "indice" : "Indice : Bonne chance",
         "limite" : 45,
         "nbObjets" : 3,
         "dObjet0" : 58,

@@ -41,3 +41,5 @@
 * Animation du robot ✅
 
 * Clean le code/le commenter ✅
+
+(Le readme va déjager quand on lui donnera je précise)

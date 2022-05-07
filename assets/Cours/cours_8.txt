@@ -1,6 +1,6 @@
 [b] Suite (et fin) : [/b]
 
-Si vous lisez ce dernier cours, c'est que vous avez fini Incredibot (enfin on espère).   
+Si vous lisez ce dernier cours, c'est que vous avez fini Incredibot (enfin on espère).   [color=#171515]Sinon vous pouvez écrire #tricher dans le champs d'instructions, et lancer le niveau[/color]
 Nous vous remercions d’avoir passé du temps sur cette application dont nous sommes très fiers. 
 Nous espérons que nous vous avons transmis les bases et l'envie de coder ou plutôt d'écrire des programmes. 
 Si c’est le cas, et que vous voulez commencer à apprendre à codez, nous vous conseillons le langage Python.  
