@@ -196,7 +196,7 @@ class CustomLevelScreen(Screen):
         """
         fichierLvl = open("assets/current_lvl.txt", "r")
         lvl = fichierLvl.read()
-        fichierLvl.close
+        fichierLvl.close()
         return int(lvl)
 
     def getLvlJson(self):
@@ -553,14 +553,14 @@ class CustomLevelScreen(Screen):
                     message = "ECHEC : Tu n'as pas d'objet à poser"
                     son = "assets/Sound/impossible.mp3"
             elif instruction == "#tricher":
-                    terminer = True
-                    son = "assets/Sound/boo.mp3"
-                    message = "Tricher c'est mal !!!"
-                    fichierMax = open("assets/max_level.txt", "r+")
-                    fichierMax.seek(0)
-                    fichierMax.truncate()
-                    fichierMax.write("24")
-                    fichierMax.close()
+                terminer = True
+                son = "assets/Sound/boo.mp3"
+                message = "Tricher c'est mal !!!"
+                fichierMax = open("assets/max_level.txt", "r+")
+                fichierMax.seek(0)
+                fichierMax.truncate()
+                fichierMax.write("24")
+                fichierMax.close()
             else:
                 terminer = True
                 message = "ECHEC : Mot incorrect dans le script"

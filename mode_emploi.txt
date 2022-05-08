@@ -1,0 +1,6 @@
+Pour que vous puissiez lancer Incredibot, il faut :
+_ utiliser une version de Python >= à Python 3.7.9
+_ installer Kivy :
+Depuis Thonny, aller dans “Outils” >>> “gérer les plugins” puis dans la barre de recherche qui s’affiche, entrer “Kivy”. Quand Thonny aura fini la recherche, choisir “Kivy” (bien prendre la version avec une majuscule qui s’affiche en gras, avec en sous titre “A software library for rapid development of hardware-accelerated multi touch applications.”) Cliquer sur installer. L’installation peut prendre un petit peu de temps. 
+Une fois que Kivy est installer : 
+Depuis le fichier “Incredibot.zip”, clique droit puis “extraire tout”. Une pop up apparaît, cliquer sur “next (ou ok)”. Puis depuis Thonny, “fichier” >>> “ouvrir” puis vous retrouvez le fichier “incredibot”. Double clique sur le fichier “Incredibot”, >>> “Incredibot” (il faut bien ouvrir un fichier “Incredibot”, puis le fichier “Incredibot qui se trouve dedans). Et pour finir double clique sur “main.py”. Si vous avez fait les bonnes manipulations, “main.py” s’ouvre directement dans Thonny. Puis vous n'avez plus qu'à cliquer sur “lancer”.
