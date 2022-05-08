@@ -1,6 +1,6 @@
 [b]Déplacement d’objet :[/b]
 
-Les objets représentés par des étoiles ici sont comme des objets comme dans la vraie vie, vous pouvez les prendre et les déposer. Votre but est de mettre ces objets sur leurs emplacements, représenté par des cercles de la même couleur afin de pouvoir atteindre l’arrivée. Voici un exemple d’un niveau avec un objet (image de gauche):
+Les objets représentés par des étoiles ici sont des objets comme dans la vraie vie, vous pouvez les prendre et les déposer. Votre but est de mettre ces objets sur leurs emplacements, représentés par des cercles de la même couleur afin de pouvoir atteindre l’arrivée. Voici un exemple d’un niveau avec un objet (image de gauche):
 Pour prendre et déposer un objet, le robot doit se trouver face à l’objet puis doit recevoir l’instruction "prendre" pour récupérer l’objet (image de gauche).
 Pour pouvoir réussir le niveau, il faut aller sur l'arrivée, avec tous les objets sur leurs emplacements respectifs.
  

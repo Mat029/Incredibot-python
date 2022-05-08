@@ -3,10 +3,10 @@
 Si vous lisez ce dernier cours, c'est que vous avez fini Incredibot (enfin on espère).   [color=#171515]Sinon vous pouvez écrire #tricher dans le champs d'instructions, et lancer le niveau[/color]
 Nous vous remercions d’avoir passé du temps sur cette application dont nous sommes très fiers. 
 Nous espérons que nous vous avons transmis les bases et l'envie de coder ou plutôt d'écrire des programmes. 
-Si c’est le cas, et que vous voulez commencer à apprendre à codez, nous vous conseillons le langage Python.  
-C’est un langage plutôt souple, simple à prendre en main qui vous permettra de faire plein de chose au fur et à mesure de votre progression, de petit programme pour calculer l’imc de quelqu’un jusqu’au intelligence artificielle hyper complexe que vous revendrez plusieurs milliards de dollars (on espère pour vous en tout cas) en passant par la création d’application graphique comme Incredibot. 
+Si c’est le cas, et que vous voulez commencer à apprendre à coder, nous vous conseillons le langage Python.  
+C’est un langage plutôt souple, simple à prendre en main qui vous permettra de faire plein de choses au fur et à mesure de votre progression, de petits programmes pour calculer l’imc de quelqu’un jusqu’aux intelligences artificielles hyper complexe que vous revendrez plusieurs milliards de dollars (on espère pour vous en tout cas) en passant par la création d’applications graphiques comme Incredibot. 
 Pour commencer nous pouvons vous conseiller :
-_ D’acheter un bouquin si vous êtes quelqu’un d’assez scolaire (mais n’oublier pas que la programmation s’apprend par la pratique et non la théorie)
+_ D’acheter un livre (mais n’oubliez pas que la programmation s’apprend par la pratique et non la théorie)
 _ De commencer une série de tutoriel YouTube (on peut vous conseiller la chaine de Graven -développement qui vous propose 11 tutoriels sur les concepts principaux de Python et des exercices pratiques corrigés). 
 _ Utiliser un site qui vous donne des leçons avec des exercices pratiques, par exemple http://www.france-ioi.org/algo/index.php (bien sélectionner Python)
 Une fois que vous aurez acquis les bases grâce à un (ou plusieurs, rien n’empêche) de ces trois moyen, le moyen le plus simple pour vous d’apprendre sera de faire des projets. Vous pourrez alors commencer à utiliser vos (maigres) connaissances pour créer des choses qui vous intéresse et qui progresseront avec vous au fil du temps.

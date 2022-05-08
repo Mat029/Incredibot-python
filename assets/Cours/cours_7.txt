@@ -1,11 +1,11 @@
 [b] Les variables : [/b] :
 
-Un autre concept fondamental de la programmation moderne est le stockage de donnés. Dans un programme, on stocke les données dans des variables. Une variable est un identifiant associé à une valeur. Un identifiant est souvent une chaine de caractère (par exemple age_utilisateur) à laquelle vous associer une valeur pour la réutiliser plus tard.
-La première chose est faire avec une variable est de l’initialiser. Par exemple, si vous voulez compter le nombre de tour que fait une machine à laver vous aller d’abord définir votre variable à 0
+Un autre concept fondamental de la programmation moderne est le stockage de données. Dans un programme, on stocke les données dans des variables. Une variable est un identifiant associé à une valeur. Un identifiant est souvent une chaine de caractère (par exemple age_utilisateur) à laquelle vous associer une valeur pour la réutiliser plus tard.
+La première chose à faire avec une variable est de l’initialiser. Par exemple, si vous voulez compter le nombre de tours que fait une machine à laver vous allez d’abord définir votre variable à 0
 nb_tour = 0 
-(Nous avons mis un signe égal ici car c’est le plus simple, mais en fonction du langage, vous le fait de façon différente).
-Puis dès que vos capteurs se rencontrent, vous aller ajouter 1 à votre variable :
+(Nous avons mis un signe égal ici car c’est le plus simple, mais en fonction du langage, vous le faites de façon différente).
+Puis dès que vos capteurs se rencontrent, vous allez ajouter 1 à votre variable :
 nb_tour = nb_tour + 1
 C’est à peu près ce qui se passe dans les niveaux avec des objets.
-Quand vous prenez un objet, le robot a deux variables qui change. Sa variable tenir_objet passe à Oui (en vérité elle passe à True, mais on simplifie ici), et sa variable couleur_objet passe à « bleu », « violet » ou « rouge ». 
+Quand vous prenez un objet, le robot a deux variables qui changent. Sa variable tenir_objet passe à Oui (en vérité elle passe à True, mais on simplifie ici), et sa variable couleur_objet passe à « bleu », « violet » ou « rouge ». 
 Les variables sont donc un concept essentiel de la programmation moderne, car elles permettent de stocker des valeurs, de les récupérer et de les modifier. 
