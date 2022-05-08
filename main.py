@@ -206,7 +206,7 @@ class CustomLevelScreen(Screen):
             dictionary : DataLvl : les données Json du niveau actuel
         """
         lvl = self.getLvl()
-        MyJson = open('assets/data.json',)
+        MyJson = open('assets/data.json',encoding="utf-8")
         Data = json.load(MyJson)
         MyJson.close()
         DataLvl = Data[lvl - 1]

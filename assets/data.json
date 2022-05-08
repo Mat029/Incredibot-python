@@ -98,7 +98,7 @@
 	},
     {
         "niveau" : "8",
-        "indice" : "Indice : Il y a x cases caché entre chaque case visible\nx est un nombre caché dans le premier cours",
+        "indice" : "Indice : Indice  dans le premier cours",
         "limite" : 11,
         "d" : 27,
 		"22" : "c",
@@ -174,7 +174,7 @@
     },
     {
         "niveau": "13",
-        "indice" : "Indice : La patience est une\n grande qualite. Attends !",
+        "indice" : "Indice : La patience est une\n grande qualité. Attends !",
         "limite" : 12,
         "d" : 41,
         "41" : "c",
@@ -232,7 +232,7 @@
     },
     {
         "niveau": "15",
-        "indice" : "Indice : Attends d'etre en haut",
+        "indice" : "Indice : Attends d'être en haut",
         "limite" : 6,
         "d" : 42,
         "24": "t-h",
@@ -294,7 +294,7 @@
     },
     {
         "niveau" : "17",
-        "indice" : "Indice : Pose l'objet sur le recepteur",
+        "indice" : "Indice : Pose l'objet sur le récepteur",
         "nbObjets": 1,
         "dObjet0": 44,
         "fObjet0": 35,
@@ -384,7 +384,7 @@
     },
     {
         "niveau" : "22",
-        "indice" : "Indice : Fais un petit detour",
+        "indice" : "Indice : Fais un petit détour",
         "limite" : 15,
 		"nbObjets": 1,
         "dObjet0": 78,

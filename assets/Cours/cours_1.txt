@@ -2,7 +2,7 @@
 
 Incredibot est une application destinée aux novices en informatique pour les aider à comprendre les bases de l’informatique et plus particulièrement du code à travers un jeu. 
 Dans l’application, vous allez devoir aider un robot à compléter des parcours à l’aide d’instructions. Cette application est composée de 24 niveaux, répartis en 3 étages. A chaque étage, il vous sera introduit de nouvelles instructions. Plus vous avancerez dans l'application, plus les niveaux seront difficiles. 
-[color=#171515]x = 4 (voir niveau 8)[/color]
+[color=#171515]Il y a 4 cases cachés entre chaque case visible(voir niveau 8)[/color]
 [b] Fonctionnement de l’application : [/b]
 
 Quand vous lancez l’application, vous arrivez sur une interface comme celle que vous pouvez voir ci-dessous.
