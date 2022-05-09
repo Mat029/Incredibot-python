@@ -34,12 +34,10 @@
 * Faire l'étage 2 ✅
 * Refonte graphique de l'interface des niv (avec des images "clean") ✅
 * Faire l'étage 3 ✅
-* Refonte totale des cours de facon à donner un truc en lien avec la programation de base
+* Refonte totale des cours de facon à donner un truc en lien avec la programation de base ✅
 ### ----------Objectif----------
 * Ajouter de la musique/des sons ✅
 * Ajouter des "paramètres" ✅
 * Animation du robot ✅
 
 * Clean le code/le commenter ✅
-
-(Le readme va déjager quand on lui donnera je précise)
